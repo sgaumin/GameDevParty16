@@ -8,11 +8,13 @@ public class CellUserInteractions : MonoBehaviour
     public Material overMat;
     public Material clickedMat;
     Renderer render;
+    Cell cell;
     CellStates state = CellStates.Unselected;
 
     private void Start()
     {
         render = gameObject.GetComponent<Renderer>();
+        cell = GetComponent<Cell>();
     }
 
     private void OnMouseOver()
