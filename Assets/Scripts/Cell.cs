@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
@@ -8,6 +9,9 @@ public class Cell : MonoBehaviour
 
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
+	[SerializeField] private GameObject highlight;
+
+	private List<Cell> nearbyCells = new List<Cell>();
 
 	public Cell CellTop { get; private set; }
 	public Cell CellDown { get; private set; }
@@ -17,6 +21,9 @@ public class Cell : MonoBehaviour
 	public Cell CellTopRight { get; private set; }
 	public Cell CellDownLeft { get; private set; }
 	public Cell CellDownRight { get; private set; }
+	public CellStates Status { get; private set; }
+	public List<Cell> NearbyCells => nearbyCells;
+
 
 	protected void Start()
 	{
@@ -33,5 +40,60 @@ public class Cell : MonoBehaviour
 		CellTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
 		CellDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
 		CellDownRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+
+		if (CellTop != null)
+		{
+			nearbyCells.Add(CellTop);
+		}
+		if (CellDown != null)
+		{
+			nearbyCells.Add(CellDown);
+		}
+		if (CellLeft != null)
+		{
+			nearbyCells.Add(CellLeft);
+		}
+		if (CellRight != null)
+		{
+			nearbyCells.Add(CellRight);
+		}
+		if (CellTopLeft != null)
+		{
+			nearbyCells.Add(CellTopLeft);
+		}
+		if (CellTopRight != null)
+		{
+			nearbyCells.Add(CellTopRight);
+		}
+		if (CellDownLeft != null)
+		{
+			nearbyCells.Add(CellDownLeft);
+		}
+		if (CellDownRight != null)
+		{
+			nearbyCells.Add(CellDownRight);
+		}
+	}
+
+	[ContextMenu("Show neighbour")]
+	private void ShowNearbyCells()
+	{
+		nearbyCells.ForEach(x => x.Select());
+	}
+
+	[ContextMenu("Hide Neighbour")]
+	private void HideNearbyCells()
+	{
+		nearbyCells.ForEach(x => x.Unselect());
+	}
+
+	public void Select()
+	{
+		highlight.gameObject.SetActive(true);
+	}
+
+	public void Unselect()
+	{
+		highlight.gameObject.SetActive(false);
 	}
 }
