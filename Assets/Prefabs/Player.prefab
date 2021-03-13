@@ -237,77 +237,12 @@ MonoBehaviour:
   fouSprite: {fileID: 21300000, guid: f02454aede624dc4186709959b699426, type: 3}
   cavalierSprite: {fileID: 21300000, guid: 7ec687317a9633a4a834b0634dbb06f1, type: 3}
   tourSprite: {fileID: 21300000, guid: 1ff8c489d7a960c41b60a82a57d7d9cb, type: 3}
+  animationData: {fileID: 11400000, guid: 3fbd3f28e7868e541b9ba74456c4ac66, type: 2}
   cellMask:
     serializedVersion: 2
     m_Bits: 256
   icon: {fileID: 5432410959977551089}
   piecesToShowInAdvance: 3
-  lookAtDuration:
-    min: 0.7477605
-    max: 1.1216407
-  lookAtEase: 3
-  raiseHeightValue:
-    min: 1.4
-    max: 2
-  raiseDuration:
-    min: 0.44608283
-    max: 0.7460828
-  raiseEase: 3
-  moveDuration:
-    min: 0.7134367
-    max: 0.89795285
-  moveAnimation:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -1.0032493
-      outSlope: -1.0032493
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.9237518
-    - serializedVersion: 3
-      time: 0.33808059
-      value: 0.025906544
-      inSlope: 0.8579728
-      outSlope: 0.8579728
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.2625951
-    - serializedVersion: 3
-      time: 0.84400666
-      value: 1.0211054
-      inSlope: 0.23698664
-      outSlope: 0.23698664
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  cameraShakeDuration:
-    min: 0.24151148
-    max: 0.3415115
-  cameraShakeStrenght:
-    min: 0.26921648
-    max: 0.34589857
-  cameraShakeVibrato:
-    min: 13
-    max: 15
-  cameraShakeAdjustmentTiming: 0.8
 --- !u!1001 &5660509872823855372
 PrefabInstance:
   m_ObjectHideFlags: 0

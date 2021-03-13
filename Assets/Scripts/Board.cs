@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,25 +15,39 @@ public class Board : MonoBehaviour
 	private Player piece;
 	private Game game;
 
+	public Action OnStartPlayerTurn;
+	public Action OnEndPlayerTurn;
+
 	void Start()
 	{
 		game = FindObjectOfType<Game>();
 		cells = GetComponentsInChildren<Cell>().ToList();
+		enemies = FindObjectsOfType<Enemy>().ToList();
+
 		cells.ForEach(x => x.Init());
 		SpawnPiece();
 		cells.ForEach(x => x.Piece = piece);
-		enemies = FindObjectsOfType<Enemy>().ToList();
+
+		OnStartPlayerTurn?.Invoke();
 	}
 
 	private void SpawnPiece()
 	{
 		piece = Instantiate(piecePrefab, transform);
-		piece.Init(spawnCell, this);
+		piece.Init(spawnCell);
 	}
 
-	public void EndTurn()
+	public void EndTurnPlayer()
 	{
-		enemies.ForEach(x => x.TryToAttackPlayer());
+		OnEndPlayerTurn?.Invoke();
+	}
+
+	public void EndTurnEnemies()
+	{
+		if (enemies.All(x => x.HasFinishTurn))
+		{
+			OnStartPlayerTurn?.Invoke();
+		}
 	}
 
 	public void EndLevel()

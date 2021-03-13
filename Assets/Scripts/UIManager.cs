@@ -13,10 +13,12 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayPieces(List<PieceType> types)
 	{
+		int i = 1;
 		piecesList.text = "";
 		foreach (PieceType type in types)
 		{
-			piecesList.text += type.ToString() + "\n";
+			piecesList.text += i.ToString() + "- " + type.ToString() + "\n";
+			i++;
 		}
 	}
 }

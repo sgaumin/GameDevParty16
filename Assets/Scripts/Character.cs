@@ -1,34 +1,78 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-
 	[Header("Sprites")]
 	[SerializeField] protected Sprite pionSprite;
 	[SerializeField] protected Sprite fouSprite;
 	[SerializeField] protected Sprite cavalierSprite;
 	[SerializeField] protected Sprite tourSprite;
 
+	[Header("Animations")]
+	[SerializeField] private CharacterAnimationData animationData;
+
 	[Header("References")]
 	[SerializeField] protected LayerMask cellMask;
 	[SerializeField] protected Image icon;
 
 	protected Board board;
-	protected Cell currentCell;
+	private Coroutine moving;
 
-	public bool isAlive { get; set; }
+	public bool IsAlive { get; set; }
+	public bool HasFinishTurn { get; set; }
+	public Cell CurrentCell { get; protected set; }
+
+	protected virtual void Awake()
+	{
+		board = FindObjectOfType<Board>();
+		board.OnStartPlayerTurn += ResetTurn;
+	}
 
 	protected virtual void Start()
 	{
-		isAlive = true;
+		IsAlive = true;
+		transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 0f));
+	}
+
+	protected void ResetTurn()
+	{
+		HasFinishTurn = false;
 	}
 
 	public void Kill()
 	{
-		isAlive = false;
+		IsAlive = false;
 		gameObject.SetActive(false);
 	}
+
+	public void MoveToCell(Cell cell)
+	{
+		moving = StartCoroutine(MovePath(cell));
+	}
+
+	private IEnumerator MovePath(Cell cell)
+	{
+		float currentRaiseDuration = animationData.raiseDuration.RandomValue;
+		float currentMoveDuration = animationData.moveDuration.RandomValue;
+
+		// Raising phase
+		transform.DOLookAt(cell.PiecePosition, animationData.lookAtDuration.RandomValue).SetEase(animationData.lookAtEase);
+		transform.DOMoveY(animationData.raiseHeightValue.RandomValue, currentRaiseDuration).SetRelative().SetEase(animationData.raiseEase);
+		yield return new WaitForSeconds(currentRaiseDuration);
+
+		// Move phase
+		transform.DOMove(cell.PiecePosition, currentMoveDuration).SetEase(animationData.moveAnimation);
+		yield return new WaitForSeconds(currentMoveDuration * animationData.cameraShakeAdjustmentTiming);
+		Camera.main.DOShakePosition(animationData.cameraShakeDuration.RandomValue, animationData.cameraShakeStrenght.RandomValue, animationData.cameraShakeVibrato.RandomValue);
+		yield return new WaitForSeconds(currentMoveDuration * (1 - animationData.cameraShakeAdjustmentTiming));
+
+		DoActionAfterMoving(cell);
+	}
+
+	protected virtual void DoActionAfterMoving(Cell cell) { }
 
 	protected void CheckCurrentCell()
 	{
@@ -36,7 +80,7 @@ public class Character : MonoBehaviour
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, Mathf.Infinity, cellMask))
 		{
-			currentCell = hit.collider.GetComponentInParent<Cell>();
+			CurrentCell = hit.collider.GetComponentInParent<Cell>();
 		}
 	}
 
@@ -57,5 +101,15 @@ public class Character : MonoBehaviour
 				icon.sprite = tourSprite;
 				break;
 		}
+	}
+
+	protected virtual void OnDestroy()
+	{
+		if (moving != null)
+		{
+			StopCoroutine(moving);
+		}
+
+		board.OnStartPlayerTurn -= ResetTurn;
 	}
 }

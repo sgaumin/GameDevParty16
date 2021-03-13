@@ -67,7 +67,7 @@ public class Cell : MonoBehaviour
 					highlight.gameObject.SetActive(true);
 					highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
 					board.OnlySelectCell(this);
-					Piece.FolowPath(this);
+					Piece.MoveToCell(this);
 					break;
 			}
 		}
