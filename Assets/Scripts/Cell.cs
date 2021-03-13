@@ -11,8 +11,13 @@ public class Cell : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
 	[SerializeField] private GameObject highlight;
+	[SerializeField] private Material highlightMaterial;
+	[SerializeField] private Material highlightSelectedMaterial;
+	[SerializeField] private Material highlightCliquedMaterial;
+	[SerializeField] private Transform piecePosition;
 
 	private Board board;
+	private CellState state;
 	private List<Cell> nearbyCells = new List<Cell>();
 	private List<Tuple<Cell, CellPositionType>> diagonalsInfoCells = new List<Tuple<Cell, CellPositionType>>();
 	private List<Tuple<Cell, CellPositionType>> linesInfoCells = new List<Tuple<Cell, CellPositionType>>();
@@ -34,11 +39,43 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightLeftTop;
 	private Cell cellKnightLeftDown;
 
-	public CellStates Status { get; private set; }
+	public PieceMouvment Piece { get; set; }
+	public CellState State
+	{
+		get => state;
+
+		set
+		{
+			state = value;
+			switch (state)
+			{
+				case CellState.Unselected:
+					highlight.gameObject.SetActive(false);
+					break;
+				case CellState.Highlighted:
+					highlight.gameObject.SetActive(true);
+					highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
+					break;
+				case CellState.Selected:
+					highlight.gameObject.SetActive(true);
+					highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
+					break;
+				case CellState.Cliqued:
+					highlight.gameObject.SetActive(true);
+					highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
+					board.OnlySelectCell(this);
+					Piece.FolowPath(this);
+					break;
+			}
+		}
+	}
+
+	public Vector3 PiecePosition => piecePosition.transform.position;
 
 	protected void Start()
 	{
 		Init();
+		State = CellState.Unselected;
 	}
 
 	private void Init()
@@ -136,7 +173,7 @@ public class Cell : MonoBehaviour
 		}
 	}
 
-	public List<List<Cell>> GetMovements(PieceType type)
+	public void ShowMovements(PieceType type)
 	{
 		List<List<Cell>> paths = new List<List<Cell>>();
 
@@ -156,7 +193,7 @@ public class Cell : MonoBehaviour
 				break;
 		}
 
-		return paths;
+		paths.Flatten().ForEach(x => x.State = CellState.Highlighted);
 	}
 
 	private List<Cell> GetRecursivePositionCells(List<Cell> path, CellPositionType position, int? recursionLimit = null, int? currentRecursion = null)
@@ -286,50 +323,40 @@ public class Cell : MonoBehaviour
 		return paths;
 	}
 
-	public void Select()
-	{
-		highlight.gameObject.SetActive(true);
-	}
-
-	public void Unselect()
-	{
-		highlight.gameObject.SetActive(false);
-	}
-
 	#region Context Menu Methods
 	[ContextMenu("Show Pawn Movements")]
 	private void ShowPawnMovements()
 	{
 		board.UnselectAllCells();
-		GetPawnMovements().Flatten().ForEach(x => x.Select());
+		GetPawnMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
 	}
 
 	[ContextMenu("Show Bishop Movements")]
 	private void ShowBishopMovements()
 	{
 		board.UnselectAllCells();
-		GetBishopMovements().Flatten().ForEach(x => x.Select());
+		GetBishopMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
 	}
 
 	[ContextMenu("Show Rook Movements")]
 	private void ShowRookMovements()
 	{
 		board.UnselectAllCells();
-		GetRookMovements().Flatten().ForEach(x => x.Select());
+		GetRookMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
 	}
 
 	[ContextMenu("Show Knight Movements")]
 	private void ShowKnightMovements()
 	{
 		board.UnselectAllCells();
-		GetKnightMovements().Flatten().ForEach(x => x.Select());
+		GetKnightMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
 	}
 
 	[ContextMenu("Show Neighbour")]
 	private void ShowNearbyCells()
 	{
 		board.UnselectAllCells();
-		nearbyCells.ForEach(x => x.Select());
+		nearbyCells.ForEach(x => x.State = CellState.Highlighted);
 	}
 	#endregion
 }

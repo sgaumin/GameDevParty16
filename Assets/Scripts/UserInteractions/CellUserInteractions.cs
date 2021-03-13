@@ -1,37 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CellUserInteractions : MonoBehaviour
 {
-    public Material defaultMat;
-    public Material overMat;
-    public Material clickedMat;
-    Renderer render;
-    Cell cell;
-    CellStates state = CellStates.Unselected;
+	[SerializeField] private Cell cell;
 
-    private void Start()
-    {
-        render = gameObject.GetComponent<Renderer>();
-        cell = GetComponent<Cell>();
-    }
+	private void OnMouseOver()
+	{
+		if (cell.State == CellState.Highlighted)
+		{
+			cell.State = CellState.Selected;
+		}
+	}
 
-    private void OnMouseOver()
-    {
-        if(state != CellStates.Selected)
-            render.material = overMat;
-    }
+	private void OnMouseExit()
+	{
+		if (cell.State == CellState.Selected)
+		{
+			cell.State = CellState.Highlighted;
+		}
+	}
 
-    private void OnMouseExit()
-    {
-        if(state != CellStates.Selected)
-            render.material = defaultMat;
-    }
-
-    private void OnMouseUp()
-    {
-        render.material = clickedMat;
-        state = CellStates.Selected;
-    }
+	private void OnMouseUp()
+	{
+		if (cell.State != CellState.Unselected)
+		{
+			cell.State = CellState.Cliqued;
+		}
+	}
 }

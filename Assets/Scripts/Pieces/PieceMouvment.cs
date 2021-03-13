@@ -1,80 +1,93 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
+using Tools.Utils;
 using UnityEngine;
-using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class PieceMouvment : MonoBehaviour
 {
-    public Cell originCell;
+	[Header("Animations")]
+	[SerializeField, FloatRangeSlider(0f, 2f)] private FloatRange lookAtDuration = new FloatRange(0.8f, 1.2f);
+	public Ease lookAtEase = Ease.OutSine;
 
-    Transform originCellTransform;
-    
-    public Cell[] path;
-    
-    Cell currentCell;
+	[Space]
+	[SerializeField, FloatRangeSlider(0f, 5f)] private FloatRange raiseHeightValue = new FloatRange(1f, 1.5f);
+	[SerializeField, FloatRangeSlider(0f, 2f)] private FloatRange raiseDuration = new FloatRange(0.8f, 1.2f);
+	public Ease raiseEase = Ease.OutBounce;
+	[Space]
+	[SerializeField, FloatRangeSlider(0f, 2f)] private FloatRange moveDuration = new FloatRange(1f, 1.5f);
+	public AnimationCurve moveAnimation;
 
-    public float lookatDuration = 1.0f;
-    public float moveDuration = 1.0f;
-    public float rotateDuration = 1.0f;
-    public float height = 1.5f;
+	private Board board;
+	private Cell currentCell;
+	private PieceType type;
+	private Coroutine moving;
 
-    private void Start()
-    {
-        originCellTransform = originCell.transform;
-        currentCell = originCell;
-        //PlaceAt(originCell);
-        FolowPath(path);
-    }
+	public void Init(Cell spawnCell, Board board)
+	{
+		this.board = board;
+		currentCell = spawnCell;
+		transform.position = spawnCell.PiecePosition;
+		AssignRandomType();
+	}
+
+	private void AssignRandomType()
+	{
+		type = (PieceType)Random.Range(0, Enum.GetNames(typeof(PieceType)).Length);
+		currentCell.ShowMovements(type);
+	}
+
+	// Move cell by cell
+	public void FolowPath(Cell cell)
+	{
+		moving = StartCoroutine(MovePath(cell));
+	}
+
+	private IEnumerator MovePath(Cell cell)
+	{
+		float currentLookAtDuration = lookAtDuration.RandomValue;
+		float currentRaiseDuration = raiseDuration.RandomValue;
+		float currentMoveDuration = moveDuration.RandomValue;
+
+		transform.DOLookAt(cell.PiecePosition, lookAtDuration.RandomValue).SetEase(lookAtEase);
+		transform.DOMoveY(raiseHeightValue.RandomValue, raiseDuration.RandomValue).SetRelative().SetEase(raiseEase);
+		yield return new WaitForSeconds(Math.Max(currentLookAtDuration, currentRaiseDuration));
 
 
-    // Move cell by cell
-    public void FolowPath(Cell[] path)
-    {
-        StartCoroutine(MovePath(path));
-    }
+		transform.DOMove(cell.PiecePosition, currentMoveDuration).SetEase(moveAnimation);
+		yield return new WaitForSeconds(currentMoveDuration);
 
-    private IEnumerator MovePath(Cell[] path)
-    {
-        foreach (Cell cell in path)
-        {
-            Transform cellTransform = cell.transform;
-            Tweener looker = transform.DOLookAt(cellTransform.position, lookatDuration, AxisConstraint.Y);
-            yield return looker.WaitForCompletion();
+		board.UnselectAllCells();
+		currentCell = cell;
+		AssignRandomType();
+	}
 
-            Vector3 heightOffset = Vector3.zero;
-            heightOffset.y = height;
-            Tweener mover = transform.DOMove(cellTransform.position + heightOffset, moveDuration);
-            yield return mover.WaitForCompletion();
+	//// Move to one cell
+	//public void PlaceAt(Cell cell)
+	//{
+	//	currentCell = cell;
+	//	Transform cellTransform = cell.transform;
+	//	Vector3 heightOffset = Vector3.zero;
+	//	//heightOffset.y = height;
 
-            Tweener rotater = transform.DORotate(cellTransform.forward, moveDuration);
-            yield return rotater.WaitForCompletion();
-        }
-    }
+	//	StartCoroutine(MovePiece(cellTransform));
+	//}
 
-    // Move to one cell
-    public void PlaceAt(Cell cell)
-    {
-        currentCell = cell;
-        Transform cellTransform = cell.transform;
-        Vector3 heightOffset = Vector3.zero;
-        heightOffset.y = height;
+	//private IEnumerator MovePiece(Transform cellTransform)
+	//{
 
-        StartCoroutine(MovePiece(cellTransform));
-    }
+	//	Tweener looker = transform.DOLookAt(cellTransform.position, raiseDuration, AxisConstraint.Y);
+	//	yield return looker.WaitForCompletion();
 
-    private IEnumerator MovePiece(Transform cellTransform)
-    {
+	//	Vector3 heightOffset = Vector3.zero;
+	//	//heightOffset.y = height;
+	//	Tweener mover = transform.DOMove(cellTransform.position + heightOffset, moveDuration);
+	//	yield return mover.WaitForCompletion();
 
-        Tweener looker = transform.DOLookAt(cellTransform.position, lookatDuration, AxisConstraint.Y);
-        yield return looker.WaitForCompletion();
+	//	Tweener rotater = transform.DORotate(cellTransform.forward, moveDuration);
+	//	yield return rotater.WaitForCompletion();
 
-        Vector3 heightOffset = Vector3.zero;
-        heightOffset.y = height;
-        Tweener mover = transform.DOMove(cellTransform.position + heightOffset, moveDuration);
-        yield return mover.WaitForCompletion();
 
-        Tweener rotater = transform.DORotate(cellTransform.forward, moveDuration);
-        yield return rotater.WaitForCompletion();
-
-    }
+	//}
 }
