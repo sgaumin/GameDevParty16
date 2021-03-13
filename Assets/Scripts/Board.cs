@@ -19,7 +19,7 @@ public class Board : MonoBehaviour
 	private List<Cell> cells = new List<Cell>();
 	private List<List<Cell>> rowCells = new List<List<Cell>>();
 	private List<Enemy> enemies = new List<Enemy>();
-	private Player piece;
+	public Player piece;
 	private Game game;
 	private GameObject o;
 	private int currentRowDeletionCount;

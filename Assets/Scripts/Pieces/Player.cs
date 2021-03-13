@@ -10,6 +10,9 @@ public class Player : Character
 	[SerializeField] private int piecesToShowInAdvance = 3;
 
 	private List<PieceType> types = new List<PieceType>();
+	private PieceType currentType;
+
+	public Action<PieceType, DialogueType> OnKillEnemy;
 
 	public void Init(Cell spawnCell)
 	{
@@ -29,9 +32,9 @@ public class Player : Character
 				types.Add((PieceType)Random.Range(0, Enum.GetNames(typeof(PieceType)).Length));
 			}
 
-			CurrentCell.ShowMovements(types.First());
-			SetIcon(types.First());
-
+			currentType = types.First();
+			CurrentCell.ShowMovements(currentType);
+			SetIcon(currentType);
 			types.RemoveAt(0);
 			UIManager.Instance.DisplayPieces(types);
 		}
@@ -51,6 +54,7 @@ public class Player : Character
 		Enemy enemy = cell.TargetPresentOnCell<Enemy>();
 		if (enemy != null)
 		{
+			OnKillEnemy?.Invoke(currentType, DialogueType.Attaque);
 			enemy.Kill();
 		}
 
