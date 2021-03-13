@@ -22,7 +22,7 @@ public class Enemy : Character
 
 	public void TryToAttackPlayer()
 	{
-		List<Player> targets = CurrentCell.GetTargetOnMovements<Player>(type);
+		List<Player> targets = CurrentCell.GetTargetOnMovements<Player>(type, this);
 		if (!targets.IsEmpty())
 		{
 			target = targets[0];

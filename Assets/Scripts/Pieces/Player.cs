@@ -33,21 +33,21 @@ public class Player : Character
 			}
 
 			currentType = types.First();
-			CurrentCell.ShowMovements(currentType);
+			CurrentCell.ShowMovements(currentType, this);
 			SetIcon(currentType);
 			types.RemoveAt(0);
 			UIManager.Instance.DisplayPieces(types);
 		}
 	}
 
-    protected override void DoActionBeforeMoving(Cell cell)
-    {
-        base.DoActionBeforeMoving(cell);
+	protected override void DoActionBeforeMoving(Cell cell)
+	{
+		base.DoActionBeforeMoving(cell);
 
 		board.PlayerSelectedCell();
-    }
+	}
 
-    protected override void DoActionAfterMoving(Cell cell)
+	protected override void DoActionAfterMoving(Cell cell)
 	{
 		base.DoActionAfterMoving(cell);
 

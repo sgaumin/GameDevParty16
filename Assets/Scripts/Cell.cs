@@ -178,14 +178,14 @@ public class Cell : MonoBehaviour
 		}
 	}
 
-	public void ShowMovements(PieceType type)
+	public void ShowMovements(PieceType type, Character character)
 	{
 		List<List<Cell>> paths = new List<List<Cell>>();
 
 		switch (type)
 		{
 			case PieceType.Pion:
-				paths = GetPawnMovements();
+				paths = GetPawnMovements(character);
 				break;
 			case PieceType.Fou:
 				paths = GetBishopMovements();
@@ -198,13 +198,13 @@ public class Cell : MonoBehaviour
 				break;
 		}
 
-		paths.Flatten().ForEach(x => x.State = CellState.Highlighted);
+		paths.Flatten().Distinct().ForEach(x => x.State = CellState.Highlighted);
 	}
 
-	public List<T> GetTargetOnMovements<T>(PieceType type) where T : Character
+	public List<T> GetTargetOnMovements<T>(PieceType type, Character character) where T : Character
 	{
 		List<T> targets = new List<T>();
-		List<List<Cell>> movements = GetMovements(type);
+		List<List<Cell>> movements = GetMovements(type, character);
 		foreach (Cell cell in movements.Flatten().ToList())
 		{
 			if (cell.TargetPresentOnCell<T>() != null)
@@ -230,14 +230,14 @@ public class Cell : MonoBehaviour
 		return null;
 	}
 
-	private List<List<Cell>> GetMovements(PieceType type)
+	private List<List<Cell>> GetMovements(PieceType type, Character character)
 	{
 		List<List<Cell>> paths = new List<List<Cell>>();
 
 		switch (type)
 		{
 			case PieceType.Pion:
-				paths = GetPawnMovements();
+				paths = GetPawnMovements(character);
 				break;
 			case PieceType.Fou:
 				paths = GetBishopMovements();
@@ -315,19 +315,46 @@ public class Cell : MonoBehaviour
 		return cell;
 	}
 
-	private List<List<Cell>> GetPawnMovements()
+	private List<List<Cell>> GetPawnMovements(Character character)
 	{
 		List<List<Cell>> paths = new List<List<Cell>>();
 
-		foreach (Tuple<Cell, CellPositionType> cell in linesInfoCells)
+		if (character is Player)
 		{
-			List<Cell> path = new List<Cell>();
-			if (cell.Item1 != null)
+			foreach (Tuple<Cell, CellPositionType> cell in linesInfoCells)
 			{
-				path.Add(cell.Item1);
-				cell.Item1.GetRecursivePositionCells(path, cell.Item2, 2);
+				List<Cell> path = new List<Cell>();
+				if (cell.Item1 != null)
+				{
+					path.Add(cell.Item1);
+					cell.Item1.GetRecursivePositionCells(path, cell.Item2, 2);
+				}
+				paths.Add(path);
 			}
-			paths.Add(path);
+
+			foreach (Tuple<Cell, CellPositionType> cell in diagonalsInfoCells)
+			{
+				List<Cell> path = new List<Cell>();
+				if (cell.Item1 != null)
+				{
+					path.Add(cell.Item1);
+					cell.Item1.GetRecursivePositionCells(path, cell.Item2, 1);
+				}
+				paths.Add(path);
+			}
+		}
+		else if (character is Enemy)
+		{
+			foreach (Tuple<Cell, CellPositionType> cell in diagonalsInfoCells)
+			{
+				List<Cell> path = new List<Cell>();
+				if (cell.Item1 != null)
+				{
+					path.Add(cell.Item1);
+					cell.Item1.GetRecursivePositionCells(path, cell.Item2, 1);
+				}
+				paths.Add(path);
+			}
 		}
 
 		return paths;
@@ -379,41 +406,4 @@ public class Cell : MonoBehaviour
 
 		return paths;
 	}
-
-	#region Context Menu Methods
-	[ContextMenu("Show Pawn Movements")]
-	private void ShowPawnMovements()
-	{
-		board.UnselectAllCells();
-		GetPawnMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
-	}
-
-	[ContextMenu("Show Bishop Movements")]
-	private void ShowBishopMovements()
-	{
-		board.UnselectAllCells();
-		GetBishopMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
-	}
-
-	[ContextMenu("Show Rook Movements")]
-	private void ShowRookMovements()
-	{
-		board.UnselectAllCells();
-		GetRookMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
-	}
-
-	[ContextMenu("Show Knight Movements")]
-	private void ShowKnightMovements()
-	{
-		board.UnselectAllCells();
-		GetKnightMovements().Flatten().ForEach(x => x.State = CellState.Highlighted);
-	}
-
-	[ContextMenu("Show Neighbour")]
-	private void ShowNearbyCells()
-	{
-		board.UnselectAllCells();
-		nearbyCells.ForEach(x => x.State = CellState.Highlighted);
-	}
-	#endregion
 }
