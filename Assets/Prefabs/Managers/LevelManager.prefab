@@ -1259,6 +1259,11 @@ PrefabInstance:
       propertyPath: board
       value: 
       objectReference: {fileID: 9187138609560199317}
+    - target: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: nbMovesBeforeDialogue
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31ade8dd55985a3418dae18b1c376e6c, type: 3}
 --- !u!224 &5964107575077043014 stripped

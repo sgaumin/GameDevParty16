@@ -13,6 +13,8 @@ public class DialoguesController : MonoBehaviour
 	Coroutine autoSwitchDialogue;
 
 	public int timeBetweenDialogues;
+    public int nbMovesBeforeDialogue;
+    private int nbMoves = 0;
 
 	public DialogueData pion;
 	public DialogueData fou;
@@ -32,6 +34,16 @@ public class DialoguesController : MonoBehaviour
     public void Init()
     {
         board.piece.OnKillEnemy += SetDialogue;
+        board.OnStartPlayerTurn += MoveDialogue;
+    }
+
+    public void MoveDialogue()
+    {
+        if(nbMoves % nbMovesBeforeDialogue == 0)
+        {
+            SetDialogue(DialogueType.Normal);
+        }
+        nbMoves++;
     }
 
     public void SetDialogue(DialogueType dialogueType)
@@ -129,6 +141,8 @@ public class DialoguesController : MonoBehaviour
 	protected virtual void OnDestroy()
 	{
         board.piece.OnKillEnemy -= SetDialogue;
+        board.OnStartPlayerTurn -= MoveDialogue;
+        
         if (dialogueCoroutine != null)
 		{
 			StopCoroutine(dialogueCoroutine);
