@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,6 +17,7 @@ public class Board : MonoBehaviour
 
 	public Action OnStartPlayerTurn;
 	public Action OnEndPlayerTurn;
+	public Action OnEndLevel;
 
 	void Start()
 	{
@@ -52,6 +53,7 @@ public class Board : MonoBehaviour
 
 	public void EndLevel()
 	{
+		OnEndLevel?.Invoke();
 		UnselectAllCells();
 		game.ReloadLevel();
 	}
