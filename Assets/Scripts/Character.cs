@@ -5,7 +5,13 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
-	[Header("Sprites")]
+	[Header("Character Sprites")]
+	[SerializeField] protected Sprite pionCharacterSprite;
+	[SerializeField] protected Sprite fouCharacterSprite;
+	[SerializeField] protected Sprite cavalierCharacterSprite;
+	[SerializeField] protected Sprite tourCharacterSprite;
+
+	[Header("Icon Sprites")]
 	[SerializeField] protected Sprite pionSprite;
 	[SerializeField] protected Sprite fouSprite;
 	[SerializeField] protected Sprite cavalierSprite;
@@ -17,6 +23,7 @@ public class Character : MonoBehaviour
 	[Header("References")]
 	[SerializeField] protected LayerMask cellMask;
 	[SerializeField] protected Image icon;
+	[SerializeField] protected Image character;
 
 	protected Board board;
 	private Coroutine moving;
@@ -42,10 +49,10 @@ public class Character : MonoBehaviour
 		HasFinishTurn = false;
 	}
 
-	public void Kill()
+	public virtual void Kill()
 	{
 		IsAlive = false;
-		gameObject.SetActive(false);
+		Destroy(gameObject);
 	}
 
 	public void MoveToCell(Cell cell)
@@ -59,7 +66,7 @@ public class Character : MonoBehaviour
 		float currentMoveDuration = animationData.moveDuration.RandomValue;
 
 		// Raising phase
-		transform.DOLookAt(cell.PiecePosition, animationData.lookAtDuration.RandomValue).SetEase(animationData.lookAtEase);
+		//transform.DOLookAt(cell.PiecePosition, animationData.lookAtDuration.RandomValue).SetEase(animationData.lookAtEase);
 		transform.DOMoveY(animationData.raiseHeightValue.RandomValue, currentRaiseDuration).SetRelative().SetEase(animationData.raiseEase);
 		yield return new WaitForSeconds(currentRaiseDuration);
 
@@ -90,15 +97,19 @@ public class Character : MonoBehaviour
 		{
 			case PieceType.Pion:
 				icon.sprite = pionSprite;
+				character.sprite = pionCharacterSprite;
 				break;
 			case PieceType.Fou:
 				icon.sprite = fouSprite;
+				character.sprite = fouCharacterSprite;
 				break;
 			case PieceType.Cavalier:
 				icon.sprite = cavalierSprite;
+				character.sprite = cavalierCharacterSprite;
 				break;
 			case PieceType.Tour:
 				icon.sprite = tourSprite;
+				character.sprite = tourCharacterSprite;
 				break;
 		}
 	}

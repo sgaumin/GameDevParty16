@@ -14,10 +14,8 @@ public class Enemy : Character
 
 	}
 
-	protected override void Start()
+	private void OnEnable()
 	{
-		base.Start();
-
 		CheckCurrentCell();
 		SetIcon(type);
 	}
@@ -36,6 +34,12 @@ public class Enemy : Character
 		}
 	}
 
+	public override void Kill()
+	{
+		board.Enemies.Remove(this);
+		base.Kill();
+	}
+
 	protected override void DoActionAfterMoving(Cell cell)
 	{
 		base.DoActionAfterMoving(cell);
@@ -48,7 +52,7 @@ public class Enemy : Character
 	private void End()
 	{
 		HasFinishTurn = true;
-		board.EndTurnEnemies();
+		board.EndingTurn();
 	}
 
 	protected override void OnDestroy()

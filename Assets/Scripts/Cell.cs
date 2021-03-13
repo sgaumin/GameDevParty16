@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-	private const float SPHERE_RADIUS = 0.2f;
+	private const float SPHERE_RADIUS = 0.45f;
 	private const float CHECK_DISTANCE = 1f;
 
 	[Header("References")]
@@ -40,7 +40,6 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightDownRight;
 	private Cell cellKnightLeftTop;
 	private Cell cellKnightLeftDown;
-	private bool hasSetMaterial;
 
 	public Player Piece { get; set; }
 	public CellState State
@@ -79,6 +78,15 @@ public class Cell : MonoBehaviour
 	{
 		board = GetComponentInParent<Board>();
 
+		DefineCellLinks();
+
+		State = CellState.Unselected;
+
+		model.material = (transform.position.x + transform.position.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
+	}
+
+	public void DefineCellLinks()
+	{
 		cellTop = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
 		cellDown = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
 		cellLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 0) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
@@ -168,8 +176,6 @@ public class Cell : MonoBehaviour
 		{
 			knightCells.Add(cellKnightLeftDown);
 		}
-
-		State = CellState.Unselected;
 	}
 
 	public void ShowMovements(PieceType type)
