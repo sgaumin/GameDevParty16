@@ -62,6 +62,8 @@ public class Character : MonoBehaviour
 
 	private IEnumerator MovePath(Cell cell)
 	{
+		DoActionBeforeMoving(cell);
+
 		float currentRaiseDuration = animationData.raiseDuration.RandomValue;
 		float currentMoveDuration = animationData.moveDuration.RandomValue;
 
@@ -79,6 +81,7 @@ public class Character : MonoBehaviour
 		DoActionAfterMoving(cell);
 	}
 
+	protected virtual void DoActionBeforeMoving(Cell cell) { }
 	protected virtual void DoActionAfterMoving(Cell cell) { }
 
 	protected void CheckCurrentCell()

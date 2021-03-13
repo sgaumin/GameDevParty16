@@ -37,7 +37,14 @@ public class Player : Character
 		}
 	}
 
-	protected override void DoActionAfterMoving(Cell cell)
+    protected override void DoActionBeforeMoving(Cell cell)
+    {
+        base.DoActionBeforeMoving(cell);
+
+		board.PlayerSelectedCell();
+    }
+
+    protected override void DoActionAfterMoving(Cell cell)
 	{
 		base.DoActionAfterMoving(cell);
 

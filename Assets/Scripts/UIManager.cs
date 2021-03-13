@@ -8,10 +8,12 @@ public class UIManager : MonoBehaviour
 
 	[Header("References")]
 	[SerializeField] private TextMeshProUGUI piecesList;
+	[SerializeField] private TextMeshProUGUI score;
+	[SerializeField] private string scoreTitle = "Score : ";
 
 	protected void Awake() => Instance = this;
 
-	public void DisplayPieces(List<PieceType> types)
+    public void DisplayPieces(List<PieceType> types)
 	{
 		int i = 1;
 		piecesList.text = "";
@@ -21,4 +23,9 @@ public class UIManager : MonoBehaviour
 			i++;
 		}
 	}
+
+    public void DisplayScore(float val)
+    {
+        score.text = scoreTitle + val.ToString();
+    }
 }

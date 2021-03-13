@@ -27,6 +27,7 @@ public class Board : MonoBehaviour
 
 	public Action OnStartPlayerTurn;
 	public Action OnEndPlayerTurn;
+	public Action OnPlayerSelectedCell;
 	public Action OnEndLevel;
 
 	public List<Enemy> Enemies
@@ -157,6 +158,12 @@ public class Board : MonoBehaviour
 	{
 		piece = Instantiate(piecePrefab, transform);
 		piece.Init(spawnCell);
+	}
+
+	public void PlayerSelectedCell()
+    {
+		OnPlayerSelectedCell?.Invoke();
+
 	}
 
 	public void EndTurnPlayer()
