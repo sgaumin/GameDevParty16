@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2d16c599ba9fe0f4ca95a20c6754f659, type: 2}
+  - {fileID: 2100000, guid: 32e5dffd08acb4c4e997e6524c0e06f4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,10 +237,10 @@ MonoBehaviour:
     m_Bits: 256
   model: {fileID: 6626758957874410945}
   groundMaterials:
-  - {fileID: 2100000, guid: c4c2d02b725b8524aac79494c1dac85a, type: 2}
+  - {fileID: 2100000, guid: 2aa149fd5031dc7469b38300d6167c32, type: 2}
   - {fileID: 2100000, guid: 2b1a2da8816eac24885ebb5c52e80a1c, type: 2}
   highlight: {fileID: 397962746239420011}
-  highlightMaterial: {fileID: 2100000, guid: e0038cbe0c6a3f04da5510d3d919288a, type: 2}
+  highlightMaterial: {fileID: 2100000, guid: 32e5dffd08acb4c4e997e6524c0e06f4, type: 2}
   highlightSelectedMaterial: {fileID: 2100000, guid: 2d16c599ba9fe0f4ca95a20c6754f659,
     type: 2}
   highlightCliquedMaterial: {fileID: 2100000, guid: 0a6892a31d27690488f47526843fd5e7,
