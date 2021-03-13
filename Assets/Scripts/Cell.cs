@@ -10,6 +10,8 @@ public class Cell : MonoBehaviour
 
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
+	[SerializeField] private MeshRenderer model;
+	[SerializeField] private Material[] groundMaterials = new Material[2];
 	[SerializeField] private GameObject highlight;
 	[SerializeField] private Material highlightMaterial;
 	[SerializeField] private Material highlightSelectedMaterial;
@@ -38,8 +40,9 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightDownRight;
 	private Cell cellKnightLeftTop;
 	private Cell cellKnightLeftDown;
+	private bool hasSetMaterial;
 
-	public PieceMouvment Piece { get; set; }
+	public Player Piece { get; set; }
 	public CellState State
 	{
 		get => state;
@@ -72,13 +75,7 @@ public class Cell : MonoBehaviour
 
 	public Vector3 PiecePosition => piecePosition.transform.position;
 
-	protected void Start()
-	{
-		Init();
-		State = CellState.Unselected;
-	}
-
-	private void Init()
+	public void Init()
 	{
 		board = GetComponentInParent<Board>();
 
@@ -171,6 +168,8 @@ public class Cell : MonoBehaviour
 		{
 			knightCells.Add(cellKnightLeftDown);
 		}
+
+		State = CellState.Unselected;
 	}
 
 	public void ShowMovements(PieceType type)
@@ -194,6 +193,58 @@ public class Cell : MonoBehaviour
 		}
 
 		paths.Flatten().ForEach(x => x.State = CellState.Highlighted);
+	}
+
+	public List<T> GetTargetOnMovements<T>(PieceType type) where T : Character
+	{
+		List<T> targets = new List<T>();
+		List<List<Cell>> movements = GetMovements(type);
+		foreach (Cell cell in movements.Flatten().ToList())
+		{
+			if (cell.TargetPresentOnCell<T>() != null)
+			{
+				targets.Add(cell.TargetPresentOnCell<T>());
+			}
+		}
+
+		return targets;
+	}
+
+	public T TargetPresentOnCell<T>() where T : Character
+	{
+		RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector2.up, Mathf.Infinity);
+		foreach (RaycastHit hit in hits)
+		{
+			if (hit.collider.GetComponentInParent<T>() != null)
+			{
+				return hit.collider.GetComponentInParent<T>();
+			}
+		}
+
+		return null;
+	}
+
+	private List<List<Cell>> GetMovements(PieceType type)
+	{
+		List<List<Cell>> paths = new List<List<Cell>>();
+
+		switch (type)
+		{
+			case PieceType.Pion:
+				paths = GetPawnMovements();
+				break;
+			case PieceType.Fou:
+				paths = GetBishopMovements();
+				break;
+			case PieceType.Cavalier:
+				paths = GetKnightMovements();
+				break;
+			case PieceType.Tour:
+				paths = GetRookMovements();
+				break;
+		}
+
+		return paths;
 	}
 
 	private List<Cell> GetRecursivePositionCells(List<Cell> path, CellPositionType position, int? recursionLimit = null, int? currentRecursion = null)

@@ -7,16 +7,21 @@ public class Board : MonoBehaviour
 	[SerializeField] private Cell spawnCell;
 
 	[Header("References")]
-	[SerializeField] private PieceMouvment piecePrefab;
+	[SerializeField] private Player piecePrefab;
 
-	private List<Cell> allCells = new List<Cell>();
-	PieceMouvment piece;
+	private List<Cell> cells = new List<Cell>();
+	private List<Enemy> enemies = new List<Enemy>();
+	private Player piece;
+	private Game game;
 
 	void Start()
 	{
+		game = FindObjectOfType<Game>();
+		cells = GetComponentsInChildren<Cell>().ToList();
+		cells.ForEach(x => x.Init());
 		SpawnPiece();
-		allCells = GetComponentsInChildren<Cell>().ToList();
-		allCells.ForEach(x => x.Piece = piece);
+		cells.ForEach(x => x.Piece = piece);
+		enemies = FindObjectsOfType<Enemy>().ToList();
 	}
 
 	private void SpawnPiece()
@@ -25,13 +30,24 @@ public class Board : MonoBehaviour
 		piece.Init(spawnCell, this);
 	}
 
+	public void EndTurn()
+	{
+		enemies.ForEach(x => x.TryToAttackPlayer());
+	}
+
+	public void EndLevel()
+	{
+		UnselectAllCells();
+		game.ReloadLevel();
+	}
+
 	public void UnselectAllCells()
 	{
-		allCells.ForEach(x => x.State = CellState.Unselected);
+		cells.ForEach(x => x.State = CellState.Unselected);
 	}
 
 	public void OnlySelectCell(Cell cell)
 	{
-		allCells.Where(x => x != cell).ForEach(x => x.State = CellState.Unselected);
+		cells.Where(x => x != cell).ForEach(x => x.State = CellState.Unselected);
 	}
 }

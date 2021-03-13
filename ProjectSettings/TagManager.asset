@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: HUD
+    uniqueID: 2113412719
+    locked: 0
   - name: Fader
     uniqueID: 1476709903
     locked: 0
