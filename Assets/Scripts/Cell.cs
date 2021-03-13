@@ -1,29 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
 {
-	private const float sphereRadius = 0.2f;
-	private const float checkDistance = 1f;
+	private const float SPHERE_RADIUS = 0.2f;
+	private const float CHECK_DISTANCE = 1f;
 
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
 	[SerializeField] private GameObject highlight;
 
+	private Board board;
 	private List<Cell> nearbyCells = new List<Cell>();
+	private List<Tuple<Cell, CellPositionType>> diagonalsInfoCells = new List<Tuple<Cell, CellPositionType>>();
+	private List<Tuple<Cell, CellPositionType>> linesInfoCells = new List<Tuple<Cell, CellPositionType>>();
+	private List<Cell> knightCells = new List<Cell>();
+	private Cell cellTop;
+	private Cell cellDown;
+	private Cell cellLeft;
+	private Cell cellRight;
+	private Cell cellTopLeft;
+	private Cell cellTopRight;
+	private Cell cellDownLeft;
+	private Cell cellDownRight;
+	private Cell cellKnightTopLeft;
+	private Cell cellKnightTopRight;
+	private Cell cellKnightRightTop;
+	private Cell cellKnightRightDown;
+	private Cell cellKnightDownLeft;
+	private Cell cellKnightDownRight;
+	private Cell cellKnightLeftTop;
+	private Cell cellKnightLeftDown;
 
-	public Cell CellTop { get; private set; }
-	public Cell CellDown { get; private set; }
-	public Cell CellLeft { get; private set; }
-	public Cell CellRight { get; private set; }
-	public Cell CellTopLeft { get; private set; }
-	public Cell CellTopRight { get; private set; }
-	public Cell CellDownLeft { get; private set; }
-	public Cell CellDownRight { get; private set; }
 	public CellStates Status { get; private set; }
-	public List<Cell> NearbyCells => nearbyCells;
-
 
 	protected void Start()
 	{
@@ -32,59 +43,247 @@ public class Cell : MonoBehaviour
 
 	private void Init()
 	{
-		CellTop = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		CellDown = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		CellLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 0) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		CellRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 0) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		CellTopLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		CellTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		CellDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		CellDownRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -1) * checkDistance, sphereRadius, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		board = GetComponentInParent<Board>();
 
-		if (CellTop != null)
+		cellTop = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellDown = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 0) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 0) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellTopLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellDownRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightTopLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightRightTop = Physics.OverlapSphere(transform.position + new Vector3(2, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightRightDown = Physics.OverlapSphere(transform.position + new Vector3(2, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-2, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightDownRight = Physics.OverlapSphere(transform.position + new Vector3(-2, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightLeftTop = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		cellKnightLeftDown = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+
+		if (cellTop != null)
 		{
-			nearbyCells.Add(CellTop);
+			nearbyCells.Add(cellTop);
+			linesInfoCells.Add(Tuple.Create(cellTop, CellPositionType.Top));
 		}
-		if (CellDown != null)
+		if (cellDown != null)
 		{
-			nearbyCells.Add(CellDown);
+			nearbyCells.Add(cellDown);
+			linesInfoCells.Add(Tuple.Create(cellDown, CellPositionType.Down));
 		}
-		if (CellLeft != null)
+		if (cellLeft != null)
 		{
-			nearbyCells.Add(CellLeft);
+			nearbyCells.Add(cellLeft);
+			linesInfoCells.Add(Tuple.Create(cellLeft, CellPositionType.Left));
 		}
-		if (CellRight != null)
+		if (cellRight != null)
 		{
-			nearbyCells.Add(CellRight);
+			nearbyCells.Add(cellRight);
+			linesInfoCells.Add(Tuple.Create(cellRight, CellPositionType.Right));
 		}
-		if (CellTopLeft != null)
+		if (cellTopLeft != null)
 		{
-			nearbyCells.Add(CellTopLeft);
+			nearbyCells.Add(cellTopLeft);
+			diagonalsInfoCells.Add(Tuple.Create(cellTopLeft, CellPositionType.TopLeft));
 		}
-		if (CellTopRight != null)
+		if (cellTopRight != null)
 		{
-			nearbyCells.Add(CellTopRight);
+			nearbyCells.Add(cellTopRight);
+			diagonalsInfoCells.Add(Tuple.Create(cellTopRight, CellPositionType.TopRight));
 		}
-		if (CellDownLeft != null)
+		if (cellDownLeft != null)
 		{
-			nearbyCells.Add(CellDownLeft);
+			nearbyCells.Add(cellDownLeft);
+			diagonalsInfoCells.Add(Tuple.Create(cellDownLeft, CellPositionType.DownLeft));
 		}
-		if (CellDownRight != null)
+		if (cellDownRight != null)
 		{
-			nearbyCells.Add(CellDownRight);
+			nearbyCells.Add(cellDownRight);
+			diagonalsInfoCells.Add(Tuple.Create(cellDownRight, CellPositionType.DownRight));
+		}
+		if (cellKnightTopLeft != null)
+		{
+			knightCells.Add(cellKnightTopLeft);
+		}
+		if (cellKnightTopRight != null)
+		{
+			knightCells.Add(cellKnightTopRight);
+		}
+		if (cellKnightRightTop != null)
+		{
+			knightCells.Add(cellKnightRightTop);
+		}
+		if (cellKnightRightDown != null)
+		{
+			knightCells.Add(cellKnightRightDown);
+		}
+		if (cellKnightDownLeft != null)
+		{
+			knightCells.Add(cellKnightDownLeft);
+		}
+		if (cellKnightDownRight != null)
+		{
+			knightCells.Add(cellKnightDownRight);
+		}
+		if (cellKnightLeftTop != null)
+		{
+			knightCells.Add(cellKnightLeftTop);
+		}
+		if (cellKnightLeftDown != null)
+		{
+			knightCells.Add(cellKnightLeftDown);
 		}
 	}
 
-	[ContextMenu("Show neighbour")]
-	private void ShowNearbyCells()
+	public List<List<Cell>> GetMovements(PieceType type)
 	{
-		nearbyCells.ForEach(x => x.Select());
+		List<List<Cell>> paths = new List<List<Cell>>();
+
+		switch (type)
+		{
+			case PieceType.Pion:
+				paths = GetPawnMovements();
+				break;
+			case PieceType.Fou:
+				paths = GetBishopMovements();
+				break;
+			case PieceType.Cavalier:
+				paths = GetKnightMovements();
+				break;
+			case PieceType.Tour:
+				paths = GetRookMovements();
+				break;
+		}
+
+		return paths;
 	}
 
-	[ContextMenu("Hide Neighbour")]
-	private void HideNearbyCells()
+	private List<Cell> GetRecursivePositionCells(List<Cell> path, CellPositionType position, int? recursionLimit = null, int? currentRecursion = null)
 	{
-		nearbyCells.ForEach(x => x.Unselect());
+		if (recursionLimit != null)
+		{
+			if (currentRecursion == null)
+			{
+				currentRecursion = 0;
+			}
+
+			currentRecursion++;
+
+			if (currentRecursion >= recursionLimit)
+			{
+				return path;
+			}
+		}
+
+		Cell targetCell = GetCell(position);
+		if (targetCell != null)
+		{
+			path.Add(targetCell);
+			targetCell.GetRecursivePositionCells(path, position, recursionLimit, currentRecursion);
+		}
+
+		return path;
+	}
+
+	private Cell GetCell(CellPositionType position)
+	{
+		Cell cell = null;
+
+		switch (position)
+		{
+			case CellPositionType.Top:
+				cell = cellTop;
+				break;
+			case CellPositionType.Down:
+				cell = cellDown;
+				break;
+			case CellPositionType.Left:
+				cell = cellLeft;
+				break;
+			case CellPositionType.Right:
+				cell = cellRight;
+				break;
+			case CellPositionType.TopLeft:
+				cell = cellTopLeft;
+				break;
+			case CellPositionType.TopRight:
+				cell = cellTopRight;
+				break;
+			case CellPositionType.DownLeft:
+				cell = cellDownLeft;
+				break;
+			case CellPositionType.DownRight:
+				cell = cellDownRight;
+				break;
+		}
+
+		return cell;
+	}
+
+	private List<List<Cell>> GetPawnMovements()
+	{
+		List<List<Cell>> paths = new List<List<Cell>>();
+
+		foreach (Tuple<Cell, CellPositionType> cell in linesInfoCells)
+		{
+			List<Cell> path = new List<Cell>();
+			if (cell.Item1 != null)
+			{
+				path.Add(cell.Item1);
+				cell.Item1.GetRecursivePositionCells(path, cell.Item2, 2);
+			}
+			paths.Add(path);
+		}
+
+		return paths;
+	}
+
+	private List<List<Cell>> GetBishopMovements()
+	{
+		List<List<Cell>> paths = new List<List<Cell>>();
+		foreach (Tuple<Cell, CellPositionType> cell in diagonalsInfoCells)
+		{
+			List<Cell> path = new List<Cell>();
+			if (cell.Item1 != null)
+			{
+				path.Add(cell.Item1);
+				cell.Item1.GetRecursivePositionCells(path, cell.Item2);
+			}
+			paths.Add(path);
+		}
+
+		return paths;
+	}
+
+	private List<List<Cell>> GetKnightMovements()
+	{
+		List<List<Cell>> paths = new List<List<Cell>>();
+		foreach (Cell cell in knightCells)
+		{
+			List<Cell> path = new List<Cell>();
+			path.Add(cell);
+			paths.Add(path);
+		}
+
+		return paths;
+	}
+
+	private List<List<Cell>> GetRookMovements()
+	{
+		List<List<Cell>> paths = new List<List<Cell>>();
+		foreach (Tuple<Cell, CellPositionType> cell in linesInfoCells)
+		{
+			List<Cell> path = new List<Cell>();
+			if (cell.Item1 != null)
+			{
+				path.Add(cell.Item1);
+				cell.Item1.GetRecursivePositionCells(path, cell.Item2);
+			}
+			paths.Add(path);
+		}
+
+		return paths;
 	}
 
 	public void Select()
@@ -96,4 +295,41 @@ public class Cell : MonoBehaviour
 	{
 		highlight.gameObject.SetActive(false);
 	}
+
+	#region Context Menu Methods
+	[ContextMenu("Show Pawn Movements")]
+	private void ShowPawnMovements()
+	{
+		board.UnselectAllCells();
+		GetPawnMovements().Flatten().ForEach(x => x.Select());
+	}
+
+	[ContextMenu("Show Bishop Movements")]
+	private void ShowBishopMovements()
+	{
+		board.UnselectAllCells();
+		GetBishopMovements().Flatten().ForEach(x => x.Select());
+	}
+
+	[ContextMenu("Show Rook Movements")]
+	private void ShowRookMovements()
+	{
+		board.UnselectAllCells();
+		GetRookMovements().Flatten().ForEach(x => x.Select());
+	}
+
+	[ContextMenu("Show Knight Movements")]
+	private void ShowKnightMovements()
+	{
+		board.UnselectAllCells();
+		GetKnightMovements().Flatten().ForEach(x => x.Select());
+	}
+
+	[ContextMenu("Show Neighbour")]
+	private void ShowNearbyCells()
+	{
+		board.UnselectAllCells();
+		nearbyCells.ForEach(x => x.Select());
+	}
+	#endregion
 }
