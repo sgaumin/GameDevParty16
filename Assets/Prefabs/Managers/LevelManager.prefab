@@ -523,6 +523,11 @@ PrefabInstance:
       propertyPath: rowDisplayCount
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: dialoguesController
+      value: 
+      objectReference: {fileID: 1154760613557713929}
     - target: {fileID: 6093408494802160787, guid: fcfa46c1a82893449acc4bfebc0c8494,
         type: 3}
       propertyPath: m_Name
@@ -613,7 +618,7 @@ PrefabInstance:
     - target: {fileID: 1368776873999698013, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_fontSize
-      value: 8
+      value: 12.1
       objectReference: {fileID: 0}
     - target: {fileID: 3511521872826282492, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
@@ -728,7 +733,7 @@ PrefabInstance:
     - target: {fileID: 5168447879811132454, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_fontSize
-      value: 9.1
+      value: 13.85
       objectReference: {fileID: 0}
     - target: {fileID: 7980819559460154167, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
@@ -892,3 +897,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 7097579229381774010}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1154760613557713929 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7097579229381774010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620d2f55900e8e24983c7d8819692153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

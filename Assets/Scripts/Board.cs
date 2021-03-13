@@ -12,6 +12,7 @@ public class Board : MonoBehaviour
 	[SerializeField] private Cell spawnCell;
 
 	[Header("References")]
+	[SerializeField] private DialoguesController dialoguesController;
 	[SerializeField] private Player piecePrefab;
 	[SerializeField] private Transform cellHolder;
 	[SerializeField] private Transform cameraTarget;
@@ -158,6 +159,7 @@ public class Board : MonoBehaviour
 	{
 		piece = Instantiate(piecePrefab, transform);
 		piece.Init(spawnCell);
+		dialoguesController.Init();
 	}
 
 	public void PlayerSelectedCell()
