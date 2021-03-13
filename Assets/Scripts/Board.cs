@@ -26,7 +26,7 @@ public class Board : MonoBehaviour
 
 	private void SpawnPiece()
 	{
-		piece = Instantiate(piecePrefab);
+		piece = Instantiate(piecePrefab, transform);
 		piece.Init(spawnCell, this);
 	}
 
