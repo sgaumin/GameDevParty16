@@ -26,6 +26,7 @@ public class Board : MonoBehaviour
 	private GameObject o;
 	private int currentRowDeletionCount;
 	private bool hasCheckedRows;
+	private bool hasFinishTurn;
 
 	public Action OnStartPlayerTurn;
 	public Action OnEndPlayerTurn;
@@ -173,15 +174,22 @@ public class Board : MonoBehaviour
 
 	public void EndTurnPlayer()
 	{
+		hasFinishTurn = false;
 		OnEndPlayerTurn?.Invoke();
+
+		if (enemies.IsEmpty())
+		{
+			EndingTurn();
+		}
 	}
 
 	public void EndingTurn()
 	{
-		if (game.GameState != GameStates.GameOver)
+		if (game.GameState != GameStates.GameOver && !hasFinishTurn)
 		{
 			if ((enemies.IsEmpty() && hasCheckedRows) || (enemies.Where(x => x.gameObject.activeSelf).All(x => x.HasFinishTurn) && hasCheckedRows))
 			{
+				hasFinishTurn = true;
 				hasCheckedRows = false;
 				OnStartPlayerTurn?.Invoke();
 			}
