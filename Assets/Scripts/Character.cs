@@ -107,7 +107,7 @@ public abstract class Character : MonoBehaviour
 	protected virtual void DoActionBeforeMoving(Cell cell) { }
 	protected virtual void DoActionAfterMoving(Cell cell) { }
 
-	protected void CheckCurrentCell()
+	public void CheckCurrentCell()
 	{
 		Ray ray = new Ray(transform.position, -Vector3.up);
 		RaycastHit hit;

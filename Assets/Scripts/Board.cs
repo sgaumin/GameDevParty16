@@ -78,12 +78,12 @@ public class Board : MonoBehaviour
 		}
 	}
 
-    public void EnemyKilled(PieceType type)
-    {
+	public void EnemyKilled(PieceType type)
+	{
 		scoreController.SetScoreKill(type);
-    }
+	}
 
-    protected void Awake()
+	protected void Awake()
 	{
 		OnEndLevel += StopAutoDeletionRows;
 	}
@@ -94,11 +94,11 @@ public class Board : MonoBehaviour
 		ReorganizeCells();
 		cells.ForEach(x => x.Init());
 
-		enemies = FindObjectsOfType<Enemy>().ToList();
-		EnemyActivationCheck();
-
 		SpawnPiece();
 		cells.ForEach(x => x.Piece = player);
+
+		enemies = FindObjectsOfType<Enemy>().ToList();
+		ActivateEnemiesChecks();
 
 		UIManager.Instance.StartTimer(timerCount);
 		StartAutoDeletionRows();
@@ -114,7 +114,7 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	private void EnemyActivationCheck()
+	private void ActivateEnemiesChecks()
 	{
 		enemies.ForEach(x => x.gameObject.SetActive(x.CurrentCell.gameObject.activeSelf));
 	}
@@ -173,7 +173,8 @@ public class Board : MonoBehaviour
 	private void ResetBoard()
 	{
 		cells.ForEach(x => x.DefineCellLinks());
-		EnemyActivationCheck();
+		ActivateEnemiesChecks();
+		SafeCheckOnPlayer();
 		OnRefreshBoard?.Invoke();
 	}
 
@@ -286,10 +287,19 @@ public class Board : MonoBehaviour
 		BoardState = BoardStates.PlayerSelecCell;
 	}
 
+	private void SafeCheckOnPlayer()
+	{
+		if (player == null || player.CurrentCell == null)
+		{
+			EndLevel();
+		}
+	}
+
 	public void EndTurnPlayer()
 	{
 		hasFinishTurn = false;
 		BoardState = BoardStates.EndPlayerTurn;
+		SafeCheckOnPlayer();
 
 		if (enemies.IsEmpty())
 		{
