@@ -12,6 +12,8 @@ public class Game : GameSystem
 	public event GameEventHandler OnGameOver;
 	public event GameEventHandler OnPause;
 
+	[SerializeField] private float fadDuration = 0.5f;
+
 	[Header("References")]
 	[SerializeField] private FadScreen fader;
 
@@ -126,7 +128,7 @@ public class Game : GameSystem
 	private IEnumerator LoadLevelCore(Action content = null)
 	{
 		Time.timeScale = 1f;
-		yield return fader.FadOutCore();
+		yield return fader.FadOutCore(fadDuration: fadDuration);
 		content?.Invoke();
 	}
 

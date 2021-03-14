@@ -23,14 +23,16 @@ public class UIManager : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private Board board;
 	[SerializeField] private Image portrait;
+	[SerializeField] private GameObject hud;
 	[SerializeField] private Image[] piecesList = new Image[4];
 	[SerializeField] private TextMeshProUGUI score;
 	[SerializeField] private GameObject gameOverUI;
+	[SerializeField] private GameObject winUI;
 	[SerializeField] private string scoreTitle = "SCORE = {0} pts";
 	[SerializeField] private TextMeshProUGUI timerText;
 
 
-
+	private PieceType previousType;
 	private int timerValue;
 	private Coroutine timer;
 
@@ -71,20 +73,26 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayPortrait(PieceType currentType)
 	{
-		switch (currentType)
+		if (previousType != currentType)
 		{
-			case PieceType.Pion:
-				portrait.sprite = pionPortraitSprite;
-				break;
-			case PieceType.Fou:
-				portrait.sprite = fouPortraitSprite;
-				break;
-			case PieceType.Cavalier:
-				portrait.sprite = cavalierPortraitSprite;
-				break;
-			case PieceType.Tour:
-				portrait.sprite = tourPortraitSprite;
-				break;
+			previousType = currentType;
+			switch (currentType)
+			{
+				case PieceType.Pion:
+					portrait.sprite = pionPortraitSprite;
+					break;
+				case PieceType.Fou:
+					portrait.sprite = fouPortraitSprite;
+					break;
+				case PieceType.Cavalier:
+					portrait.sprite = cavalierPortraitSprite;
+					break;
+				case PieceType.Tour:
+					portrait.sprite = tourPortraitSprite;
+					break;
+			}
+
+			portrait.GetComponent<Animator>().SetTrigger("change");
 		}
 	}
 
@@ -128,7 +136,22 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayGameOver()
 	{
-		gameOverUI.SetActive(true);
+		StartCoroutine(DisplayScreenCore(gameOverUI));
+	}
+
+	public void DisplayWin()
+	{
+		StartCoroutine(DisplayScreenCore(winUI));
+	}
+
+	private IEnumerator DisplayScreenCore(GameObject prefab)
+	{
+		hud.gameObject.FadOut(0.1f);
+
+		yield return new WaitForSeconds(0.2f);
+
+		prefab.gameObject.SetActive(true);
+		prefab.FadIn(0.5f);
 	}
 
 	private void OnDestroy()

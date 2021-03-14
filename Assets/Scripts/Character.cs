@@ -57,7 +57,10 @@ public class Character : MonoBehaviour
 
 	public void MoveToCell(Cell cell)
 	{
-		moving = StartCoroutine(MovePath(cell));
+		if (cell != null)
+		{
+			moving = StartCoroutine(MovePath(cell));
+		}
 	}
 
 	private IEnumerator MovePath(Cell cell)

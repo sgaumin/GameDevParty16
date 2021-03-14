@@ -23,6 +23,7 @@ public class Player : Character
 		transform.position = spawnCell.PiecePosition;
 
 		board.OnStartPlayerTurn += AssignRandomType;
+		board.OnMovingRow += RefreshMovements;
 	}
 
 	private void AssignRandomType()
@@ -43,6 +44,14 @@ public class Player : Character
 			{
 				UIManager.Instance.DisplayPortrait(currentType);
 			}
+		}
+	}
+
+	private void RefreshMovements()
+	{
+		if (board.BoardState == BoardStates.StartPlayerTurn)
+		{
+			CurrentCell.RefreshMovements();
 		}
 	}
 
@@ -82,5 +91,6 @@ public class Player : Character
 	{
 		base.OnDestroy();
 		board.OnStartPlayerTurn -= AssignRandomType;
+		board.OnMovingRow -= RefreshMovements;
 	}
 }

@@ -22,6 +22,8 @@ public class Cell : MonoBehaviour
 
 	private Board board;
 	private CellState state;
+	private PieceType typeGiven;
+	private Character characterGiven;
 	private List<Cell> nearbyCells = new List<Cell>();
 	private List<Tuple<Cell, CellPositionType>> diagonalsInfoCells = new List<Tuple<Cell, CellPositionType>>();
 	private List<Tuple<Cell, CellPositionType>> linesInfoCells = new List<Tuple<Cell, CellPositionType>>();
@@ -190,6 +192,9 @@ public class Cell : MonoBehaviour
 	{
 		List<List<Cell>> paths = new List<List<Cell>>();
 
+		typeGiven = type;
+		characterGiven = character;
+
 		switch (type)
 		{
 			case PieceType.Pion:
@@ -206,7 +211,30 @@ public class Cell : MonoBehaviour
 				break;
 		}
 
-		paths.Flatten().Distinct().ForEach(x => x.State = CellState.Highlighted);
+		paths.Flatten().Distinct().WithoutNullValues().ForEach(x => x.State = CellState.Highlighted);
+	}
+
+	public void RefreshMovements()
+	{
+		List<List<Cell>> paths = new List<List<Cell>>();
+
+		switch (typeGiven)
+		{
+			case PieceType.Pion:
+				paths = GetPawnMovements(characterGiven);
+				break;
+			case PieceType.Fou:
+				paths = GetBishopMovements();
+				break;
+			case PieceType.Cavalier:
+				paths = GetKnightMovements();
+				break;
+			case PieceType.Tour:
+				paths = GetRookMovements();
+				break;
+		}
+
+		paths.Flatten().Distinct().WithoutNullValues().ForEach(x => x.State = CellState.Highlighted);
 	}
 
 	public List<T> GetTargetOnMovements<T>(PieceType type, Character character) where T : Character

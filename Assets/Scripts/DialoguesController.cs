@@ -1,154 +1,151 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class DialoguesController : MonoBehaviour
 {
+	[SerializeField] private float fadeDuration = 0.2f;
+
 	[Header("References")]
-    //[SerializeField] private GameObject dialogueBox;
-    [SerializeField] private Board board;
-    [SerializeField] private TextMeshProUGUI nameText;
-    [SerializeField] private TextMeshProUGUI dialogueText;
+	//[SerializeField] private GameObject dialogueBox;
+	[SerializeField] private Board board;
+	[SerializeField] private TextMeshProUGUI nameText;
+	[SerializeField] private TextMeshProUGUI dialogueText;
 	Coroutine dialogueCoroutine;
 	Coroutine autoSwitchDialogue;
 
 	public int timeBetweenDialogues;
-    public int nbMovesBeforeDialogue;
-    private int nbMoves = 0;
+	public int nbMovesBeforeDialogue;
+	private int nbMoves = 0;
 
 	public DialogueData pion;
 	public DialogueData fou;
 	public DialogueData cavalier;
 	public DialogueData tour;
 
-    private void Start()
-    {
-        //board.piece.OnKillEnemy += SetDialogue;
-    }
-
-    private void Awake()
-    {
-		//autoSwitchDialogue = StartCoroutine(AutoSwitchDialogue());
+	public void Init()
+	{
+		board.piece.OnKillEnemy += SetDialogue;
+		board.OnStartPlayerTurn += MoveDialogue;
 	}
 
-    public void Init()
-    {
-        board.piece.OnKillEnemy += SetDialogue;
-        board.OnStartPlayerTurn += MoveDialogue;
-    }
+	public void MoveDialogue()
+	{
+		if (nbMoves % nbMovesBeforeDialogue == 0 && !board.piece.hasKilled)
+		{
+			SetDialogue(board.piece.currentType, DialogueType.Normal);
+		}
+		board.piece.hasKilled = false;
+		nbMoves++;
+	}
 
-    public void MoveDialogue()
-    {
-        if(nbMoves % nbMovesBeforeDialogue == 0 && !board.piece.hasKilled)
-        {
-            SetDialogue(board.piece.currentType, DialogueType.Normal);
-        }
-        board.piece.hasKilled = false;
-        nbMoves++;
-    }
-
-    public void SetDialogue(DialogueType dialogueType)
-    {
+	public void SetDialogue(DialogueType dialogueType)
+	{
 		PieceType type = (PieceType)Random.Range(0, System.Enum.GetValues(typeof(PieceType)).Length);
 		SetDialogue(type, dialogueType);
-    }
+	}
 
-		// Dialogue choisi aléatoirement dans la base des dialogues de la pièce choisie
+	// Dialogue choisi aléatoirement dans la base des dialogues de la pièce choisie
 	public void SetDialogue(PieceType piece, DialogueType dialogueType)
-    {	
+	{
 		string[] dialogueBase = { "NONE" };
-        string name = "NONE";
-        switch (piece)
-        {
-            case PieceType.Pion:
-                name = pion.name;
-                switch (dialogueType)
-                {
-                    case DialogueType.Attaque:
-                        dialogueBase = pion.dialogueAttaque;
-                        break;
-                    case DialogueType.Normal:
-                        dialogueBase = pion.dialogue;
-                        break;
-                }
-                break;
-            case PieceType.Fou:
-                name = fou.name;
-                switch (dialogueType)
-                {
-                    case DialogueType.Attaque:
-                        dialogueBase = fou.dialogueAttaque;
-                        break;
-                    case DialogueType.Normal:
-                        dialogueBase = fou.dialogue;
-                        break;
-                }
-                break;
-            case PieceType.Cavalier:
-                name = cavalier.name;
-                switch (dialogueType)
-                {
-                    case DialogueType.Attaque:
-                        dialogueBase = cavalier.dialogueAttaque;
-                        break;
-                    case DialogueType.Normal:
-                        dialogueBase = cavalier.dialogue;
-                        break;
-                }
-                break;
-            case PieceType.Tour:
-                name = tour.name;
-                switch (dialogueType)
-                {
-                    case DialogueType.Attaque:
-                        dialogueBase = tour.dialogueAttaque;
-                        break;
-                    case DialogueType.Normal:
-                        dialogueBase = tour.dialogue;
-                        break;
-                }
-                break;
-        }
-        string dialogue = dialogueBase[Random.Range(0, dialogueBase.Length)];
+		string name = "NONE";
+		switch (piece)
+		{
+			case PieceType.Pion:
+				name = pion.name;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = pion.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = pion.dialogue;
+						break;
+				}
+				break;
+			case PieceType.Fou:
+				name = fou.name;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = fou.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = fou.dialogue;
+						break;
+				}
+				break;
+			case PieceType.Cavalier:
+				name = cavalier.name;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = cavalier.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = cavalier.dialogue;
+						break;
+				}
+				break;
+			case PieceType.Tour:
+				name = tour.name;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = tour.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = tour.dialogue;
+						break;
+				}
+				break;
+		}
+		string dialogue = dialogueBase[Random.Range(0, dialogueBase.Length)];
 		SetDialogueText(dialogue, name);
-    }
+	}
 
-    public void SetDialogueText(string text, string name)
-    {
+	public void SetDialogueText(string text, string name)
+	{
 		dialogueCoroutine = StartCoroutine(DialogueCoroutine(text, name));
 	}
 
-    public void ResetAutoSwitchDialogue()
-    {
+	public void ResetAutoSwitchDialogue()
+	{
 		if (autoSwitchDialogue != null)
 		{
 			StopCoroutine(autoSwitchDialogue);
 		}
 	}
 
-    private IEnumerator AutoSwitchDialogue()
-    {
-		while(true)
-        {
+	private IEnumerator AutoSwitchDialogue()
+	{
+		while (true)
+		{
 			SetDialogue(DialogueType.Normal);
 			yield return new WaitForSeconds(timeBetweenDialogues);
-        }
+		}
 	}
 
 	private IEnumerator DialogueCoroutine(string text, string name)
-    {
+	{
+		if (name != nameText.text)
+		{
+			nameText.gameObject.FadIn(fadeDuration);
+		}
+		dialogueText.gameObject.FadIn(fadeDuration);
+
 		dialogueText.text = text;
-        nameText.text = name;
-        yield return new WaitForSeconds(0);
-    }
+		nameText.text = name;
+		yield return new WaitForSeconds(0);
+	}
 
 	protected virtual void OnDestroy()
 	{
-        board.piece.OnKillEnemy -= SetDialogue;
-        board.OnStartPlayerTurn -= MoveDialogue;
-        
-        if (dialogueCoroutine != null)
+		board.piece.OnKillEnemy -= SetDialogue;
+		board.OnStartPlayerTurn -= MoveDialogue;
+
+		if (dialogueCoroutine != null)
 		{
 			StopCoroutine(dialogueCoroutine);
 		}

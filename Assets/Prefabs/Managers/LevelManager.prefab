@@ -519,6 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dc52d7a03854747abbc90cc4458624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadDuration: 0.55
   fader: {fileID: 1857699063805068419}
 --- !u!114 &1261624071804609154
 MonoBehaviour:
@@ -558,7 +559,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6884240917761863250}
-  m_LocalRotation: {x: 0.32715225, y: -0.46005318, z: 0.18721919, w: 0.8039102}
+  m_LocalRotation: {x: 0.32715225, y: -0.46005315, z: 0.18721917, w: 0.8039102}
   m_LocalPosition: {x: 12.65, y: 13.32, z: -5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -925,11 +926,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
         type: 3}
-      propertyPath: rowDisplayCount
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
-        type: 3}
       propertyPath: dialoguesController
       value: 
       objectReference: {fileID: 1154760613557713929}
@@ -1029,7 +1025,7 @@ PrefabInstance:
     - target: {fileID: 1014823040803086449, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_fontSize
-      value: 34.85
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 1368776873999698013, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
@@ -1092,6 +1088,36 @@ PrefabInstance:
       value: QuitGame
       objectReference: {fileID: 0}
     - target: {fileID: 2152167160346770236, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942623488032463104, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942623488032463104, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942623488032463104, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942623488032463104, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7246981277467468507}
+    - target: {fileID: 2942623488032463104, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReloadLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2942623488032463104, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
@@ -1224,7 +1250,7 @@ PrefabInstance:
     - target: {fileID: 5168447879811132454, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_fontSize
-      value: 9.05
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 5640266547841278822, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}

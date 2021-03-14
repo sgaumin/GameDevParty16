@@ -27,11 +27,13 @@ public class Board : MonoBehaviour
 	private GameObject o;
 	private bool hasFinishTurn;
 	private Coroutine rowDeletion;
+	private BoardStates boardState;
 
 	public Action OnStartPlayerTurn;
-	public Action OnEndPlayerTurn;
 	public Action OnPlayerSelectedCell;
+	public Action OnEndPlayerTurn;
 	public Action OnEndLevel;
+	public Action OnMovingRow;
 
 	public List<Enemy> Enemies
 	{
@@ -39,6 +41,31 @@ public class Board : MonoBehaviour
 		set
 		{
 			enemies = value;
+		}
+	}
+
+	public BoardStates BoardState
+	{
+		get => boardState;
+		set
+		{
+			boardState = value;
+
+			switch (value)
+			{
+				case BoardStates.StartPlayerTurn:
+					OnStartPlayerTurn?.Invoke();
+					break;
+				case BoardStates.PlayerSelecCell:
+					OnPlayerSelectedCell?.Invoke();
+					break;
+				case BoardStates.EndPlayerTurn:
+					OnEndPlayerTurn?.Invoke();
+					break;
+				case BoardStates.EndLevel:
+					OnEndLevel?.Invoke();
+					break;
+			}
 		}
 	}
 
@@ -55,6 +82,7 @@ public class Board : MonoBehaviour
 		cells.ForEach(x => x.Init());
 
 		enemies = FindObjectsOfType<Enemy>().ToList();
+		EnemyActivationCheck();
 
 		SpawnPiece();
 		cells.ForEach(x => x.Piece = piece);
@@ -62,7 +90,7 @@ public class Board : MonoBehaviour
 		UIManager.Instance.StartTimer(timerCount);
 		StartAutoDeletionRows();
 
-		OnStartPlayerTurn?.Invoke();
+		BoardState = BoardStates.StartPlayerTurn;
 	}
 
 	private void Update()
@@ -71,6 +99,11 @@ public class Board : MonoBehaviour
 		{
 			cameraTarget.transform.position = piece.transform.position;
 		}
+	}
+
+	private void EnemyActivationCheck()
+	{
+		enemies.ForEach(x => x.gameObject.SetActive(x.CurrentCell.gameObject.activeSelf));
 	}
 
 	private void ReorganizeCells()
@@ -134,6 +167,8 @@ public class Board : MonoBehaviour
 			DeleteFirstRow();
 			ShowNewRow();
 			cells.ForEach(x => x.DefineCellLinks());
+			EnemyActivationCheck();
+			OnMovingRow?.Invoke();
 		}
 
 	}
@@ -187,14 +222,13 @@ public class Board : MonoBehaviour
 
 	public void PlayerSelectedCell()
 	{
-		OnPlayerSelectedCell?.Invoke();
-
+		BoardState = BoardStates.PlayerSelecCell;
 	}
 
 	public void EndTurnPlayer()
 	{
 		hasFinishTurn = false;
-		OnEndPlayerTurn?.Invoke();
+		BoardState = BoardStates.EndPlayerTurn;
 
 		if (enemies.IsEmpty())
 		{
@@ -204,30 +238,29 @@ public class Board : MonoBehaviour
 
 	public void EndingTurn()
 	{
-		if (game.GameState != GameStates.GameOver && !hasFinishTurn)
+		if (BoardState != BoardStates.EndLevel && !hasFinishTurn)
 		{
 			if (enemies.IsEmpty() || enemies.Where(x => x.gameObject.activeSelf).All(x => x.HasFinishTurn))
 			{
 				hasFinishTurn = true;
-				OnStartPlayerTurn?.Invoke();
+				BoardState = BoardStates.StartPlayerTurn;
 			}
 		}
 	}
 
 	public void EndLevel(bool hasWon = false)
 	{
-		game.GameState = GameStates.GameOver;
-
-		OnEndLevel?.Invoke();
+		BoardState = BoardStates.EndLevel;
 		UnselectAllCells();
-		if(!hasWon)
-        {
+		if (!hasWon)
+		{
 			UIManager.Instance.DisplayGameOver();
-        } else
-        {
-			game.ReloadLevel();
-        }
-    }
+		}
+		else
+		{
+			UIManager.Instance.DisplayWin();
+		}
+	}
 
 	public void UnselectAllCells()
 	{

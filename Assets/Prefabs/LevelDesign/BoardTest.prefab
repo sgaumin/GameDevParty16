@@ -310,9 +310,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerCount: 90
-  rowDisplayCount: 8
+  rowDisplayCount: 10
   rowDeletionFrequency: 1
-  timeBeforeRowDeletion: 2
+  timeBeforeRowDeletion: 1.4
   spawnCell: {fileID: 7227624767949412090}
   dialoguesController: {fileID: 0}
   piecePrefab: {fileID: 3127202912604834137, guid: 791dbd1f0e919f94089a21a35fd5648b,
