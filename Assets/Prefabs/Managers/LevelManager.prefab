@@ -1026,10 +1026,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1649039352197683438}
     m_Modifications:
+    - target: {fileID: 1014823040803086449, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 34.85
+      objectReference: {fileID: 0}
     - target: {fileID: 1368776873999698013, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_fontSize
-      value: 16
+      value: 7.85
       objectReference: {fileID: 0}
     - target: {fileID: 3030167775248291442, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
@@ -1145,11 +1150,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3240564644996932493}
     - target: {fileID: 5168447879811132454, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 9.05
       objectReference: {fileID: 0}
     - target: {fileID: 7980819559460154167, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
