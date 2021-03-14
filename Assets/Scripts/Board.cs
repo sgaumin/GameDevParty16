@@ -37,6 +37,9 @@ public class Board : MonoBehaviour
 	private bool inverseAnimation;
 	private float positionPercentage;
 	private float currentRowDeletionAmount;
+	
+	public AudioExpress killSoundInstrument;
+	public AudioExpress killSoundParole;
 
 	public Action OnStartPlayerTurn;
 	public Action OnPlayerSelectedCell;
@@ -80,6 +83,8 @@ public class Board : MonoBehaviour
 
 	public void EnemyKilled(PieceType type)
 	{
+		killSoundInstrument.Play();
+		killSoundParole.Play();
 		scoreController.SetScoreKill(type);
 	}
 

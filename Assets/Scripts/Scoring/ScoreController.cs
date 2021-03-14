@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using Tools.Utils;
+using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
 	[Header("References")]
 	[SerializeField] protected Board board;
 	[SerializeField] protected UIManager ui;
+	public AudioExpress moveParole;
 	static float bestScore;
 	private float multiplier;
 	public int nbTurns = 0;
@@ -56,7 +58,7 @@ public class ScoreController : MonoBehaviour
 		// Son si score > 100
 		if (val >= 100)
 		{
-			// TODO: Play Sound
+			moveParole.Play();
 		}
 
 		scoreMove += val;
