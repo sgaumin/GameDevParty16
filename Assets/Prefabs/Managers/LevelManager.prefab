@@ -567,28 +567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   board: {fileID: 9187138609560199317}
   ui: {fileID: 5220511158057786568}
-  moveParole:
-    isUsingClips: 1
-    clip: {fileID: 0}
-    clips:
-    - {fileID: 8300000, guid: 3c4372434441ca54f9a42ac0a6a6be82, type: 3}
-    - {fileID: 8300000, guid: 6c8911c2fc23c4f42a1bb32f449f1256, type: 3}
-    - {fileID: 8300000, guid: 422510b786865ab4880920a3d5a907fd, type: 3}
-    - {fileID: 8300000, guid: 3e2e97d42dd4aa64896deba7f0bebe5b, type: 3}
-    - {fileID: 8300000, guid: 16da88119b6fe5a43b1c33bbb413b8b5, type: 3}
-    - {fileID: 8300000, guid: 223c870711f68a246bb3390436ad008c, type: 3}
-    - {fileID: 8300000, guid: c1281740e5820de4095c041a78c8ba5c, type: 3}
-    mixerGroup: {fileID: 0}
-    loopType: 0
-    timeBetweenLoop:
-      min: 1
-      max: 3
-    isPitchModified: 1
-    pitchMaxVariation:
-      min: -0.2
-      max: 0.2
-    autoDestroy: 0
-    multiplier: 5
+  mouveSounds: {fileID: 11400000, guid: a3a5bfa624cab1449932183525088b90, type: 2}
   nbTurns: 0
   score: 0
   scoreMove: 0
@@ -869,12 +848,12 @@ PrefabInstance:
     - target: {fileID: 4381328670056538133, guid: 70dcbaea908f1374295c2aa4af06da9d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.46005315
+      value: -0.46005318
       objectReference: {fileID: 0}
     - target: {fileID: 4381328670056538133, guid: 70dcbaea908f1374295c2aa4af06da9d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.18721917
+      value: 0.18721919
       objectReference: {fileID: 0}
     - target: {fileID: 4381328670056538133, guid: 70dcbaea908f1374295c2aa4af06da9d,
         type: 3}
@@ -999,6 +978,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
         type: 3}
+      propertyPath: playerKilledSoundVoice.clips.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.clips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
       propertyPath: dialoguesController
       value: 
       objectReference: {fileID: 1154760613557713929}
@@ -1072,6 +1061,83 @@ PrefabInstance:
       propertyPath: killSoundParole.clips.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: cda340c0bbf2b3343a6af28aa9d3469b, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.isUsingClips
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundVoice.isUsingClips
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.isPitchModified
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundVoice.isPitchModified
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundVoice.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0e9dadaa1eb177342a35b6ba87449ada, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundVoice.clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: f7ddf3aad00620940b7dccc2051b6876, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundVoice.clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 03d9d4aa3f98d1c4895d341284dafcac, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundVoice.clips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: fa5ad940ed380ac45bac35673e93143b, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: d577fbf20fcfb934cafd4c19d91ec737, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0ef2c33c19d86dd4e87e7c5458407056, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: ec269878b2138584cb22b3f28271902c, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.clips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 615e2d2bb885fc144ba45b238cb26cad, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSoundInstrument.clips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3204fd6fcfb221d4b9010725964ec574, type: 3}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: killSound
+      value: 
+      objectReference: {fileID: 11400000, guid: a8af31bf22ebe13439028b3e063e4336,
+        type: 2}
+    - target: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+        type: 3}
+      propertyPath: playerKilledSound
+      value: 
+      objectReference: {fileID: 11400000, guid: e51f3196bfc15f0449c656b210f39436,
+        type: 2}
     - target: {fileID: 6093408494802160787, guid: fcfa46c1a82893449acc4bfebc0c8494,
         type: 3}
       propertyPath: m_Name

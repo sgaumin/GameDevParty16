@@ -6,7 +6,8 @@ public class ScoreController : MonoBehaviour
 	[Header("References")]
 	[SerializeField] protected Board board;
 	[SerializeField] protected UIManager ui;
-	public AudioExpress moveParole;
+	public SoundData mouveSounds;
+
 	static float bestScore;
 	private float multiplier;
 	public int nbTurns = 0;
@@ -58,7 +59,7 @@ public class ScoreController : MonoBehaviour
 		// Son si score > 100
 		if (val >= 100)
 		{
-			moveParole.Play();
+			mouveSounds.voice.Play();
 		}
 
 		scoreMove += val;

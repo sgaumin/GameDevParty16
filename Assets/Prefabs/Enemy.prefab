@@ -78,6 +78,7 @@ MonoBehaviour:
   icon: {fileID: 7244804328140109055}
   character: {fileID: 453303200291480858}
   type: 0
+  playerKilledSound: {fileID: 11400000, guid: e51f3196bfc15f0449c656b210f39436, type: 2}
 --- !u!1 &4091003999517611599
 GameObject:
   m_ObjectHideFlags: 0
