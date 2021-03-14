@@ -55,7 +55,13 @@ public class UIManager : MonoBehaviour
 	{
 		while (true)
 		{
-			timerText.text = $"{Mathf.Max(timerValue, 0)}";
+			int minutes = timerValue / 60;
+			int secondes = timerValue - minutes * 60;
+
+			string minutesPrefix = minutes >= 10 ? "" : "0";
+			string secondesPrefix = secondes >= 10 ? "" : "0";
+
+			timerText.text = $"{minutesPrefix}{minutes}:{secondesPrefix}{Mathf.Max(secondes, 0)}";
 			yield return new WaitForSeconds(1f);
 			timerValue--;
 
