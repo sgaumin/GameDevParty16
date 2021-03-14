@@ -77,6 +77,8 @@ public abstract class Character : MonoBehaviour
 		ParticleSystem currentAttackEffect = Instantiate(attackingEffect);
 		currentAttackEffect.transform.position = CurrentCell.CharacterPosition;
 
+		Camera.main.DOShakePosition(animationData.cameraShakeDuration.RandomValue, animationData.cameraShakeStrenght.RandomValue, animationData.cameraShakeVibrato.RandomValue);
+
 		Destroy(gameObject);
 	}
 

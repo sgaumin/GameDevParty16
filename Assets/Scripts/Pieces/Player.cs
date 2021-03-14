@@ -40,10 +40,7 @@ public class Player : Character
 			SetIcon(currentType);
 			types.RemoveAt(0);
 			UIManager.Instance.DisplayPieces(types);
-			if (!hasKilled)
-			{
-				UIManager.Instance.DisplayPortrait(currentType);
-			}
+			UIManager.Instance.DisplayPortrait(currentType);
 		}
 	}
 
