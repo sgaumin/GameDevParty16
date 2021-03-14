@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-	[SerializeField] private PieceType type;
+	[SerializeField] public PieceType type;
 
 	private Character target;
 

@@ -69,6 +69,7 @@ public class Player : Character
 		Enemy enemy = cell.TargetPresentOnCell<Enemy>();
 		if (enemy != null)
 		{
+			board.EnemyKilled(enemy.type);
 			hasKilled = true;
 			OnKillEnemy?.Invoke(currentType, DialogueType.Attaque);
 			enemy.Kill();

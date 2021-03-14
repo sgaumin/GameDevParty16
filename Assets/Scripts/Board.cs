@@ -21,6 +21,7 @@ public class Board : MonoBehaviour
 
 	[Header("References")]
 	[SerializeField] private DialoguesController dialoguesController;
+	[SerializeField] private ScoreController scoreController;
 	[SerializeField] private Player piecePrefab;
 	[SerializeField] private Transform cellHolder;
 	[SerializeField] private Transform cameraTarget;
@@ -77,7 +78,12 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	protected void Awake()
+    public void EnemyKilled(PieceType type)
+    {
+		scoreController.SetScoreKill(type);
+    }
+
+    protected void Awake()
 	{
 		OnEndLevel += StopAutoDeletionRows;
 	}
