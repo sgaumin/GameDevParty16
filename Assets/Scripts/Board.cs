@@ -188,7 +188,7 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	public void EndLevel()
+	public void EndLevel(bool hasWon = false)
 	{
 		game.GameState = GameStates.GameOver;
 

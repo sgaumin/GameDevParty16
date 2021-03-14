@@ -285,12 +285,12 @@ PrefabInstance:
     - target: {fileID: 3240564644996932466, guid: 91f77c7f45a95cc40a928615b549a427,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.46005315
+      value: -0.46005318
       objectReference: {fileID: 0}
     - target: {fileID: 3240564644996932466, guid: 91f77c7f45a95cc40a928615b549a427,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.18721917
+      value: 0.18721919
       objectReference: {fileID: 0}
     - target: {fileID: 3240564644996932466, guid: 91f77c7f45a95cc40a928615b549a427,
         type: 3}
@@ -341,6 +341,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119126772889961639, guid: 91f77c7f45a95cc40a928615b549a427,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.46005318
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119126772889961639, guid: 91f77c7f45a95cc40a928615b549a427,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.18721919
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5512943084976244949, guid: 91f77c7f45a95cc40a928615b549a427, type: 3}

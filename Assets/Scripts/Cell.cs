@@ -8,6 +8,8 @@ public class Cell : MonoBehaviour
 	private const float SPHERE_RADIUS = 0.45f;
 	private const float CHECK_DISTANCE = 1f;
 
+	[SerializeField] private bool isWin;
+
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
 	[SerializeField] private MeshRenderer model;
@@ -41,6 +43,7 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightLeftTop;
 	private Cell cellKnightLeftDown;
 
+	public bool IsWin => isWin;
 	public Player Piece { get; set; }
 	public CellState State
 	{
@@ -77,12 +80,17 @@ public class Cell : MonoBehaviour
 	public void Init()
 	{
 		board = GetComponentInParent<Board>();
-
 		DefineCellLinks();
-
 		State = CellState.Unselected;
 
-		model.material = (transform.position.x + transform.position.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
+		if (isWin)
+		{
+			model.material = groundMaterials[2];
+		}
+		else
+		{
+			model.material = (transform.position.x + transform.position.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
+		}
 	}
 
 	public void DefineCellLinks()

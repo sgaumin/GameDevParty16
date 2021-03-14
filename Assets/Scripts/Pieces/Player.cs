@@ -63,7 +63,15 @@ public class Player : Character
 
 		CurrentCell = cell;
 		board.UnselectAllCells();
-		board.EndTurnPlayer();
+
+		if (CurrentCell.IsWin)
+		{
+			board.EndLevel(true);
+		}
+		else
+		{
+			board.EndTurnPlayer();
+		}
 	}
 
 	protected override void OnDestroy()

@@ -232,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e8772c14532dd418864007d2cb341a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWin: 0
   cellMask:
     serializedVersion: 2
     m_Bits: 256
@@ -239,6 +240,7 @@ MonoBehaviour:
   groundMaterials:
   - {fileID: 2100000, guid: 2aa149fd5031dc7469b38300d6167c32, type: 2}
   - {fileID: 2100000, guid: 2b1a2da8816eac24885ebb5c52e80a1c, type: 2}
+  - {fileID: 2100000, guid: b62177bf2ae350844aa0b0178de13069, type: 2}
   highlight: {fileID: 397962746239420011}
   highlightMaterial: {fileID: 2100000, guid: 32e5dffd08acb4c4e997e6524c0e06f4, type: 2}
   highlightSelectedMaterial: {fileID: 2100000, guid: 2d16c599ba9fe0f4ca95a20c6754f659,
