@@ -225,13 +225,8 @@ public class Board : MonoBehaviour
 			UIManager.Instance.DisplayGameOver();
         } else
         {
-			ReloadLevel();
+			game.ReloadLevel();
         }
-    }
-
-	public void ReloadLevel()
-    {
-        game.ReloadLevel();
     }
 
 	public void UnselectAllCells()
