@@ -20,8 +20,8 @@ MonoBehaviour:
     min: 1.2
     max: 1.6
   raiseDuration:
-    min: 0.2
-    max: 0.3
+    min: 0.14621246
+    max: 0.24621242
   raiseEase: 2
   moveDuration:
     min: 0.5

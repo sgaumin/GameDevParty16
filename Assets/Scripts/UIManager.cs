@@ -21,6 +21,11 @@ public class UIManager : MonoBehaviour
 	[SerializeField] protected Sprite cavalierPortraitSprite;
 	[SerializeField] protected Sprite tourPortraitSprite;
 
+	[Header("Animations")]
+	[SerializeField] private float shakeScoreDuration = 0.6f;
+	[SerializeField] private float shakeScoreStrenght = 1f;
+	[SerializeField] private int shakeScoreVibrato = 15;
+
 	[Header("References")]
 	[SerializeField] private Board board;
 	[SerializeField] private Image portrait;
@@ -97,10 +102,14 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	public void DisplayScore(float val)
+	public void DisplayScore(float val, bool shake = true)
 	{
 		score.text = string.Format(scoreTitle, val.ToString());
-		score.transform.DOShakePosition(0.5f, 1f);
+
+		if (shake)
+		{
+			score.transform.DOShakePosition(shakeScoreDuration, shakeScoreStrenght, shakeScoreVibrato);
+		}
 	}
 
 	public void StartTimer(int value)

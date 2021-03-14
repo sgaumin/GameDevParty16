@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialoguesController : MonoBehaviour
 {
 	[SerializeField] private float fadeDuration = 0.2f;
+	[SerializeField] private float delayCharacterDisplay = 0.01f;
 
 	[Header("References")]
 	//[SerializeField] private GameObject dialogueBox;
@@ -135,9 +136,22 @@ public class DialoguesController : MonoBehaviour
 		}
 		dialogueText.gameObject.FadIn(fadeDuration);
 
-		dialogueText.text = text;
-		nameText.text = name;
-		yield return new WaitForSeconds(0);
+		dialogueText.text = "";
+		nameText.text = "";
+
+		StartCoroutine(DisplayLetterCore(text, dialogueText));
+		StartCoroutine(DisplayLetterCore(name, nameText));
+
+		yield return null;
+	}
+
+	private IEnumerator DisplayLetterCore(string text, TextMeshProUGUI target)
+	{
+		for (int i = 0; i < text.Length; i++)
+		{
+			target.text += "" + text[i];
+			yield return new WaitForSeconds(delayCharacterDisplay);
+		}
 	}
 
 	protected virtual void OnDestroy()
