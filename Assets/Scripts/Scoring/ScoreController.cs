@@ -47,6 +47,8 @@ public class ScoreController : MonoBehaviour
 	private void PlayerTurnEnd()
 	{
 		nbTurns++;
+		if (!board.player.IsAlive)
+			return;
 		System.DateTime endTime = System.DateTime.Now;
 		System.TimeSpan delta = (endTime - startTime);
 		int val = SetScoreTime((float)delta.TotalMilliseconds);
@@ -63,6 +65,8 @@ public class ScoreController : MonoBehaviour
 
 	private void EndLevelReached()
 	{
+		if (!board.player.IsAlive)
+			return;
 		int val = SetScoreCoups(nbTurns);
 		scoreEndLevel += val;
 		Score += val;
