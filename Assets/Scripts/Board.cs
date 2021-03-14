@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,8 +9,8 @@ public class Board : MonoBehaviour
 	[Header("Rules")]
 	[SerializeField] private int timerCount = 10;
 	[SerializeField] private int rowDisplayCount = 8;
-	[SerializeField] private int rowDeletionCount = 1;
 	[SerializeField] private int rowDeletionFrequency = 1;
+	[SerializeField] private float timeBeforeRowDeletion = 1f;
 	[SerializeField] private Cell spawnCell;
 
 	[Header("References")]
@@ -24,9 +25,8 @@ public class Board : MonoBehaviour
 	public Player piece;
 	private Game game;
 	private GameObject o;
-	private int currentRowDeletionCount;
-	private bool hasCheckedRows;
 	private bool hasFinishTurn;
+	private Coroutine rowDeletion;
 
 	public Action OnStartPlayerTurn;
 	public Action OnEndPlayerTurn;
@@ -45,6 +45,7 @@ public class Board : MonoBehaviour
 	protected void Awake()
 	{
 		OnStartPlayerTurn += CheckRowDeletion;
+		OnEndLevel += StopAutoDeletionRows;
 	}
 
 	void Start()
@@ -60,6 +61,7 @@ public class Board : MonoBehaviour
 		cells.ForEach(x => x.Piece = piece);
 
 		UIManager.Instance.StartTimer(timerCount);
+		StartAutoDeletionRows();
 
 		OnStartPlayerTurn?.Invoke();
 	}
@@ -101,22 +103,40 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	private void CheckRowDeletion()
+	public void StartAutoDeletionRows()
 	{
-		if (currentRowDeletionCount >= rowDeletionFrequency)
+		rowDeletion = StartCoroutine(AutoDeletionRowsCore());
+	}
+
+	public void StopAutoDeletionRows()
+	{
+		if (rowDeletion != null)
 		{
-			currentRowDeletionCount = 0;
+			StopCoroutine(rowDeletion);
+		}
+	}
+
+	private IEnumerator AutoDeletionRowsCore()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(timeBeforeRowDeletion);
 			for (int i = 0; i < rowDeletionFrequency; i++)
 			{
-				DeleteFirstRow();
-				ShowNewRow();
-				cells.ForEach(x => x.DefineCellLinks());
+				CheckRowDeletion();
 			}
 		}
+	}
 
-		currentRowDeletionCount++;
-		hasCheckedRows = true;
-		EndingTurn();
+	private void CheckRowDeletion()
+	{
+		for (int i = 0; i < rowDeletionFrequency; i++)
+		{
+			DeleteFirstRow();
+			ShowNewRow();
+			cells.ForEach(x => x.DefineCellLinks());
+		}
+
 	}
 
 	private void DeleteFirstRow()
@@ -187,10 +207,9 @@ public class Board : MonoBehaviour
 	{
 		if (game.GameState != GameStates.GameOver && !hasFinishTurn)
 		{
-			if ((enemies.IsEmpty() && hasCheckedRows) || (enemies.Where(x => x.gameObject.activeSelf).All(x => x.HasFinishTurn) && hasCheckedRows))
+			if (enemies.IsEmpty() || enemies.Where(x => x.gameObject.activeSelf).All(x => x.HasFinishTurn))
 			{
 				hasFinishTurn = true;
-				hasCheckedRows = false;
 				OnStartPlayerTurn?.Invoke();
 			}
 		}
@@ -218,5 +237,6 @@ public class Board : MonoBehaviour
 	private void OnDestroy()
 	{
 		OnStartPlayerTurn -= CheckRowDeletion;
+		OnEndLevel -= StopAutoDeletionRows;
 	}
 }
