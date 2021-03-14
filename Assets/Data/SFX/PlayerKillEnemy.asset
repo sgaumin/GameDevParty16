@@ -21,7 +21,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 252c7fe85ae3b6d4ead39d010f71a500, type: 3}
     - {fileID: 8300000, guid: c87d2904df4e5f84b918229aaaf9419f, type: 3}
     - {fileID: 8300000, guid: 5181b8bf0d9c6b64bafc109b9d5f2389, type: 3}
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 1210247988137533499, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
     loopType: 0
     timeBetweenLoop:
       min: 1
@@ -40,7 +41,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 59e9193fa7153934e901828f444e70ba, type: 3}
     - {fileID: 8300000, guid: 6597f905b00a2e346b26d8c5f8c43026, type: 3}
     - {fileID: 8300000, guid: cda340c0bbf2b3343a6af28aa9d3469b, type: 3}
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -2988044021073429056, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
     loopType: 0
     timeBetweenLoop:
       min: 1

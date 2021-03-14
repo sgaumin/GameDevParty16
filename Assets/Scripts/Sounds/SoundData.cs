@@ -15,11 +15,13 @@ public class SoundData : ScriptableObject
         PlayVoiceSound();
     }
 
+    [ContextMenu("PlayInstrumentSound")]
     public void PlayInstrumentSound()
     {
         instrument.Play();
     }
 
+    [ContextMenu("PlayVoiceSound")]
     public void PlayVoiceSound()
     {
         voice.Play();

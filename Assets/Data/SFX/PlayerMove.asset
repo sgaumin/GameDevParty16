@@ -38,7 +38,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 16da88119b6fe5a43b1c33bbb413b8b5, type: 3}
     - {fileID: 8300000, guid: 223c870711f68a246bb3390436ad008c, type: 3}
     - {fileID: 8300000, guid: c1281740e5820de4095c041a78c8ba5c, type: 3}
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -2988044021073429056, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
     loopType: 0
     timeBetweenLoop:
       min: 1

@@ -17,7 +17,8 @@ MonoBehaviour:
     clip: {fileID: 0}
     clips:
     - {fileID: 8300000, guid: 27b18f07b3644ea4bbc9149120594040, type: 3}
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: 1210247988137533499, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
     loopType: 0
     timeBetweenLoop:
       min: 1
@@ -37,7 +38,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 83176424eab6e1a4f89095a526c9fad5, type: 3}
     - {fileID: 8300000, guid: fdc7450bc014d7c43a9d7977351e31aa, type: 3}
     - {fileID: 8300000, guid: fad005c014a19a241b101ea144b1ae69, type: 3}
-    mixerGroup: {fileID: 0}
+    mixerGroup: {fileID: -2988044021073429056, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
     loopType: 0
     timeBetweenLoop:
       min: 1

@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e1628c105d8dc54988ccd8c697ead6b, type: 3}
-  m_Name: EndLevel
+  m_Name: MenuMusic
   m_EditorClassIdentifier: 
   instrument:
     isUsingClips: 1
     clip: {fileID: 0}
     clips:
-    - {fileID: 8300000, guid: 8cad5306c2b48124daec530327df28bc, type: 3}
-    - {fileID: 8300000, guid: ae251ec3d011fc642af21bb1269541ac, type: 3}
-    mixerGroup: {fileID: 2282503454744926330, guid: dbd143edd4df0224d92ac4ff39f0844e,
+    - {fileID: 8300000, guid: 097c91c830ef8dc4d9a703a867b4350a, type: 3}
+    mixerGroup: {fileID: 3123317229295671624, guid: dbd143edd4df0224d92ac4ff39f0844e,
       type: 2}
-    loopType: 0
+    loopType: 1
     timeBetweenLoop:
       min: 1
       max: 3
@@ -33,12 +32,8 @@ MonoBehaviour:
   voice:
     isUsingClips: 1
     clip: {fileID: 0}
-    clips:
-    - {fileID: 8300000, guid: 9b1208e749b6a4e4684ff3f52145abaa, type: 3}
-    - {fileID: 8300000, guid: cf5f4e4387b217a4ebf06368e29fac00, type: 3}
-    - {fileID: 8300000, guid: 365fc77d76e22874c857a696817344c8, type: 3}
-    mixerGroup: {fileID: -2988044021073429056, guid: dbd143edd4df0224d92ac4ff39f0844e,
-      type: 2}
+    clips: []
+    mixerGroup: {fileID: 0}
     loopType: 0
     timeBetweenLoop:
       min: 1
