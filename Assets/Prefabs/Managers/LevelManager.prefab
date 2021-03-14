@@ -553,6 +553,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadDuration: 0.55
   fader: {fileID: 1857699063805068419}
+  music: {fileID: 8300000, guid: 632629cff1a121042bbf5817b01fa34e, type: 3}
+  mixer: {fileID: 7990551975244809061, guid: dbd143edd4df0224d92ac4ff39f0844e, type: 2}
 --- !u!114 &1261624071804609154
 MonoBehaviour:
   m_ObjectHideFlags: 0

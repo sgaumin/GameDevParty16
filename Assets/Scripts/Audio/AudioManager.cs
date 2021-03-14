@@ -3,39 +3,36 @@ using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
-{   
+{
     //our array of sounds
-    public Sound[] sounds;
+    //public Sound[] sounds;
 
-    //in awake we fetch the sound properties for our array
-    void Awake()
+    //public AudioClip musicClip;
+    //public AudioSource audioSource;
+    //SoundData music;
+
+    public static AudioManager Instance { get; private set; }
+
+    protected void Awake()
     {
-        foreach (Sound s in sounds)
+        if (Instance == null)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.spatialBlend = s.spatialBlend;
-
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
-    private void Start()
-    {
-        Play("Theme");
-    }
+    //private void Start()
+    //{
+    //    //music.Play();
+    //}
 
-    public void Play(string name)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null)
-        {
-            print("sfx " + name + " not found");
-            return;
-        }
-
-        s.source.Play();
-    }
+    //internal void ChangeMusic(AudioClip music)
+    //{
+    //    Instance.musicClip = music;
+    //}
 }

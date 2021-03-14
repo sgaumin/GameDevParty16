@@ -128,6 +128,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6821864920919538933, guid: 0cf4f588313217e4696bd2a42f16d00f,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 632629cff1a121042bbf5817b01fa34e, type: 3}
+    - target: {fileID: 6821864920919538933, guid: 0cf4f588313217e4696bd2a42f16d00f,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 7990551975244809061, guid: dbd143edd4df0224d92ac4ff39f0844e,
+        type: 2}
     - target: {fileID: 7487367236898554076, guid: 0cf4f588313217e4696bd2a42f16d00f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -260,7 +271,7 @@ PrefabInstance:
     - target: {fileID: 1184405538462412628, guid: 91f77c7f45a95cc40a928615b549a427,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.600008
+      value: 1.6000137
       objectReference: {fileID: 0}
     - target: {fileID: 1261624071804609154, guid: 91f77c7f45a95cc40a928615b549a427,
         type: 3}
