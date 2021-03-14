@@ -42,7 +42,6 @@ public class ScoreController : MonoBehaviour
 	private void PlayerTurnStart()
 	{
 		startTime = System.DateTime.Now;
-		//Debug.Log($"PlayerTurnStart {startTime}");
 	}
 
 	private void PlayerTurnEnd()
@@ -51,7 +50,6 @@ public class ScoreController : MonoBehaviour
 		System.DateTime endTime = System.DateTime.Now;
 		System.TimeSpan delta = (endTime - startTime);
 		int val = SetScoreTime((float)delta.TotalMilliseconds);
-		//Debug.Log($"PlayerTurnEnd {endTime}, {delta.TotalSeconds}, {val}");
 
 		// Son si score > 100
 		if (val >= 100)
