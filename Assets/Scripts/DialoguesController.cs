@@ -26,17 +26,17 @@ public class DialoguesController : MonoBehaviour
 
 	public void Init()
 	{
-		board.piece.OnKillEnemy += SetDialogue;
+		board.player.OnKillEnemy += SetDialogue;
 		board.OnStartPlayerTurn += MoveDialogue;
 	}
 
 	public void MoveDialogue()
 	{
-		if (nbMoves % nbMovesBeforeDialogue == 0 && !board.piece.hasKilled)
+		if (nbMoves % nbMovesBeforeDialogue == 0 && !board.player.hasKilled)
 		{
-			SetDialogue(board.piece.currentType, DialogueType.Normal);
+			SetDialogue(board.player.currentType, DialogueType.Normal);
 		}
-		board.piece.hasKilled = false;
+		board.player.hasKilled = false;
 		nbMoves++;
 	}
 
@@ -156,7 +156,7 @@ public class DialoguesController : MonoBehaviour
 
 	protected virtual void OnDestroy()
 	{
-		board.piece.OnKillEnemy -= SetDialogue;
+		board.player.OnKillEnemy -= SetDialogue;
 		board.OnStartPlayerTurn -= MoveDialogue;
 
 		if (dialogueCoroutine != null)

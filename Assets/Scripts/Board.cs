@@ -3,14 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Tools.Utils;
 using UnityEngine;
 
 public class Board : MonoBehaviour
 {
 	[Header("Rules")]
 	[SerializeField] private int timerCount = 10;
-	[SerializeField] private int rowDisplayCount = 8;
-	[SerializeField] private int rowDeletionFrequency = 1;
+	[SerializeField] private int rowStartDisplayCount = 8;
+	[SerializeField, IntRangeSlider(0, 10)] private IntRange rowDeletionAmount = new IntRange(1, 3);
 	[SerializeField] private float timeBeforeRowDeletion = 1f;
 	[SerializeField] private Cell spawnCell;
 
@@ -27,13 +28,14 @@ public class Board : MonoBehaviour
 	private List<Cell> cells = new List<Cell>();
 	private List<List<Cell>> rowCells = new List<List<Cell>>();
 	private List<Enemy> enemies = new List<Enemy>();
-	public Player piece;
+	public Player player;
 	private GameObject o;
 	private bool hasFinishTurn;
 	private Coroutine rowDeletion;
 	private BoardStates boardState;
 	private bool inverseAnimation;
-	private List<Cell> newRow = new List<Cell>();
+	private float positionPercentage;
+	private float currentRowDeletionAmount;
 
 	public Action OnStartPlayerTurn;
 	public Action OnPlayerSelectedCell;
@@ -90,7 +92,7 @@ public class Board : MonoBehaviour
 		EnemyActivationCheck();
 
 		SpawnPiece();
-		cells.ForEach(x => x.Piece = piece);
+		cells.ForEach(x => x.Piece = player);
 
 		UIManager.Instance.StartTimer(timerCount);
 		StartAutoDeletionRows();
@@ -100,9 +102,9 @@ public class Board : MonoBehaviour
 
 	private void Update()
 	{
-		if (piece != null)
+		if (player != null)
 		{
-			cameraTarget.transform.position = piece.transform.position;
+			cameraTarget.transform.position = player.transform.position;
 		}
 	}
 
@@ -134,7 +136,7 @@ public class Board : MonoBehaviour
 		}
 
 		rowCells.ForEach(x => x.ForEach(y => y.gameObject.SetActive(false)));
-		for (int i = 0; i < rowDisplayCount; i++)
+		for (int i = 0; i < rowStartDisplayCount; i++)
 		{
 			rowCells[i].ForEach(x => x.gameObject.SetActive(true));
 		}
@@ -158,10 +160,7 @@ public class Board : MonoBehaviour
 		while (true)
 		{
 			yield return new WaitForSeconds(timeBeforeRowDeletion);
-			for (int i = 0; i < rowDeletionFrequency; i++)
-			{
-				CheckRowDeletion();
-			}
+			CheckRowDeletion();
 		}
 	}
 
@@ -174,13 +173,24 @@ public class Board : MonoBehaviour
 
 	private void CheckRowDeletion()
 	{
-		for (int i = 0; i < rowDeletionFrequency; i++)
+		CheckPlayerPositionPercentage();
+		DeleteFirstRow();
+
+		for (int i = 0; i < currentRowDeletionAmount; i++)
 		{
 			inverseAnimation = !inverseAnimation;
-			DeleteFirstRow();
-			ShowNewRow();
+			ShowNewRow(rowStartDisplayCount);
 			ResetBoard();
 		}
+	}
+
+	private void CheckPlayerPositionPercentage()
+	{
+		int zMin = Mathf.FloorToInt(cells.Min(x => x.transform.position.z));
+		int zMax = Mathf.FloorToInt(cells.Max(x => x.transform.position.z));
+
+		positionPercentage = (player.transform.position.z - zMin) / (zMax - zMin);
+		currentRowDeletionAmount = Mathf.FloorToInt((rowDeletionAmount.Max - rowDeletionAmount.Min) * positionPercentage + rowDeletionAmount.Min);
 	}
 
 	private void DeleteFirstRow()
@@ -194,10 +204,10 @@ public class Board : MonoBehaviour
 		}
 
 		firstRow.ForEach(x => cells.Remove(x));
-		StartCoroutine(FirstRowDeletionAnimation(firstRow, true));
+		StartCoroutine(RowAnimation(firstRow, true));
 	}
 
-	private IEnumerator FirstRowDeletionAnimation(List<Cell> row, bool isFirstRow)
+	private IEnumerator RowAnimation(List<Cell> row, bool isFirstRow)
 	{
 		if (inverseAnimation)
 		{
@@ -242,32 +252,26 @@ public class Board : MonoBehaviour
 		ResetBoard();
 	}
 
-	private void ShowNewRow()
+	private void ShowNewRow(int index)
 	{
-		int i = 1;
-		while (i <= rowCells.Count)
+		if (index < rowCells.Count())
 		{
-			if (rowCells.Count > rowDisplayCount - i)
+			List<Cell> lastRow = rowCells[index - 1];
+			if (lastRow.First().gameObject.activeSelf)
 			{
-				if (newRow != null && newRow != rowCells[rowDisplayCount - i])
-				{
-					newRow = rowCells[rowDisplayCount - i];
-					StartCoroutine(FirstRowDeletionAnimation(newRow, false));
-				}
-
-				break;
+				ShowNewRow(index + 1);
 			}
 			else
 			{
-				i++;
+				StartCoroutine(RowAnimation(rowCells[index - 1], false));
 			}
 		}
 	}
 
 	private void SpawnPiece()
 	{
-		piece = Instantiate(piecePrefab, transform);
-		piece.Init(spawnCell);
+		player = Instantiate(piecePrefab, transform);
+		player.Init(spawnCell);
 		dialoguesController.Init();
 	}
 

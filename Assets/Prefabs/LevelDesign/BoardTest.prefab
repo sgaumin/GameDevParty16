@@ -320,8 +320,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerCount: 90
-  rowDisplayCount: 10
-  rowDeletionFrequency: 1
+  rowStartDisplayCount: 8
+  rowDeletionAmount:
+    min: 1
+    max: 7
   timeBeforeRowDeletion: 1.4
   spawnCell: {fileID: 7227624767949412090}
   fadDestroyingCellDuration: 0.09
@@ -331,7 +333,7 @@ MonoBehaviour:
     type: 3}
   cellHolder: {fileID: 7245974684880019990}
   cameraTarget: {fileID: 5873186000029535158}
-  piece: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1001 &1765838407679212
 PrefabInstance:
   m_ObjectHideFlags: 0

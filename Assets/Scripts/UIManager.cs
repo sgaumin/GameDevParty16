@@ -157,6 +157,8 @@ public class UIManager : MonoBehaviour
 
 	private IEnumerator DisplayScreenCore(GameObject prefab)
 	{
+		yield return new WaitForSeconds(0.65f);
+
 		hud.gameObject.FadOut(0.1f);
 
 		yield return new WaitForSeconds(0.2f);
