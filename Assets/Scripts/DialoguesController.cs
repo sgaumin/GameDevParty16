@@ -1,17 +1,27 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialoguesController : MonoBehaviour
 {
 	[SerializeField] private float fadeDuration = 0.2f;
 	[SerializeField] private float delayCharacterDisplay = 0.01f;
 
+	[Header("Notification Icons")]
+	[SerializeField] protected Sprite pionSprite;
+	[SerializeField] protected Sprite fouSprite;
+	[SerializeField] protected Sprite cavalierSprite;
+	[SerializeField] protected Sprite tourSprite;
+
 	[Header("References")]
-	//[SerializeField] private GameObject dialogueBox;
 	[SerializeField] private Board board;
 	[SerializeField] private TextMeshProUGUI nameText;
 	[SerializeField] private TextMeshProUGUI dialogueText;
+	[SerializeField] private Animator notificationAnim;
+	[SerializeField] private TextMeshProUGUI notificationText;
+	[SerializeField] private Image notificationIcon;
+
 	Coroutine dialogueCoroutine;
 	Coroutine autoSwitchDialogue;
 
@@ -26,18 +36,82 @@ public class DialoguesController : MonoBehaviour
 
 	public void Init()
 	{
-		board.player.OnKillEnemy += SetDialogue;
+		board.player.OnKillEnemy += SetNotifications;
 		board.OnStartPlayerTurn += MoveDialogue;
 	}
 
 	public void MoveDialogue()
 	{
-		if (nbMoves % nbMovesBeforeDialogue == 0 && !board.player.hasKilled)
+		if (nbMoves % nbMovesBeforeDialogue == 0)
 		{
 			SetDialogue(board.player.currentType, DialogueType.Normal);
 		}
+
 		board.player.hasKilled = false;
 		nbMoves++;
+	}
+
+	public void SetNotifications(PieceType piece, DialogueType dialogueType)
+	{
+		string[] dialogueBase = { "NONE" };
+		switch (piece)
+		{
+			case PieceType.Pion:
+				notificationIcon.sprite = pionSprite;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = pion.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = pion.dialogue;
+						break;
+				}
+				break;
+			case PieceType.Fou:
+				notificationIcon.sprite = fouSprite;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = fou.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = fou.dialogue;
+						break;
+				}
+				break;
+			case PieceType.Cavalier:
+				notificationIcon.sprite = cavalierSprite;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = cavalier.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = cavalier.dialogue;
+						break;
+				}
+				break;
+			case PieceType.Tour:
+				notificationIcon.sprite = tourSprite;
+				switch (dialogueType)
+				{
+					case DialogueType.Attaque:
+						dialogueBase = tour.dialogueAttaque;
+						break;
+					case DialogueType.Normal:
+						dialogueBase = tour.dialogue;
+						break;
+				}
+				break;
+		}
+
+		string dialogue = dialogueBase[Random.Range(0, dialogueBase.Length)];
+		notificationText.gameObject.FadIn(fadeDuration);
+		notificationText.text = "";
+		notificationAnim.SetTrigger("show");
+
+		StartCoroutine(DisplayLetterCore(dialogue, notificationText));
 	}
 
 	public void SetDialogue(DialogueType dialogueType)
@@ -156,7 +230,7 @@ public class DialoguesController : MonoBehaviour
 
 	protected virtual void OnDestroy()
 	{
-		board.player.OnKillEnemy -= SetDialogue;
+		board.player.OnKillEnemy -= SetNotifications;
 		board.OnStartPlayerTurn -= MoveDialogue;
 
 		if (dialogueCoroutine != null)

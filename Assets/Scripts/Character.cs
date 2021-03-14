@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour
 {
-
 	[Header("Character Sprites")]
 	[SerializeField] protected Sprite pionCharacterSprite;
 	[SerializeField] private Sprite pionCharacterhighlightSprite;
