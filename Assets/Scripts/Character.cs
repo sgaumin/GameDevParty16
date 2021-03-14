@@ -24,6 +24,7 @@ public abstract class Character : MonoBehaviour
 	[SerializeField] private Color effectColor;
 	[SerializeField] private ParticleSystem leavingCellEffect;
 	[SerializeField] private ParticleSystem arrivingOnCellEffect;
+	[SerializeField] private ParticleSystem attackingEffect;
 
 	[Header("References")]
 	[SerializeField] protected LayerMask cellMask;
@@ -57,6 +58,10 @@ public abstract class Character : MonoBehaviour
 	public virtual void Kill()
 	{
 		IsAlive = false;
+
+		ParticleSystem currentAttackEffect = Instantiate(attackingEffect);
+		currentAttackEffect.transform.position = CurrentCell.CharacterPosition;
+
 		Destroy(gameObject);
 	}
 

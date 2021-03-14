@@ -188,19 +188,9 @@ public class Board : MonoBehaviour
 		List<Cell> firstRow = rowCells.First();
 		rowCells.RemoveAt(0);
 
-		Character currentCharacter;
 		foreach (Cell cell in firstRow)
 		{
 			cell.State = CellState.Inactive;
-			currentCharacter = cell.TargetPresentOnCell<Character>();
-			if (currentCharacter != null)
-			{
-				currentCharacter.Kill();
-				if (currentCharacter is Player)
-				{
-					EndLevel();
-				}
-			}
 		}
 
 		firstRow.ForEach(x => cells.Remove(x));
@@ -217,6 +207,7 @@ public class Board : MonoBehaviour
 		foreach (Cell cell in row)
 		{
 			cell.gameObject.SetActive(true);
+			cell.Highlight.SetActive(false);
 
 			if (!isFirstRow)
 			{
@@ -226,6 +217,19 @@ public class Board : MonoBehaviour
 
 			cell.Model.material.DOColor(cell.Model.material.color.WithAlpha(isFirstRow ? 0f : 1f), fadDestroyingCellDuration).SetEase(Ease.OutCubic);
 			cell.transform.DOMoveY(-offsetYDestroyingCell, fadDestroyingCellDuration).SetRelative().SetEase(Ease.OutBack);
+
+			if (isFirstRow)
+			{
+				Character currentCharacter = cell.TargetPresentOnCell<Character>();
+				if (currentCharacter != null)
+				{
+					currentCharacter.Kill();
+					if (currentCharacter is Player)
+					{
+						EndLevel();
+					}
+				}
+			}
 
 			yield return new WaitForSeconds(fadDestroyingCellDuration);
 		}

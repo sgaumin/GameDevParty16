@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -99,6 +100,7 @@ public class UIManager : MonoBehaviour
 	public void DisplayScore(float val)
 	{
 		score.text = string.Format(scoreTitle, val.ToString());
+		score.transform.DOShakePosition(0.5f, 1f);
 	}
 
 	public void StartTimer(int value)

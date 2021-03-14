@@ -63,6 +63,7 @@ MonoBehaviour:
     type: 3}
   arrivingOnCellEffect: {fileID: 4729046621828197069, guid: 9b1e28980ec7c014aa4b8afadcf378f6,
     type: 3}
+  attackingEffect: {fileID: 19800018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
   cellMask:
     serializedVersion: 2
     m_Bits: 256

@@ -47,6 +47,7 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightLeftDown;
 
 	public MeshRenderer Model => model;
+	public GameObject Highlight => highlight;
 	public bool IsWin => isWin;
 	public Player Piece { get; set; }
 	public CellState State
