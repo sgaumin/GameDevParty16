@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Fou
   m_EditorClassIdentifier: 
-  name: Ufo la Fou
+  name: Ufo
   dialogue:
   - "Plus vite ! on va rater des points !\r"
   - "Mes d\xE9placements sont pr\xE9cis et rapides !\r"

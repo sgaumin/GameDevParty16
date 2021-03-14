@@ -53,10 +53,10 @@ MonoBehaviour:
     type: 3}
   tourCharacterSprite: {fileID: 21300000, guid: 8fdaaf7ba5866ee4381f6bba78b5246e,
     type: 3}
-  pionSprite: {fileID: 21300000, guid: 84c77d65498286641b3729648544d339, type: 3}
-  fouSprite: {fileID: 21300000, guid: f02454aede624dc4186709959b699426, type: 3}
-  cavalierSprite: {fileID: 21300000, guid: 7ec687317a9633a4a834b0634dbb06f1, type: 3}
-  tourSprite: {fileID: 21300000, guid: 1ff8c489d7a960c41b60a82a57d7d9cb, type: 3}
+  pionSprite: {fileID: 21300000, guid: 4258037d186b27343addcfbd8e28e380, type: 3}
+  fouSprite: {fileID: 21300000, guid: c6eb53fc13511ab4da433af4cb80beea, type: 3}
+  cavalierSprite: {fileID: 21300000, guid: 39fb7bd6972b28d4bae22383ed0993d5, type: 3}
+  tourSprite: {fileID: 21300000, guid: d018828f73e35f049853463770f6574a, type: 3}
   animationData: {fileID: 11400000, guid: 3fbd3f28e7868e541b9ba74456c4ac66, type: 2}
   cellMask:
     serializedVersion: 2
@@ -391,22 +391,22 @@ PrefabInstance:
     - target: {fileID: 344018237405877200, guid: 2e498a15b80973241bb383fdbea142ab,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.0031
       objectReference: {fileID: 0}
     - target: {fileID: 344018237405877200, guid: 2e498a15b80973241bb383fdbea142ab,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2
+      value: 2.396
       objectReference: {fileID: 0}
     - target: {fileID: 344018237405877200, guid: 2e498a15b80973241bb383fdbea142ab,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0.6
+      value: 0.93444943
       objectReference: {fileID: 0}
     - target: {fileID: 344018237405877200, guid: 2e498a15b80973241bb383fdbea142ab,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0.6
+      value: 0.9608412
       objectReference: {fileID: 0}
     - target: {fileID: 344018237405877200, guid: 2e498a15b80973241bb383fdbea142ab,
         type: 3}

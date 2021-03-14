@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Tour
   m_EditorClassIdentifier: 
-  name: Ruto la Tour
+  name: Ruto
   dialogue:
   - "Je les vois l\xE0- bas ! Vite ! "
   - 'La sortie n''est pas loin ! on va y arriver ! '

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Cavalier
   m_EditorClassIdentifier: 
-  name: Laviraec le Cavalier
+  name: Laviraec
   dialogue:
   - "Aussi impr\xE9visible que le feu !"
   - "Arr\xEAte de compter Ufo ! ON FONCE !\r"

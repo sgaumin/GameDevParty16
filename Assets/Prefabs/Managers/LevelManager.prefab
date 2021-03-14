@@ -558,7 +558,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6884240917761863250}
-  m_LocalRotation: {x: 0.32715225, y: -0.46005315, z: 0.18721917, w: 0.8039102}
+  m_LocalRotation: {x: 0.32715225, y: -0.46005318, z: 0.18721919, w: 0.8039102}
   m_LocalPosition: {x: 12.65, y: 13.32, z: -5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -805,12 +805,12 @@ PrefabInstance:
     - target: {fileID: 4381328670056538133, guid: 70dcbaea908f1374295c2aa4af06da9d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.46005315
+      value: -0.46005318
       objectReference: {fileID: 0}
     - target: {fileID: 4381328670056538133, guid: 70dcbaea908f1374295c2aa4af06da9d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.18721917
+      value: 0.18721919
       objectReference: {fileID: 0}
     - target: {fileID: 4381328670056538133, guid: 70dcbaea908f1374295c2aa4af06da9d,
         type: 3}
@@ -1226,20 +1226,10 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 9.05
       objectReference: {fileID: 0}
-    - target: {fileID: 5348086354941734051, guid: 31ade8dd55985a3418dae18b1c376e6c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 368.59998
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348086354941734051, guid: 31ade8dd55985a3418dae18b1c376e6c,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -99.399994
-      objectReference: {fileID: 0}
     - target: {fileID: 5640266547841278822, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -8.370003
+      value: -8.369995
       objectReference: {fileID: 0}
     - target: {fileID: 7980819559460154167, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
@@ -1249,7 +1239,7 @@ PrefabInstance:
     - target: {fileID: 8219192720845137390, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.6000004
+      value: 1.6000023
       objectReference: {fileID: 0}
     - target: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Pion
   m_EditorClassIdentifier: 
-  name: Poni le Pion
+  name: Poni
   dialogue:
   - "C'est bient\xF4t \xE0 moi ? Je m'ennuie \u2026"
   - "Non, ne me laissez pas seul !\r"

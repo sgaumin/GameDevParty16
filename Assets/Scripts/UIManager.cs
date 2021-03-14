@@ -2,18 +2,34 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
 	public static UIManager Instance { get; private set; }
 
+	[Header("Icon Sprites")]
+	[SerializeField] protected Sprite pionSprite;
+	[SerializeField] protected Sprite fouSprite;
+	[SerializeField] protected Sprite cavalierSprite;
+	[SerializeField] protected Sprite tourSprite;
+
+	[Header("Portrait Sprites")]
+	[SerializeField] protected Sprite pionPortraitSprite;
+	[SerializeField] protected Sprite fouPortraitSprite;
+	[SerializeField] protected Sprite cavalierPortraitSprite;
+	[SerializeField] protected Sprite tourPortraitSprite;
+
 	[Header("References")]
 	[SerializeField] private Board board;
-	[SerializeField] private TextMeshProUGUI piecesList;
+	[SerializeField] private Image portrait;
+	[SerializeField] private Image[] piecesList = new Image[4];
 	[SerializeField] private TextMeshProUGUI score;
 	[SerializeField] private GameObject gameOverUI;
 	[SerializeField] private string scoreTitle = "SCORE = {0} pts";
 	[SerializeField] private TextMeshProUGUI timerText;
+
+
 
 	private int timerValue;
 	private Coroutine timer;
@@ -27,12 +43,48 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayPieces(List<PieceType> types)
 	{
-		int i = 1;
-		piecesList.text = "";
+		int i = 0;
 		foreach (PieceType type in types)
 		{
-			piecesList.text += i.ToString() + "- " + type.ToString() + "\n";
-			i++;
+			piecesList[i++].sprite = GetSpriteByType(type);
+		}
+	}
+
+	private Sprite GetSpriteByType(PieceType type)
+	{
+		Sprite selectedSprite = null;
+
+		switch (type)
+		{
+			case PieceType.Pion:
+				return pionSprite;
+			case PieceType.Fou:
+				return fouSprite;
+			case PieceType.Cavalier:
+				return cavalierSprite;
+			case PieceType.Tour:
+				return tourSprite;
+		}
+
+		return selectedSprite;
+	}
+
+	public void DisplayPortrait(PieceType currentType)
+	{
+		switch (currentType)
+		{
+			case PieceType.Pion:
+				portrait.sprite = pionPortraitSprite;
+				break;
+			case PieceType.Fou:
+				portrait.sprite = fouPortraitSprite;
+				break;
+			case PieceType.Cavalier:
+				portrait.sprite = cavalierPortraitSprite;
+				break;
+			case PieceType.Tour:
+				portrait.sprite = tourPortraitSprite;
+				break;
 		}
 	}
 
@@ -75,7 +127,7 @@ public class UIManager : MonoBehaviour
 	}
 
 	public void DisplayGameOver()
-    {
+	{
 		gameOverUI.SetActive(true);
 	}
 
