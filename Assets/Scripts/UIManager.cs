@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private Board board;
 	[SerializeField] private TextMeshProUGUI piecesList;
 	[SerializeField] private TextMeshProUGUI score;
-	[SerializeField] private string scoreTitle = "Score : ";
+	[SerializeField] private string scoreTitle = "SCORE = {0} pts";
 	[SerializeField] private TextMeshProUGUI timerText;
 
 	private int timerValue;
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayScore(float val)
 	{
-		score.text = scoreTitle + val.ToString();
+		score.text = string.Format(scoreTitle, val.ToString());
 	}
 
 	public void StartTimer(int value)
