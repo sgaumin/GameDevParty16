@@ -22,16 +22,19 @@ public class Enemy : Character
 
 	public void TryToAttackPlayer()
 	{
-		List<Player> targets = CurrentCell.GetTargetOnMovements<Player>(type, this);
-		if (!targets.IsEmpty())
+		if (gameObject.activeSelf)
 		{
-			board.StopAutoDeletionRows();
-			target = targets[0];
-			MoveToCell(target.CurrentCell);
-		}
-		else
-		{
-			End();
+			List<Player> targets = CurrentCell.GetTargetOnMovements<Player>(type, this);
+			if (!targets.IsEmpty())
+			{
+				board.StopAutoDeletionRows();
+				target = targets[0];
+				MoveToCell(target.CurrentCell);
+			}
+			else
+			{
+				End();
+			}
 		}
 	}
 

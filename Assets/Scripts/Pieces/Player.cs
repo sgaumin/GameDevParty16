@@ -23,7 +23,7 @@ public class Player : Character
 		transform.position = spawnCell.CharacterPosition;
 
 		board.OnStartPlayerTurn += AssignRandomType;
-		board.OnMovingRow += RefreshMovements;
+		board.OnRefreshBoard += RefreshMovements;
 	}
 
 	private void AssignRandomType()
@@ -91,6 +91,6 @@ public class Player : Character
 	{
 		base.OnDestroy();
 		board.OnStartPlayerTurn -= AssignRandomType;
-		board.OnMovingRow -= RefreshMovements;
+		board.OnRefreshBoard -= RefreshMovements;
 	}
 }

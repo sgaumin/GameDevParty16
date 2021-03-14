@@ -46,6 +46,7 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightLeftTop;
 	private Cell cellKnightLeftDown;
 
+	public MeshRenderer Model => model;
 	public bool IsWin => isWin;
 	public Player Piece { get; set; }
 	public CellState State
@@ -86,6 +87,12 @@ public class Cell : MonoBehaviour
 					board.OnlySelectCell(this);
 					Piece.MoveToCell(this);
 					break;
+				case CellState.Inactive:
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(false);
+					}
+					break;
 			}
 		}
 	}
@@ -112,21 +119,37 @@ public class Cell : MonoBehaviour
 	public void DefineCellLinks()
 	{
 		cellTop = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellTop != null && cellTop.state == CellState.Inactive) cellTop = null;
 		cellDown = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellDown != null && cellDown.state == CellState.Inactive) cellDown = null;
 		cellLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 0) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellLeft != null && cellLeft.state == CellState.Inactive) cellLeft = null;
 		cellRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 0) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellRight != null && cellRight.state == CellState.Inactive) cellRight = null;
 		cellTopLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellTopLeft != null && cellTopLeft.state == CellState.Inactive) cellTopLeft = null;
 		cellTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellTopRight != null && cellTopRight.state == CellState.Inactive) cellTopRight = null;
 		cellDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellDownLeft != null && cellDownLeft.state == CellState.Inactive) cellDownLeft = null;
 		cellDownRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellDownRight != null && cellDownRight.state == CellState.Inactive) cellDownRight = null;
 		cellKnightTopLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightTopLeft != null && cellKnightTopLeft.state == CellState.Inactive) cellKnightTopLeft = null;
 		cellKnightTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightTopRight != null && cellKnightTopRight.state == CellState.Inactive) cellKnightTopRight = null;
 		cellKnightRightTop = Physics.OverlapSphere(transform.position + new Vector3(2, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightRightTop != null && cellKnightRightTop.state == CellState.Inactive) cellKnightRightTop = null;
 		cellKnightRightDown = Physics.OverlapSphere(transform.position + new Vector3(2, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightRightDown != null && cellKnightRightDown.state == CellState.Inactive) cellKnightRightDown = null;
 		cellKnightDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-2, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightDownLeft != null && cellKnightDownLeft.state == CellState.Inactive) cellKnightDownLeft = null;
 		cellKnightDownRight = Physics.OverlapSphere(transform.position + new Vector3(-2, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightDownRight != null && cellKnightDownRight.state == CellState.Inactive) cellKnightDownRight = null;
 		cellKnightLeftTop = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightLeftTop != null && cellKnightLeftTop.state == CellState.Inactive) cellKnightLeftTop = null;
 		cellKnightLeftDown = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
+		if (cellKnightLeftDown != null && cellKnightLeftDown.state == CellState.Inactive) cellKnightLeftDown = null;
 
 		if (cellTop != null)
 		{

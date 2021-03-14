@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,10 @@ public class Board : MonoBehaviour
 	[SerializeField] private float timeBeforeRowDeletion = 1f;
 	[SerializeField] private Cell spawnCell;
 
+	[Header("Animations")]
+	[SerializeField] private float fadDestroyingCellDuration = 0.01f;
+	[SerializeField] private float offsetYDestroyingCell = -2f;
+
 	[Header("References")]
 	[SerializeField] private DialoguesController dialoguesController;
 	[SerializeField] private Player piecePrefab;
@@ -23,17 +28,18 @@ public class Board : MonoBehaviour
 	private List<List<Cell>> rowCells = new List<List<Cell>>();
 	private List<Enemy> enemies = new List<Enemy>();
 	public Player piece;
-	private Game game;
 	private GameObject o;
 	private bool hasFinishTurn;
 	private Coroutine rowDeletion;
 	private BoardStates boardState;
+	private bool inverseAnimation;
+	private List<Cell> newRow = new List<Cell>();
 
 	public Action OnStartPlayerTurn;
 	public Action OnPlayerSelectedCell;
 	public Action OnEndPlayerTurn;
 	public Action OnEndLevel;
-	public Action OnMovingRow;
+	public Action OnRefreshBoard;
 
 	public List<Enemy> Enemies
 	{
@@ -76,7 +82,6 @@ public class Board : MonoBehaviour
 
 	void Start()
 	{
-		game = FindObjectOfType<Game>();
 		cells = GetComponentsInChildren<Cell>().ToList();
 		ReorganizeCells();
 		cells.ForEach(x => x.Init());
@@ -160,17 +165,22 @@ public class Board : MonoBehaviour
 		}
 	}
 
+	private void ResetBoard()
+	{
+		cells.ForEach(x => x.DefineCellLinks());
+		EnemyActivationCheck();
+		OnRefreshBoard?.Invoke();
+	}
+
 	private void CheckRowDeletion()
 	{
 		for (int i = 0; i < rowDeletionFrequency; i++)
 		{
+			inverseAnimation = !inverseAnimation;
 			DeleteFirstRow();
 			ShowNewRow();
-			cells.ForEach(x => x.DefineCellLinks());
-			EnemyActivationCheck();
-			OnMovingRow?.Invoke();
+			ResetBoard();
 		}
-
 	}
 
 	private void DeleteFirstRow()
@@ -181,6 +191,7 @@ public class Board : MonoBehaviour
 		Character currentCharacter;
 		foreach (Cell cell in firstRow)
 		{
+			cell.State = CellState.Inactive;
 			currentCharacter = cell.TargetPresentOnCell<Character>();
 			if (currentCharacter != null)
 			{
@@ -193,7 +204,38 @@ public class Board : MonoBehaviour
 		}
 
 		firstRow.ForEach(x => cells.Remove(x));
-		firstRow.ForEach(x => Destroy(x.gameObject));
+		StartCoroutine(FirstRowDeletionAnimation(firstRow, true));
+	}
+
+	private IEnumerator FirstRowDeletionAnimation(List<Cell> row, bool isFirstRow)
+	{
+		if (inverseAnimation)
+		{
+			row.Reverse();
+		}
+
+		foreach (Cell cell in row)
+		{
+			cell.gameObject.SetActive(true);
+
+			if (!isFirstRow)
+			{
+				cell.Model.material.color = cell.Model.material.color.WithAlpha(0f);
+				cell.transform.position = cell.transform.position.plusY(offsetYDestroyingCell);
+			}
+
+			cell.Model.material.DOColor(cell.Model.material.color.WithAlpha(isFirstRow ? 0f : 1f), fadDestroyingCellDuration).SetEase(Ease.OutCubic);
+			cell.transform.DOMoveY(-offsetYDestroyingCell, fadDestroyingCellDuration).SetRelative().SetEase(Ease.OutBack);
+
+			yield return new WaitForSeconds(fadDestroyingCellDuration);
+		}
+
+		if (isFirstRow)
+		{
+			row.ForEach(x => Destroy(x.gameObject));
+		}
+
+		ResetBoard();
 	}
 
 	private void ShowNewRow()
@@ -203,7 +245,12 @@ public class Board : MonoBehaviour
 		{
 			if (rowCells.Count > rowDisplayCount - i)
 			{
-				rowCells[rowDisplayCount - i].ForEach(x => x.gameObject.SetActive(true));
+				if (newRow != null && newRow != rowCells[rowDisplayCount - i])
+				{
+					newRow = rowCells[rowDisplayCount - i];
+					StartCoroutine(FirstRowDeletionAnimation(newRow, false));
+				}
+
 				break;
 			}
 			else

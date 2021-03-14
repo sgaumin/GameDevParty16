@@ -3,5 +3,6 @@
 	Unselected,
 	Highlighted,
 	Selected,
-	Cliqued
+	Cliqued,
+	Inactive
 }

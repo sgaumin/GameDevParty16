@@ -314,6 +314,8 @@ MonoBehaviour:
   rowDeletionFrequency: 1
   timeBeforeRowDeletion: 1.4
   spawnCell: {fileID: 7227624767949412090}
+  fadDestroyingCellDuration: 0.09
+  offsetYDestroyingCell: 1.5
   dialoguesController: {fileID: 0}
   piecePrefab: {fileID: 3127202912604834137, guid: 791dbd1f0e919f94089a21a35fd5648b,
     type: 3}
