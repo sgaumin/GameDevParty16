@@ -12,10 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Pion
   m_EditorClassIdentifier: 
-  name: 'Ruto '
+  name: Poni le Pion
   dialogue:
-  - Pion0
-  - Pion1
+  - "C'est bient\xF4t \xE0 moi ? Je m'ennuie \u2026"
+  - "Non, ne me laissez pas seul !\r"
+  - "Il y a plein de m\xE9chants !"
+  - "Je ferai honneur \xE0 Super-Meh !"
+  - "Vous \u2026 vous \xEAtes s\xFBrs ?"
+  - Moi aussi je peux faire comme vous !
+  - "Les m\xE9chants n\u2019ont qu\u2019\xE0 bien se tenir !"
+  - "Je ne veux pas d\xE9cevoir Ufo\u2026 Un peu de courage"
+  - "Laviraec me regarde\u2026 Il faut tout donner !"
+  - "Ruto me couvre\u2026 En avant !"
   dialogueAttaque:
-  - PionAttaque0
-  - PionAttaque1
+  - "Prends \xE7a !"
+  - "Ah ! Euhh \u2026 Pardon je suppose ?\u2026"
+  - Super Giga poing !
+  - "Vous avez vu ? je l\u2019ai eu !"
+  - "J\u2019aurais jamais pens\xE9 r\xE9ussir \u2026"

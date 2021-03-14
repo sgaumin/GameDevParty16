@@ -12,10 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Tour
   m_EditorClassIdentifier: 
-  name: 'Ruto '
+  name: Ruto la Tour
   dialogue:
-  - Tour0
-  - Tour1
+  - "Je les vois l\xE0- bas ! Vite ! "
+  - 'La sortie n''est pas loin ! on va y arriver ! '
+  - "Attendez j\u2019ai \xE9cras\xE9 un truc je crois ..."
+  - "Oh non ! Vite ! Ils s\u2019en prennent \xE0 un chat ! "
+  - "Ne me mettez pas de b\xE2ton dans les roues !"
+  - "Si seulement c'\xE9tait tout droit \u2026."
+  - "Poni fait attention\u2026 Tu n\u2019es pas Super-Meh\u2026"
+  - "Ufo tu voudrais pas m\u2019ajouter des propulseurs ?"
+  - "Attention Laviraec ! Derri\xE8re toi !"
+  - "J\u2019ai encore du mal \xE0 d\xE9raper \u2026"
   dialogueAttaque:
-  - TourAttaque0
-  - TourAttaque1
+  - Hyper Vitesse !
+  - Je prends ta place, tu prends un handicap.
+  - Pour moi tout roule !
+  - "Heureusement que je savais que tu \xE9tais l\xE0."
+  - "Je veux juste prot\xE9ger les gens, moi \u2026"
