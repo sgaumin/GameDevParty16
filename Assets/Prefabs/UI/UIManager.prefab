@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OK.
+  m_text: OK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8130c24038ec0e4d87530d4c5fdf966, type: 2}
   m_sharedMaterial: {fileID: -7974466212189239721, guid: c8130c24038ec0e4d87530d4c5fdf966,
@@ -1567,7 +1567,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.6
+  m_fontSize: 27.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1701,7 +1701,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 86.15
+  m_fontSize: 95
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1807,7 +1807,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OK.
+  m_text: OK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c8130c24038ec0e4d87530d4c5fdf966, type: 2}
   m_sharedMaterial: {fileID: -7974466212189239721, guid: c8130c24038ec0e4d87530d4c5fdf966,
@@ -2877,6 +2877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 0.15
+  delayCharacterDisplay: 0.01
   board: {fileID: 0}
   nameText: {fileID: 4581318068744908967}
   dialogueText: {fileID: 1413240554447684638}

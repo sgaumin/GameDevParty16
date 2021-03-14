@@ -9,6 +9,7 @@ public class Cell : MonoBehaviour
 	private const float CHECK_DISTANCE = 1f;
 
 	[SerializeField] private bool isWin;
+	[SerializeField] private GameObject winEffect;
 
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
@@ -21,6 +22,7 @@ public class Cell : MonoBehaviour
 	[SerializeField] private Transform characterPosition;
 	[SerializeField] private Transform effectPosition;
 
+	private GameObject effect;
 	private Board board;
 	private CellState state;
 	private PieceType typeGiven;
@@ -110,6 +112,9 @@ public class Cell : MonoBehaviour
 		if (isWin)
 		{
 			model.material = groundMaterials[2];
+			effect = Instantiate(winEffect);
+			effect.transform.position = EffectPosition;
+			effect.transform.SetParent(transform);
 		}
 		else
 		{

@@ -179,7 +179,7 @@ public class Board : MonoBehaviour
 		for (int i = 0; i < currentRowDeletionAmount; i++)
 		{
 			inverseAnimation = !inverseAnimation;
-			ShowNewRow(rowStartDisplayCount);
+			ShowNewRow(0);
 			ResetBoard();
 		}
 	}
@@ -256,14 +256,14 @@ public class Board : MonoBehaviour
 	{
 		if (index < rowCells.Count())
 		{
-			List<Cell> lastRow = rowCells[index - 1];
+			List<Cell> lastRow = rowCells[index];
 			if (lastRow.First().gameObject.activeSelf)
 			{
 				ShowNewRow(index + 1);
 			}
 			else
 			{
-				StartCoroutine(RowAnimation(rowCells[index - 1], false));
+				StartCoroutine(RowAnimation(rowCells[index], false));
 			}
 		}
 	}
