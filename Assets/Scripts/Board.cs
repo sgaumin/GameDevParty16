@@ -40,7 +40,7 @@ public class Board : MonoBehaviour
 
 	public SoundData killSound;
 	public SoundData playerKilledSound;
-    public SoundData winSound;
+	public SoundData winSound;
 
 	public Action OnStartPlayerTurn;
 	public Action OnPlayerSelectedCell;
@@ -48,7 +48,7 @@ public class Board : MonoBehaviour
 	public Action OnEndLevel;
 	public Action OnRefreshBoard;
 
-    public List<Enemy> Enemies
+	public List<Enemy> Enemies
 	{
 		get => enemies;
 		set
@@ -81,6 +81,7 @@ public class Board : MonoBehaviour
 			}
 		}
 	}
+	public bool CanReceiveInput { get; set; }
 
 	public void EnemyKilled(PieceType type)
 	{
@@ -92,6 +93,8 @@ public class Board : MonoBehaviour
 	protected void Awake()
 	{
 		OnEndLevel += StopAutoDeletionRows;
+		OnStartPlayerTurn += AllowInput;
+		OnPlayerSelectedCell += DisableInput;
 	}
 
 	void Start()
@@ -110,6 +113,16 @@ public class Board : MonoBehaviour
 		StartAutoDeletionRows();
 
 		BoardState = BoardStates.StartPlayerTurn;
+	}
+
+	private void AllowInput()
+	{
+		CanReceiveInput = true;
+	}
+
+	private void DisableInput()
+	{
+		CanReceiveInput = false;
 	}
 
 	private void Update()
@@ -356,5 +369,7 @@ public class Board : MonoBehaviour
 	private void OnDestroy()
 	{
 		OnEndLevel -= StopAutoDeletionRows;
+		OnStartPlayerTurn -= AllowInput;
+		OnPlayerSelectedCell -= DisableInput;
 	}
 }

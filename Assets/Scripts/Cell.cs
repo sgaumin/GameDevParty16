@@ -58,64 +58,67 @@ public class Cell : MonoBehaviour
 		get => state;
 		set
 		{
-			state = value;
-			switch (state)
+			if (board.CanReceiveInput)
 			{
-				case CellState.Unselected:
-					if (highlight != null)
-					{
-						highlight.gameObject.SetActive(false);
-					}
-					if (enemyOnTop != null)
-					{
-						enemyOnTop.IsHighlighted = false;
-					}
-					break;
-				case CellState.Highlighted:
-					if (highlight != null)
-					{
-						highlight.gameObject.SetActive(true);
-						highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
-					}
-					if (enemyOnTop != null)
-					{
-						enemyOnTop.IsHighlighted = true;
-					}
-					break;
-				case CellState.Selected:
-					if (highlight != null)
-					{
-						highlight.gameObject.SetActive(true);
-						highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
-					}
-					if (enemyOnTop != null)
-					{
-						enemyOnTop.IsHighlighted = false;
-					}
-					break;
-				case CellState.Cliqued:
-					if (highlight != null)
-					{
-						highlight.gameObject.SetActive(true);
-						highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
-					}
-					if (enemyOnTop != null)
-					{
-						enemyOnTop.IsHighlighted = false;
-					}
-					board.OnlySelectCell(this);
-					Piece.MoveToCell(this);
-					break;
-				case CellState.Inactive:
-					if (highlight != null)
-					{
-						highlight.gameObject.SetActive(false);
-					}
-					if (enemyOnTop != null)
-					{
-						enemyOnTop.IsHighlighted = false;
-					}
-					break;
+				state = value;
+				switch (state)
+				{
+					case CellState.Unselected:
+						if (highlight != null)
+						{
+							highlight.gameObject.SetActive(false);
+						}
+						if (enemyOnTop != null)
+						{
+							enemyOnTop.IsHighlighted = false;
+						}
+						break;
+					case CellState.Highlighted:
+						if (highlight != null)
+						{
+							highlight.gameObject.SetActive(true);
+							highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
+						}
+						if (enemyOnTop != null)
+						{
+							enemyOnTop.IsHighlighted = true;
+						}
+						break;
+					case CellState.Selected:
+						if (highlight != null)
+						{
+							highlight.gameObject.SetActive(true);
+							highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
+						}
+						if (enemyOnTop != null)
+						{
+							enemyOnTop.IsHighlighted = false;
+						}
+						break;
+					case CellState.Cliqued:
+						if (highlight != null)
+						{
+							highlight.gameObject.SetActive(true);
+							highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
+						}
+						if (enemyOnTop != null)
+						{
+							enemyOnTop.IsHighlighted = false;
+						}
+						board.OnlySelectCell(this);
+						Piece.MoveToCell(this);
+						break;
+					case CellState.Inactive:
+						if (highlight != null)
+						{
+							highlight.gameObject.SetActive(false);
+						}
+						if (enemyOnTop != null)
+						{
+							enemyOnTop.IsHighlighted = false;
+						}
+						break;
+				}
 			}
 		}
 	}
