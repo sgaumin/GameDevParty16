@@ -1,4 +1,4 @@
-﻿using Tools.Utils;
+﻿using TMPro;
 using UnityEngine;
 
 public class ScoreController : MonoBehaviour
@@ -6,6 +6,7 @@ public class ScoreController : MonoBehaviour
 	[Header("References")]
 	[SerializeField] protected Board board;
 	[SerializeField] protected UIManager ui;
+	[SerializeField] private TextMeshProUGUI winScore;
 	public SoundData mouveSounds;
 
 	static float bestScore;
@@ -17,9 +18,9 @@ public class ScoreController : MonoBehaviour
 	public int scoreEndLevel = 0;
 	public int scoreKill = 0;
 	public int scoreKillPion = 0;
-    public int scoreKillFou = 0;
-    public int scoreKillCavalier = 0;
-    public int scoreKillTour = 0;
+	public int scoreKillFou = 0;
+	public int scoreKillCavalier = 0;
+	public int scoreKillTour = 0;
 
 	public int Score
 	{
@@ -28,11 +29,12 @@ public class ScoreController : MonoBehaviour
 		{
 			score = value;
 			ui.DisplayScore(score);
+			winScore.text = score.ToString();
 		}
 	}
 
 
-    protected virtual void Awake()
+	protected virtual void Awake()
 	{
 		board.OnStartPlayerTurn += PlayerTurnStart;
 		board.OnPlayerSelectedCell += PlayerTurnEnd;
@@ -85,8 +87,8 @@ public class ScoreController : MonoBehaviour
 	}
 
 	public int SetScoreCoups(int nbCoups)
-    {
-		return ((-10 * nbCoups) + 2000) *10; // ((-10x) + 2000) * 10
+	{
+		return ((-10 * nbCoups) + 2000) * 10; // ((-10x) + 2000) * 10
 	}
 
 	// Tour: 900
@@ -94,30 +96,30 @@ public class ScoreController : MonoBehaviour
 	// Cavalier: 350
 	// Pion: 100
 	public int SetScoreKill(PieceType type)
-    {
+	{
 		int val = 0;
-        switch (type)
-        {
-            case PieceType.Tour:
+		switch (type)
+		{
+			case PieceType.Tour:
 				val = 900;
 				scoreKillTour += val;
-                break;
-            case PieceType.Fou:
+				break;
+			case PieceType.Fou:
 				val = 600;
 				scoreKillFou += val;
-                break;
-            case PieceType.Cavalier:
+				break;
+			case PieceType.Cavalier:
 				val = 350;
 				scoreKillCavalier += val;
-                break;
-            case PieceType.Pion:
+				break;
+			case PieceType.Pion:
 				val = 100;
 				scoreKillPion += val;
-                break;
-            default:
+				break;
+			default:
 				val = 0;
-                break;
-        }
+				break;
+		}
 		//val *= 10;
 		scoreKill += val;
 		Score += val;
