@@ -546,7 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af14c7ee0929504da591ad6e1beec0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerCount: 90
+  timerCount: 60
   rowStartDisplayCount: 11
   rowDeletionAmount:
     min: 1
