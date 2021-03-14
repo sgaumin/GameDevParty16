@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using Tools;
-using Tools.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -56,11 +55,12 @@ public class Game : GameSystem
 
 	protected void Start()
 	{
-		if(music != AudioManager.Instance.GetComponent<AudioSource>().clip)
-        {
+		if (music != AudioManager.Instance.GetComponent<AudioSource>().clip)
+		{
 			AudioManager.Instance.GetComponent<AudioSource>().clip = music;
 			AudioManager.Instance.GetComponent<AudioSource>().outputAudioMixerGroup = mixer;
 		}
+
 		GameState = GameStates.Play;
 		fader.FadIn();
 	}
