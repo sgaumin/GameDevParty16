@@ -44,7 +44,6 @@ public class Board : MonoBehaviour
 
 	protected void Awake()
 	{
-		OnStartPlayerTurn += CheckRowDeletion;
 		OnEndLevel += StopAutoDeletionRows;
 	}
 
@@ -236,7 +235,6 @@ public class Board : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		OnStartPlayerTurn -= CheckRowDeletion;
 		OnEndLevel -= StopAutoDeletionRows;
 	}
 }
