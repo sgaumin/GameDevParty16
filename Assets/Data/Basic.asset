@@ -17,15 +17,15 @@ MonoBehaviour:
     max: 1.2
   lookAtEase: 3
   raiseHeightValue:
-    min: 1.12
-    max: 2
+    min: 1
+    max: 1.5
   raiseDuration:
-    min: 0.45
-    max: 0.75
+    min: 0.2
+    max: 0.3
   raiseEase: 3
   moveDuration:
-    min: 0.71
-    max: 0.9
+    min: 0.6
+    max: 0.8
   moveAnimation:
     serializedVersion: 2
     m_Curve:
@@ -48,14 +48,14 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.20105833
     - serializedVersion: 3
-      time: 0.84076524
-      value: 0.9704332
-      inSlope: 1.7732581
-      outSlope: 1.7732581
+      time: 0.7615985
+      value: 0.98317385
+      inSlope: 0.52391654
+      outSlope: 0.52391654
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.2775745
+      outWeight: 0.5106294
     - serializedVersion: 3
       time: 1
       value: 1

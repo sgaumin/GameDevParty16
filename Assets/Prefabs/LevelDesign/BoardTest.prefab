@@ -309,10 +309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af14c7ee0929504da591ad6e1beec0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerCount: 90
+  timerCount: 90000
   rowDisplayCount: 8
   rowDeletionFrequency: 1
-  timeBeforeRowDeletion: 2
+  timeBeforeRowDeletion: 1000000
   spawnCell: {fileID: 7227624767949412090}
   dialoguesController: {fileID: 0}
   piecePrefab: {fileID: 3127202912604834137, guid: 791dbd1f0e919f94089a21a35fd5648b,
