@@ -67,7 +67,7 @@ public class Board : MonoBehaviour
 	{
 		if (piece != null)
 		{
-			cameraTarget.transform.position.withX(piece.transform.position.x);
+			cameraTarget.transform.position = piece.transform.position;
 		}
 	}
 
