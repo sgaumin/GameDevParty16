@@ -925,6 +925,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 12.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3030167775248291442, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: board
+      value: 
+      objectReference: {fileID: 9187138609560199317}
     - target: {fileID: 3511521872826282492, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_LocalPosition.x

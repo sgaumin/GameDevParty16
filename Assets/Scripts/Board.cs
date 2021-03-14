@@ -6,6 +6,7 @@ using UnityEngine;
 public class Board : MonoBehaviour
 {
 	[Header("Rules")]
+	[SerializeField] private int timerCount = 10;
 	[SerializeField] private int rowDisplayCount = 8;
 	[SerializeField] private int rowDeletionCount = 1;
 	[SerializeField] private int rowDeletionFrequency = 1;
@@ -56,6 +57,8 @@ public class Board : MonoBehaviour
 
 		SpawnPiece();
 		cells.ForEach(x => x.Piece = piece);
+
+		UIManager.Instance.StartTimer(timerCount);
 
 		OnStartPlayerTurn?.Invoke();
 	}
@@ -163,7 +166,7 @@ public class Board : MonoBehaviour
 	}
 
 	public void PlayerSelectedCell()
-    {
+	{
 		OnPlayerSelectedCell?.Invoke();
 
 	}

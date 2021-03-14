@@ -281,14 +281,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af14c7ee0929504da591ad6e1beec0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerCount: 90
   rowDisplayCount: 8
   rowDeletionCount: 1
   rowDeletionFrequency: 1
   spawnCell: {fileID: 7227624767949412090}
+  dialoguesController: {fileID: 0}
   piecePrefab: {fileID: 3127202912604834137, guid: 791dbd1f0e919f94089a21a35fd5648b,
     type: 3}
   cellHolder: {fileID: 7245974684880019990}
   cameraTarget: {fileID: 8614081229080751849}
+  piece: {fileID: 0}
 --- !u!1001 &1765838407679212
 PrefabInstance:
   m_ObjectHideFlags: 0
