@@ -622,8 +622,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620d2f55900e8e24983c7d8819692153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 3284626183626800529}
+  board: {fileID: 0}
   dialogueText: {fileID: 1413240554447684638}
+  timeBetweenDialogues: 0
+  nbMovesBeforeDialogue: 1
+  pion: {fileID: 0}
+  fou: {fileID: 0}
+  cavalier: {fileID: 0}
+  tour: {fileID: 0}
 --- !u!1 &8530522678453800288
 GameObject:
   m_ObjectHideFlags: 0

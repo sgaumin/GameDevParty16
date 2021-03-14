@@ -39,10 +39,11 @@ public class DialoguesController : MonoBehaviour
 
     public void MoveDialogue()
     {
-        if(nbMoves % nbMovesBeforeDialogue == 0)
+        if(nbMoves % nbMovesBeforeDialogue == 0 && !board.piece.hasKilled)
         {
-            SetDialogue(DialogueType.Normal);
+            SetDialogue(board.piece.currentType, DialogueType.Normal);
         }
+        board.piece.hasKilled = false;
         nbMoves++;
     }
 

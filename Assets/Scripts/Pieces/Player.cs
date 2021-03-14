@@ -10,9 +10,11 @@ public class Player : Character
 	[SerializeField] private int piecesToShowInAdvance = 3;
 
 	private List<PieceType> types = new List<PieceType>();
-	private PieceType currentType;
+	public PieceType currentType;
 
 	public Action<PieceType, DialogueType> OnKillEnemy;
+
+	public bool hasKilled = false;
 
 	public void Init(Cell spawnCell)
 	{
@@ -54,6 +56,7 @@ public class Player : Character
 		Enemy enemy = cell.TargetPresentOnCell<Enemy>();
 		if (enemy != null)
 		{
+			hasKilled = true;
 			OnKillEnemy?.Invoke(currentType, DialogueType.Attaque);
 			enemy.Kill();
 		}
