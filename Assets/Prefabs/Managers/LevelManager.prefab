@@ -1172,30 +1172,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
-      propertyPath: pion
-      value: 
-      objectReference: {fileID: 11400000, guid: ab063588658353a4ab989278e0ce522d,
-        type: 2}
-    - target: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
-        type: 3}
-      propertyPath: fou
-      value: 
-      objectReference: {fileID: 11400000, guid: cf53faf07fab6ab488646e36b84068aa,
-        type: 2}
-    - target: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
-        type: 3}
-      propertyPath: cavalier
-      value: 
-      objectReference: {fileID: 11400000, guid: 48c1e3bf6e57f2d4e9daf7ee96c12947,
-        type: 2}
-    - target: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
-        type: 3}
-      propertyPath: tour
-      value: 
-      objectReference: {fileID: 11400000, guid: 0fdc1e02b0d1e124b9d8c486d30b63d8,
-        type: 2}
-    - target: {fileID: 8248661699243407027, guid: 31ade8dd55985a3418dae18b1c376e6c,
-        type: 3}
       propertyPath: board
       value: 
       objectReference: {fileID: 9187138609560199317}

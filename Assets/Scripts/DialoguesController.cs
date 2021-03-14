@@ -8,6 +8,7 @@ public class DialoguesController : MonoBehaviour
 	[Header("References")]
     //[SerializeField] private GameObject dialogueBox;
     [SerializeField] private Board board;
+    [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI dialogueText;
 	Coroutine dialogueCoroutine;
 	Coroutine autoSwitchDialogue;
@@ -57,9 +58,11 @@ public class DialoguesController : MonoBehaviour
 	public void SetDialogue(PieceType piece, DialogueType dialogueType)
     {	
 		string[] dialogueBase = { "NONE" };
+        string name = "NONE";
         switch (piece)
         {
             case PieceType.Pion:
+                name = pion.name;
                 switch (dialogueType)
                 {
                     case DialogueType.Attaque:
@@ -71,6 +74,7 @@ public class DialoguesController : MonoBehaviour
                 }
                 break;
             case PieceType.Fou:
+                name = fou.name;
                 switch (dialogueType)
                 {
                     case DialogueType.Attaque:
@@ -82,6 +86,7 @@ public class DialoguesController : MonoBehaviour
                 }
                 break;
             case PieceType.Cavalier:
+                name = cavalier.name;
                 switch (dialogueType)
                 {
                     case DialogueType.Attaque:
@@ -93,6 +98,7 @@ public class DialoguesController : MonoBehaviour
                 }
                 break;
             case PieceType.Tour:
+                name = tour.name;
                 switch (dialogueType)
                 {
                     case DialogueType.Attaque:
@@ -105,12 +111,12 @@ public class DialoguesController : MonoBehaviour
                 break;
         }
         string dialogue = dialogueBase[Random.Range(0, dialogueBase.Length)];
-		SetDialogueText(dialogue);
+		SetDialogueText(dialogue, name);
     }
 
-	public void SetDialogueText(string text)
+    public void SetDialogueText(string text, string name)
     {
-		dialogueCoroutine = StartCoroutine(DialogueCoroutine(text));
+		dialogueCoroutine = StartCoroutine(DialogueCoroutine(text, name));
 	}
 
     public void ResetAutoSwitchDialogue()
@@ -130,13 +136,11 @@ public class DialoguesController : MonoBehaviour
         }
 	}
 
-	private IEnumerator DialogueCoroutine(string text)
+	private IEnumerator DialogueCoroutine(string text, string name)
     {
-		//dialogueBox.gameObject.SetActive(true);
 		dialogueText.text = text;
-        yield return new WaitForSeconds(3);
-        //dialogueBox.gameObject.SetActive(false);
-        //dialogueText.text = "";
+        nameText.text = name;
+        yield return new WaitForSeconds(0);
     }
 
 	protected virtual void OnDestroy()
