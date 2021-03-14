@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7269780462152660627
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1490,6 +1490,7 @@ MonoBehaviour:
   board: {fileID: 0}
   piecesList: {fileID: 1368776873999698013}
   score: {fileID: 7440101613881684768}
+  gameOverUI: {fileID: 17178564494417242}
   scoreTitle: SCORE = {0} pts
   timerText: {fileID: 1014823040803086449}
 --- !u!114 &8248661699243407027

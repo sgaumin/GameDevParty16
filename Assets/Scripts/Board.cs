@@ -220,8 +220,19 @@ public class Board : MonoBehaviour
 
 		OnEndLevel?.Invoke();
 		UnselectAllCells();
-		game.ReloadLevel();
-	}
+		if(!hasWon)
+        {
+			UIManager.Instance.DisplayGameOver();
+        } else
+        {
+			ReloadLevel();
+        }
+    }
+
+	public void ReloadLevel()
+    {
+        game.ReloadLevel();
+    }
 
 	public void UnselectAllCells()
 	{

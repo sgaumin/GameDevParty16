@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private Board board;
 	[SerializeField] private TextMeshProUGUI piecesList;
 	[SerializeField] private TextMeshProUGUI score;
+	[SerializeField] private GameObject gameOverUI;
 	[SerializeField] private string scoreTitle = "SCORE = {0} pts";
 	[SerializeField] private TextMeshProUGUI timerText;
 
@@ -71,6 +72,11 @@ public class UIManager : MonoBehaviour
 				break;
 			}
 		}
+	}
+
+	public void DisplayGameOver()
+    {
+		gameOverUI.SetActive(true);
 	}
 
 	private void OnDestroy()
