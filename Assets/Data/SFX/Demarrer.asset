@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1628c105d8dc54988ccd8c697ead6b, type: 3}
+  m_Name: Demarrer
+  m_EditorClassIdentifier: 
+  instrument:
+    isUsingClips: 1
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 27b18f07b3644ea4bbc9149120594040, type: 3}
+    mixerGroup: {fileID: 0}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 1
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
+  voice:
+    isUsingClips: 1
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 83fc98d856b9b4146885bf7fd5d28580, type: 3}
+    - {fileID: 8300000, guid: 03f5f80a996084944b6d43ac7206d633, type: 3}
+    - {fileID: 8300000, guid: 83176424eab6e1a4f89095a526c9fad5, type: 3}
+    - {fileID: 8300000, guid: fdc7450bc014d7c43a9d7977351e31aa, type: 3}
+    - {fileID: 8300000, guid: fad005c014a19a241b101ea144b1ae69, type: 3}
+    mixerGroup: {fileID: 0}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 1
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5

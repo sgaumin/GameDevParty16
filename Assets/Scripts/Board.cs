@@ -37,9 +37,9 @@ public class Board : MonoBehaviour
 	private bool inverseAnimation;
 	private float positionPercentage;
 	private float currentRowDeletionAmount;
-	
-	public AudioExpress killSoundInstrument;
-	public AudioExpress killSoundParole;
+
+	public SoundData killSound;
+	public SoundData playerKilledSound;
 
 	public Action OnStartPlayerTurn;
 	public Action OnPlayerSelectedCell;
@@ -47,7 +47,7 @@ public class Board : MonoBehaviour
 	public Action OnEndLevel;
 	public Action OnRefreshBoard;
 
-	public List<Enemy> Enemies
+    public List<Enemy> Enemies
 	{
 		get => enemies;
 		set
@@ -83,8 +83,8 @@ public class Board : MonoBehaviour
 
 	public void EnemyKilled(PieceType type)
 	{
-		killSoundInstrument.Play();
-		killSoundParole.Play();
+		killSound.instrument.Play();
+		killSound.voice.Play();
 		scoreController.SetScoreKill(type);
 	}
 
@@ -248,6 +248,8 @@ public class Board : MonoBehaviour
 					currentCharacter.Kill();
 					if (currentCharacter is Player)
 					{
+						playerKilledSound.instrument.Play();
+						playerKilledSound.voice.Play();
 						EndLevel();
 					}
 				}

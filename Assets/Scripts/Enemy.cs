@@ -7,6 +7,10 @@ public class Enemy : Character
 
 	private Character target;
 
+	public static bool attackPlayer = false;
+
+	public SoundData playerKilledSound;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -44,10 +48,22 @@ public class Enemy : Character
 		base.Kill();
 	}
 
+	protected override void DoActionBeforeMoving(Cell cell)
+    {
+		base.DoActionBeforeMoving(cell);
+		if(attackPlayer == false)
+        {
+			attackPlayer = true;
+			playerKilledSound.instrument.Play();
+			playerKilledSound.voice.Play();
+		}
+	}
+
 	protected override void DoActionAfterMoving(Cell cell)
 	{
 		base.DoActionAfterMoving(cell);
 		target.Kill();
+		attackPlayer = false;
 		board.EndLevel();
 
 		End();

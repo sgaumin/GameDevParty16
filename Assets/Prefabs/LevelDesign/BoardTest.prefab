@@ -329,11 +329,14 @@ MonoBehaviour:
   fadDestroyingCellDuration: 0.09
   offsetYDestroyingCell: 1.5
   dialoguesController: {fileID: 0}
+  scoreController: {fileID: 0}
   piecePrefab: {fileID: 3127202912604834137, guid: 791dbd1f0e919f94089a21a35fd5648b,
     type: 3}
   cellHolder: {fileID: 7245974684880019990}
   cameraTarget: {fileID: 5873186000029535158}
   player: {fileID: 0}
+  killSound: {fileID: 0}
+  playerKilledSound: {fileID: 0}
 --- !u!1001 &1765838407679212
 PrefabInstance:
   m_ObjectHideFlags: 0
