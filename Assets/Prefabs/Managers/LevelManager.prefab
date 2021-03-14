@@ -1417,11 +1417,6 @@ PrefabInstance:
       objectReference: {fileID: 3240564644996932493}
     - target: {fileID: 4069040734277366742, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4069040734277366742, guid: 31ade8dd55985a3418dae18b1c376e6c,
-        type: 3}
       propertyPath: m_SortingLayerID
       value: 2113412719
       objectReference: {fileID: 0}
