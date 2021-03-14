@@ -40,6 +40,7 @@ public class Board : MonoBehaviour
 
 	public SoundData killSound;
 	public SoundData playerKilledSound;
+    public SoundData winSound;
 
 	public Action OnStartPlayerTurn;
 	public Action OnPlayerSelectedCell;
@@ -336,6 +337,8 @@ public class Board : MonoBehaviour
 		}
 		else
 		{
+			winSound.instrument.Play();
+			winSound.voice.Play();
 			UIManager.Instance.DisplayWin();
 		}
 	}

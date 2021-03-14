@@ -545,6 +545,9 @@ MonoBehaviour:
   cellHolder: {fileID: 7245974684880019990}
   cameraTarget: {fileID: 5873186000029535158}
   player: {fileID: 0}
+  killSound: {fileID: 11400000, guid: a8af31bf22ebe13439028b3e063e4336, type: 2}
+  playerKilledSound: {fileID: 11400000, guid: e51f3196bfc15f0449c656b210f39436, type: 2}
+  winSound: {fileID: 11400000, guid: db548ec888ba0104abf12972d92c33cb, type: 2}
 --- !u!1001 &10424272501374791
 PrefabInstance:
   m_ObjectHideFlags: 0
