@@ -20,7 +20,7 @@ public class Player : Character
 	{
 		Start();
 		CurrentCell = spawnCell;
-		transform.position = spawnCell.PiecePosition;
+		transform.position = spawnCell.CharacterPosition;
 
 		board.OnStartPlayerTurn += AssignRandomType;
 		board.OnMovingRow += RefreshMovements;

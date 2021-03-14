@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
 	[Header("Character Sprites")]
 	[SerializeField] protected Sprite pionCharacterSprite;
@@ -19,6 +19,11 @@ public class Character : MonoBehaviour
 
 	[Header("Animations")]
 	[SerializeField] private CharacterAnimationData animationData;
+
+	[Header("Effects")]
+	[SerializeField] private Color effectColor;
+	[SerializeField] private ParticleSystem leavingCellEffect;
+	[SerializeField] private ParticleSystem arrivingOnCellEffect;
 
 	[Header("References")]
 	[SerializeField] protected LayerMask cellMask;
@@ -67,6 +72,11 @@ public class Character : MonoBehaviour
 	{
 		DoActionBeforeMoving(cell);
 
+		ParticleSystem leavingEffect = Instantiate(leavingCellEffect);
+		//var main = leavingEffect.main;
+		//main.startColor = effectColor;
+		leavingEffect.transform.position = CurrentCell.EffectPosition;
+
 		float currentRaiseDuration = animationData.raiseDuration.RandomValue;
 		float currentMoveDuration = animationData.moveDuration.RandomValue;
 
@@ -76,10 +86,15 @@ public class Character : MonoBehaviour
 		yield return new WaitForSeconds(currentRaiseDuration);
 
 		// Move phase
-		transform.DOMove(cell.PiecePosition, currentMoveDuration).SetEase(animationData.moveAnimation);
+		transform.DOMove(cell.CharacterPosition, currentMoveDuration).SetEase(animationData.moveAnimation);
 		yield return new WaitForSeconds(currentMoveDuration * animationData.cameraShakeAdjustmentTiming);
 		Camera.main.DOShakePosition(animationData.cameraShakeDuration.RandomValue, animationData.cameraShakeStrenght.RandomValue, animationData.cameraShakeVibrato.RandomValue);
 		yield return new WaitForSeconds(currentMoveDuration * (1 - animationData.cameraShakeAdjustmentTiming));
+
+		ParticleSystem arrivingEffect = Instantiate(arrivingOnCellEffect);
+		//main = arrivingEffect.main;
+		//main.startColor = effectColor;
+		arrivingEffect.transform.position = cell.EffectPosition;
 
 		DoActionAfterMoving(cell);
 	}

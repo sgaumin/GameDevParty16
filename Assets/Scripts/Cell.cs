@@ -18,7 +18,8 @@ public class Cell : MonoBehaviour
 	[SerializeField] private Material highlightMaterial;
 	[SerializeField] private Material highlightSelectedMaterial;
 	[SerializeField] private Material highlightCliquedMaterial;
-	[SerializeField] private Transform piecePosition;
+	[SerializeField] private Transform characterPosition;
+	[SerializeField] private Transform effectPosition;
 
 	private Board board;
 	private CellState state;
@@ -57,19 +58,31 @@ public class Cell : MonoBehaviour
 			switch (state)
 			{
 				case CellState.Unselected:
-					highlight.gameObject.SetActive(false);
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(false);
+					}
 					break;
 				case CellState.Highlighted:
-					highlight.gameObject.SetActive(true);
-					highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(true);
+						highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
+					}
 					break;
 				case CellState.Selected:
-					highlight.gameObject.SetActive(true);
-					highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(true);
+						highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
+					}
 					break;
 				case CellState.Cliqued:
-					highlight.gameObject.SetActive(true);
-					highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(true);
+						highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
+					}
 					board.OnlySelectCell(this);
 					Piece.MoveToCell(this);
 					break;
@@ -77,7 +90,8 @@ public class Cell : MonoBehaviour
 		}
 	}
 
-	public Vector3 PiecePosition => piecePosition.transform.position;
+	public Vector3 CharacterPosition => characterPosition.transform.position;
+	public Vector3 EffectPosition => effectPosition.transform.position;
 
 	public void Init()
 	{
