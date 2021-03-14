@@ -78,3 +78,9 @@ MonoBehaviour:
     min: 13
     max: 15
   cameraShakeAdjustmentTiming: 0.8
+  strechYFactor:
+    min: 1.02
+    max: 1.08
+  strechYFrequency:
+    min: 0.9
+    max: 1.3

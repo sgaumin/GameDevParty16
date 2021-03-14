@@ -63,8 +63,10 @@ public abstract class Character : MonoBehaviour
 	protected virtual void Start()
 	{
 		IsAlive = true;
-		transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 0f));
+
+		character.transform.DOScaleY(transform.localScale.y * animationData.strechYFactor.RandomValue, animationData.strechYFrequency.RandomValue).SetEase(Ease.OutSine).SetLoops(-1, LoopType.Yoyo);
 	}
+
 	protected void ResetTurn()
 	{
 		HasFinishTurn = false;

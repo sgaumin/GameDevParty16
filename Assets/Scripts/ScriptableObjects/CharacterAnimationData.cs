@@ -19,4 +19,7 @@ public class CharacterAnimationData : ScriptableObject
 	[FloatRangeSlider(0f, 10f)] public FloatRange cameraShakeStrenght = new FloatRange(2.6f, 3.2f);
 	[IntRangeSlider(5, 15)] public IntRange cameraShakeVibrato = new IntRange(9, 11);
 	public float cameraShakeAdjustmentTiming = 0.8f;
+	[Space]
+	[FloatRangeSlider(0f, 2f)] public FloatRange strechYFactor = new FloatRange(1.02f, 1.08f);
+	[FloatRangeSlider(0f, 2f)] public FloatRange strechYFrequency = new FloatRange(1f, 1.5f);
 }
