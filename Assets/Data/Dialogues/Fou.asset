@@ -12,10 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Fou
   m_EditorClassIdentifier: 
-  name: 'Ruto '
+  name: Ufo la Fou
   dialogue:
-  - Fou0
-  - Fou1
+  - "Plus vite ! on va rater des points !\r"
+  - "Mes d\xE9placements sont pr\xE9cis et rapides !\r"
+  - "Si on prend ce chemin on a 82 % de chance de r\xE9ussir\r"
+  - "On avance ! Je connais d\xE9j\xE0 mes 3 prochains coups\u2026\r"
+  - "Aller Poni ne tra\xEEne pas ! \r"
+  - "Ruto dit moi ce que tu voies ! \r"
+  - "Attaque-le ! Je ne veux pas qu\u2019il nous g\xEAne !\r"
+  - "Ne me pousse pas Laviraec ! Tu vas casser mes lunettes.\r"
+  - "Attends \u2026 87+ 156 \u2026. fois 13 \u2026 Ok on est sur la bonne voie !\r"
+  - "L\u2019intelligence gagne toujours ! Comme moi !\r"
   dialogueAttaque:
-  - FouAttaque0
-  - FouAttaque1
+  - "Je n\u2019ai pas de temps \xE0 perdre avec toi !\r"
+  - "Tu g\xEAnais mon 78\xE8me mouvement\r"
+  - "Tu pensais que je savais pas me d\xE9fendre ?\r"
+  - "Retourne en prison !\r"
+  - "Je ne vous laisserai plus faire de mal !\r"

@@ -12,10 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe72eb0c07ec2174bb92052a124d3b67, type: 3}
   m_Name: Cavalier
   m_EditorClassIdentifier: 
-  name: 'Ruto '
+  name: Laviraec le Cavalier
   dialogue:
-  - Cavalier0
-  - Cavalier1
+  - "Aussi impr\xE9visible que le feu !"
+  - "Arr\xEAte de compter Ufo ! ON FONCE !\r"
+  - "Je te dis que je suis plus fort que Super-Meh !\r"
+  - "Personne ne m\u2019arr\xEAte !\r"
+  - "Ruto, avance ! on a pas le temps ! \r\n"
+  - "Mais qui a laiss\xE9 autant de Super M\xE9chants sortir ?\r"
+  - "On fait une pause ? non je rigole, ON AVANCE ! \r"
+  - "Il rigolera moins quand je lui serai tomb\xE9e dessus !\r"
+  - "Le Combat approche ! Je le sens ! \r"
+  - "Mais attaque-le ! Je n'attends que \xE7a !\r"
   dialogueAttaque:
-  - CavalierAttaque0
-  - CavalierAttaque1
+  - "Enfin de la Bagarre !\r"
+  - "\rCrochet du droit ! Tu l\u2019as bien cherch\xE9.\r"
+  - 'Hop ! dans ton dos ! '
+  - "On souffle \xE0 fond et on va leur casser la bouche ! \r"
+  - "Une petite seconde\u2026 Mince, il est d\xE9j\xE0 \xE0 terre ?\r"
