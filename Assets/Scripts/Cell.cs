@@ -144,6 +144,9 @@ public class Cell : MonoBehaviour
 
 	public void DefineCellLinks()
 	{
+		nearbyCells.Clear();
+		knightCells.Clear();
+
 		cellTop = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
 		if (cellTop != null && cellTop.state == CellState.Inactive) cellTop = null;
 		cellDown = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
