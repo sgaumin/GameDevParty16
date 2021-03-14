@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour
 {
+
 	[Header("Character Sprites")]
 	[SerializeField] protected Sprite pionCharacterSprite;
+	[SerializeField] private Sprite pionCharacterhighlightSprite;
 	[SerializeField] protected Sprite fouCharacterSprite;
+	[SerializeField] protected Sprite fouCharacterhighlightSprite;
 	[SerializeField] protected Sprite cavalierCharacterSprite;
+	[SerializeField] protected Sprite cavalierCharacterhighlightSprite;
 	[SerializeField] protected Sprite tourCharacterSprite;
+	[SerializeField] protected Sprite tourCharacterhighlightSprite;
 
 	[Header("Icon Sprites")]
 	[SerializeField] protected Sprite pionSprite;
@@ -33,10 +38,22 @@ public abstract class Character : MonoBehaviour
 
 	protected Board board;
 	private Coroutine moving;
+	private Sprite currentSprite;
+	private Sprite highlightSprite;
+	private bool isHighlighted;
 
 	public bool IsAlive { get; set; }
 	public bool HasFinishTurn { get; set; }
 	public Cell CurrentCell { get; protected set; }
+	public bool IsHighlighted
+	{
+		get => isHighlighted;
+		set
+		{
+			isHighlighted = value;
+			character.sprite = isHighlighted ? highlightSprite : currentSprite;
+		}
+	}
 
 	protected virtual void Awake()
 	{
@@ -49,7 +66,6 @@ public abstract class Character : MonoBehaviour
 		IsAlive = true;
 		transform.rotation = Quaternion.Euler(new Vector3(0f, Random.Range(0f, 360f), 0f));
 	}
-
 	protected void ResetTurn()
 	{
 		HasFinishTurn = false;
@@ -124,20 +140,26 @@ public abstract class Character : MonoBehaviour
 			case PieceType.Pion:
 				icon.sprite = pionSprite;
 				character.sprite = pionCharacterSprite;
+				highlightSprite = pionCharacterhighlightSprite;
 				break;
 			case PieceType.Fou:
 				icon.sprite = fouSprite;
 				character.sprite = fouCharacterSprite;
+				highlightSprite = fouCharacterhighlightSprite;
 				break;
 			case PieceType.Cavalier:
 				icon.sprite = cavalierSprite;
 				character.sprite = cavalierCharacterSprite;
+				highlightSprite = cavalierCharacterhighlightSprite;
 				break;
 			case PieceType.Tour:
 				icon.sprite = tourSprite;
 				character.sprite = tourCharacterSprite;
+				highlightSprite = tourCharacterhighlightSprite;
 				break;
 		}
+
+		currentSprite = character.sprite;
 	}
 
 	protected virtual void OnDestroy()

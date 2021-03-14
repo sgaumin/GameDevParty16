@@ -47,6 +47,7 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightDownRight;
 	private Cell cellKnightLeftTop;
 	private Cell cellKnightLeftDown;
+	private Enemy enemyOnTop;
 
 	public MeshRenderer Model => model;
 	public GameObject Highlight => highlight;
@@ -55,7 +56,6 @@ public class Cell : MonoBehaviour
 	public CellState State
 	{
 		get => state;
-
 		set
 		{
 			state = value;
@@ -66,12 +66,20 @@ public class Cell : MonoBehaviour
 					{
 						highlight.gameObject.SetActive(false);
 					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = false;
+					}
 					break;
 				case CellState.Highlighted:
 					if (highlight != null)
 					{
 						highlight.gameObject.SetActive(true);
 						highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
+					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = true;
 					}
 					break;
 				case CellState.Selected:
@@ -80,12 +88,20 @@ public class Cell : MonoBehaviour
 						highlight.gameObject.SetActive(true);
 						highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
 					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = false;
+					}
 					break;
 				case CellState.Cliqued:
 					if (highlight != null)
 					{
 						highlight.gameObject.SetActive(true);
 						highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
+					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = false;
 					}
 					board.OnlySelectCell(this);
 					Piece.MoveToCell(this);
@@ -94,6 +110,10 @@ public class Cell : MonoBehaviour
 					if (highlight != null)
 					{
 						highlight.gameObject.SetActive(false);
+					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = false;
 					}
 					break;
 			}
@@ -229,6 +249,8 @@ public class Cell : MonoBehaviour
 		{
 			knightCells.Add(cellKnightLeftDown);
 		}
+
+		enemyOnTop = TargetPresentOnCell<Enemy>();
 	}
 
 	public void ShowMovements(PieceType type, Character character)

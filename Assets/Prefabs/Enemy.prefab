@@ -48,10 +48,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pionCharacterSprite: {fileID: 21300000, guid: 07953ea00f63b9c46856c164bd62dbf0,
     type: 3}
+  pionCharacterhighlightSprite: {fileID: 21300000, guid: c7530f8436cd8ea46a252aed472a83fd,
+    type: 3}
   fouCharacterSprite: {fileID: 21300000, guid: 4249ff9906c26e74d923b6c05044bb1c, type: 3}
+  fouCharacterhighlightSprite: {fileID: 21300000, guid: 28e7ed0f720c7f3478048a7c8ea4e832,
+    type: 3}
   cavalierCharacterSprite: {fileID: 21300000, guid: dce1e9703c9c2714fb6c13d7a24b8775,
     type: 3}
+  cavalierCharacterhighlightSprite: {fileID: 21300000, guid: cc2217637b15a4043b2481827a39e08a,
+    type: 3}
   tourCharacterSprite: {fileID: 21300000, guid: 8fdaaf7ba5866ee4381f6bba78b5246e,
+    type: 3}
+  tourCharacterhighlightSprite: {fileID: 21300000, guid: 4b42c03b2d7fbd84f8e7e589bf9a1dd0,
     type: 3}
   pionSprite: {fileID: 21300000, guid: 4258037d186b27343addcfbd8e28e380, type: 3}
   fouSprite: {fileID: 21300000, guid: c6eb53fc13511ab4da433af4cb80beea, type: 3}
