@@ -55,10 +55,11 @@ public class Game : GameSystem
 
 	protected void Start()
 	{
-		if (music != AudioManager.Instance.GetComponent<AudioSource>().clip)
+		if (music.name != AudioManager.Instance.GetComponent<AudioSource>().clip.name)
 		{
 			AudioManager.Instance.GetComponent<AudioSource>().clip = music;
 			AudioManager.Instance.GetComponent<AudioSource>().outputAudioMixerGroup = mixer;
+			AudioManager.Instance.GetComponent<AudioSource>().Play();
 		}
 
 		GameState = GameStates.Play;
