@@ -1,6 +1,9 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Tools.Utils;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
@@ -9,6 +12,7 @@ public class Cell : MonoBehaviour
 	private const float CHECK_DISTANCE = 1f;
 
 	[SerializeField] private bool isWin;
+	[SerializeField] private bool canFall;
 	[SerializeField] private GameObject winEffect;
 
 	[Header("References")]
@@ -21,6 +25,11 @@ public class Cell : MonoBehaviour
 	[SerializeField] private Material highlightCliquedMaterial;
 	[SerializeField] private Transform characterPosition;
 	[SerializeField] private Transform effectPosition;
+
+	[Header("Animations")]
+	[SerializeField] private float timeBeforeRowDeletion = 1.4f;
+	[SerializeField] private float fadDestroyingCellDuration = 0.09f;
+	[SerializeField] private float offsetYDestroyingCell = -1.5f;
 
 	private GameObject effect;
 	private Board board;
@@ -53,6 +62,10 @@ public class Cell : MonoBehaviour
 	public GameObject Highlight => highlight;
 	public bool IsWin => isWin;
 	public Player Piece { get; set; }
+
+	public bool CanFall => canFall;
+	private Coroutine falling;
+
 	public CellState State
 	{
 		get => state;
@@ -513,4 +526,27 @@ public class Cell : MonoBehaviour
 
 		return paths;
 	}
+
+	public void MakeCellFall()
+    {
+		this.falling = StartCoroutine(CellFalling());
+    }
+
+	private IEnumerator CellFalling()
+    {
+		yield return new WaitForSeconds(timeBeforeRowDeletion);
+		gameObject.SetActive(true);
+		Highlight.SetActive(false);
+		Model.material.DOColor(Model.material.color.WithAlpha(0f), fadDestroyingCellDuration).SetEase(Ease.OutCubic);
+		transform.DOMoveY(-offsetYDestroyingCell, fadDestroyingCellDuration).SetRelative().SetEase(Ease.OutBack);
+		yield return new WaitForSeconds(fadDestroyingCellDuration);
+	}
+
+    private void OnDestroy()
+    {
+        if (falling != null)
+        {
+			StopCoroutine(falling);
+        }
+    }
 }

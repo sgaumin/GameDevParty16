@@ -189,7 +189,7 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	private void ResetBoard()
+	public void ResetBoard()
 	{
 		cells.ForEach(x => x.DefineCellLinks());
 		ActivateEnemiesChecks();

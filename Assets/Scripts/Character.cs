@@ -123,8 +123,21 @@ public abstract class Character : MonoBehaviour
 		DoActionAfterMoving(cell);
 	}
 
-	protected virtual void DoActionBeforeMoving(Cell cell) { }
-	protected virtual void DoActionAfterMoving(Cell cell) { }
+	protected virtual void DoActionBeforeMoving(Cell cell)
+	{
+        if (CurrentCell.CanFall)
+        {
+			CurrentCell.MakeCellFall();
+        }
+    }
+	protected virtual void DoActionAfterMoving(Cell cell)
+	{
+        if (CurrentCell.CanFall)
+        {
+			Destroy(CurrentCell.gameObject);
+			board.ResetBoard();
+		}
+	}
 
 	public void CheckCurrentCell()
 	{
