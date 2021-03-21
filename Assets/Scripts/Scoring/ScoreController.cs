@@ -71,7 +71,7 @@ public class ScoreController : MonoBehaviour
 			return;
 		System.DateTime endTime = System.DateTime.Now;
 		System.TimeSpan delta = (endTime - startTime);
-		int val = SetScoreTime((float)delta.TotalMilliseconds);
+		int val = GetScoreTime((float)delta.TotalMilliseconds);
 
 		// Son si score > 100
 		if (val >= 100)
@@ -87,12 +87,13 @@ public class ScoreController : MonoBehaviour
 	{
 		if (!board.player.IsAlive)
 			return;
-		int val = SetScoreCoups(nbTurns);
+		int val = GetScoreCoups(nbTurns);
 		scoreEndLevel += val;
 		Score += val;
 	}
 
-	public int SetScoreTime(float delta)
+
+	public int GetScoreTime(float delta)
 	{
 		//int score = (int)((10000.0f * Mathf.Exp(-0.001f * delta)) / 10.0f); //((10000*e^(-0.001x)) + 0) / 10
 
@@ -101,10 +102,20 @@ public class ScoreController : MonoBehaviour
 		return val;
 	}
 
-	public int SetScoreCoups(int nbCoups)
+	public string GetTextScoreTime()
+    {
+		return $"{scoreMove}";
+    }
+
+	public int GetScoreCoups(int nbCoups)
 	{
 		return ((-10 * nbCoups) + 2000) * 10; // ((-10x) + 2000) * 10
 	}
+
+	public string GetTextScoreNbCoups()
+    {
+		return $"{nbTurns} tours = {scoreEndLevel}";
+    }
 
 	// Tour: 900
 	// Fou: 600

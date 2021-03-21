@@ -8,6 +8,8 @@ public class UIWinController : MonoBehaviour
 {
     [Header("references")]
     [SerializeField] private ScoreController scoreController;
+    [SerializeField] private TextMeshProUGUI textScoreNbTurns;
+    [SerializeField] private TextMeshProUGUI textScoretime;
     [SerializeField] private TextMeshProUGUI textScoreFou;
     [SerializeField] private TextMeshProUGUI textScoreTour;
     [SerializeField] private TextMeshProUGUI textScoreCavalier;
@@ -21,6 +23,10 @@ public class UIWinController : MonoBehaviour
         textPiecesKIlled.Add(PieceType.Tour, textScoreTour);
         textPiecesKIlled.Add(PieceType.Fou, textScoreFou);
         textPiecesKIlled.Add(PieceType.Pion, textScorePion);
+        scoreController.SetScoreKill(PieceType.Tour);
+        scoreController.SetScoreKill(PieceType.Tour);
+        scoreController.SetScoreKill(PieceType.Fou);
+        scoreController.SetScoreKill(PieceType.Pion);
     }
 
     public void DisplayScore()
@@ -30,5 +36,7 @@ public class UIWinController : MonoBehaviour
             Debug.Log($"{piece} -> {scoreController.GetScoreKillString(piece)}");
             textPiecesKIlled[piece].text = scoreController.GetScoreKillString(piece);
         }
+        textScoreNbTurns.text = scoreController.GetTextScoreNbCoups();
+        textScoretime.text = scoreController.GetTextScoreTime();
     }
 }
