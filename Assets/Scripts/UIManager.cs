@@ -36,6 +36,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private GameObject winUI;
 	[SerializeField] private string scoreTitle = "SCORE = {0} pts";
 	[SerializeField] private TextMeshProUGUI timerText;
+	[SerializeField] private UIWinController winController;
 
 
 	private PieceType previousType;
@@ -45,6 +46,8 @@ public class UIManager : MonoBehaviour
 	protected void Awake()
 	{
 		Instance = this;
+
+		winController.Init();
 
 		board.OnEndLevel += StopTimer;
 	}
@@ -106,6 +109,8 @@ public class UIManager : MonoBehaviour
 	{
 		score.text = string.Format(scoreTitle, val.ToString());
 
+		winController.DisplayScore();
+
 		if (shake)
 		{
 			score.transform.DOShakePosition(shakeScoreDuration, shakeScoreStrenght, shakeScoreVibrato);
@@ -153,6 +158,7 @@ public class UIManager : MonoBehaviour
 	public void DisplayWin()
 	{
 		StartCoroutine(DisplayScreenCore(winUI));
+		winController.DisplayScore();
 	}
 
 	private IEnumerator DisplayScreenCore(GameObject prefab)

@@ -9,6 +9,21 @@ public class ScoreController : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI winScore;
 	public SoundData mouveSounds;
 
+	// Tour: 900
+	// Fou: 600
+	// Cavalier: 350
+	// Pion: 100
+	[Header("rules")]
+	[SerializeField] private int valKillTour = 900;
+	[SerializeField] private int valKillFou = 600;
+	[SerializeField] private int valKillCavalier = 350;
+	[SerializeField] private int valKillPion = 100;
+
+	private int nbTourKilled = 0;
+	private int nbFouKilled = 0;
+	private int nbCavalierKilled = 0;
+	private int nbPionKilled = 0;
+
 	static float bestScore;
 	private float multiplier;
 	public int nbTurns = 0;
@@ -17,10 +32,10 @@ public class ScoreController : MonoBehaviour
 	public int scoreMove = 0;
 	public int scoreEndLevel = 0;
 	public int scoreKill = 0;
-	public int scoreKillPion = 0;
 	public int scoreKillFou = 0;
 	public int scoreKillCavalier = 0;
 	public int scoreKillTour = 0;
+	public int scoreKillPion = 0;
 
 	public int Score
 	{
@@ -101,19 +116,23 @@ public class ScoreController : MonoBehaviour
 		switch (type)
 		{
 			case PieceType.Tour:
-				val = 900;
+				val = valKillTour;
+				nbTourKilled++;
 				scoreKillTour += val;
 				break;
 			case PieceType.Fou:
-				val = 600;
+				val = valKillFou;
+				nbFouKilled++;
 				scoreKillFou += val;
 				break;
 			case PieceType.Cavalier:
-				val = 350;
+				val = valKillCavalier;
+				nbCavalierKilled++;
 				scoreKillCavalier += val;
 				break;
 			case PieceType.Pion:
-				val = 100;
+				val = valKillPion;
+				nbPionKilled++;
 				scoreKillPion += val;
 				break;
 			default:
@@ -125,6 +144,28 @@ public class ScoreController : MonoBehaviour
 		Score += val;
 		return val;
 	}
+
+	public string GetScoreKillString(PieceType piece)
+    {
+        switch (piece)
+        {
+            case PieceType.Pion:
+				return $"x {nbPionKilled} = {scoreKillPion}";
+                break;
+            case PieceType.Fou:
+				return $"x {nbFouKilled} = {scoreKillFou}";
+                break;
+            case PieceType.Cavalier:
+				return $"x {nbCavalierKilled} = {scoreKillCavalier}";
+                break;
+            case PieceType.Tour:
+				return $"x {nbTourKilled} = {scoreKillTour}";
+                break;
+            default:
+				return "";
+                break;
+        }
+    }
 
 	private void OnDestroy()
 	{

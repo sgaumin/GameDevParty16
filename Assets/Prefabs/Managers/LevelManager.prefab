@@ -571,15 +571,19 @@ MonoBehaviour:
   ui: {fileID: 5220511158057786568}
   winScore: {fileID: 4144978267144924128}
   mouveSounds: {fileID: 11400000, guid: a3a5bfa624cab1449932183525088b90, type: 2}
+  valKillTour: 900
+  valKillFou: 600
+  valKillCavalier: 350
+  valKillPion: 100
   nbTurns: 0
   score: 0
   scoreMove: 0
   scoreEndLevel: 0
   scoreKill: 0
-  scoreKillPion: 0
   scoreKillFou: 0
   scoreKillCavalier: 0
   scoreKillTour: 0
+  scoreKillPion: 0
 --- !u!1 &6884240917761863250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1491,11 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 7618772419583883202, guid: 31ade8dd55985a3418dae18b1c376e6c,
+        type: 3}
+      propertyPath: scoreController
+      value: 
+      objectReference: {fileID: 1261624071804609154}
     - target: {fileID: 7980819559460154167, guid: 31ade8dd55985a3418dae18b1c376e6c,
         type: 3}
       propertyPath: m_Name
