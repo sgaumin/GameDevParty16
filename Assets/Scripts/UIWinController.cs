@@ -23,17 +23,12 @@ public class UIWinController : MonoBehaviour
         textPiecesKIlled.Add(PieceType.Tour, textScoreTour);
         textPiecesKIlled.Add(PieceType.Fou, textScoreFou);
         textPiecesKIlled.Add(PieceType.Pion, textScorePion);
-        scoreController.SetScoreKill(PieceType.Tour);
-        scoreController.SetScoreKill(PieceType.Tour);
-        scoreController.SetScoreKill(PieceType.Fou);
-        scoreController.SetScoreKill(PieceType.Pion);
     }
 
     public void DisplayScore()
     {
         foreach (PieceType piece in (PieceType[])Enum.GetValues(typeof(PieceType)))
         {
-            Debug.Log($"{piece} -> {scoreController.GetScoreKillString(piece)}");
             textPiecesKIlled[piece].text = scoreController.GetScoreKillString(piece);
         }
         textScoreNbTurns.text = scoreController.GetTextScoreNbCoups();
