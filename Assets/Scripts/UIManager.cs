@@ -38,7 +38,6 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI timerText;
 	[SerializeField] private UIWinController winController;
 
-
 	private PieceType previousType;
 	private int timerValue;
 	private Coroutine timer;
@@ -46,9 +45,6 @@ public class UIManager : MonoBehaviour
 	protected void Awake()
 	{
 		Instance = this;
-
-		winController.Init();
-
 		board.OnEndLevel += StopTimer;
 	}
 
