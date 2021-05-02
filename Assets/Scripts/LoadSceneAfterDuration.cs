@@ -6,32 +6,35 @@ public class LoadSceneAfterDuration : MonoBehaviour
 {
 	private Coroutine loader;
 
-	void Start()
+	public float Duration { get; set; }
+
+	public void StartLoader()
 	{
-#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
 		loader = StartCoroutine(Core());
-#else
-	LevelLoader.LoadNextLevel();
-#endif
 	}
 
 	private void Update()
 	{
+#if UNITY_STANDALONE_OSX || UNITY_STANDALONE_WIN || UNITY_STANDALONE_LINUX || UNITY_EDITOR
 		if (Input.GetButtonDown("Quit"))
 		{
 			LevelLoader.QuitGame();
 		}
+#endif
 
 		if (Input.anyKeyDown)
 		{
-			StopCoroutine(loader);
+			if (loader != null)
+			{
+				StopCoroutine(loader);
+			}
 			LevelLoader.LoadNextLevel();
 		}
 	}
 
 	private IEnumerator Core()
 	{
-		yield return new WaitForSeconds(45f);
+		yield return new WaitForSeconds(Duration);
 		LevelLoader.LoadNextLevel();
 	}
 }
