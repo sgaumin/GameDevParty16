@@ -2,16 +2,18 @@
 using TMPro;
 using UnityEngine;
 
-public class UIWinController : MonoBehaviour
+public class UIScoreController : MonoBehaviour
 {
 	[Header("references")]
 	[SerializeField] private ScoreController scoreController;
 	[SerializeField] private TextMeshProUGUI textScoreNbTurns;
 	[SerializeField] private TextMeshProUGUI textScoretime;
 	[SerializeField] private TextMeshProUGUI textScoreFou;
-	[SerializeField] private TextMeshProUGUI textScoreTour;
+	[SerializeField] private TextMeshProUGUI textScoreTower;
 	[SerializeField] private TextMeshProUGUI textScoreCavalier;
 	[SerializeField] private TextMeshProUGUI textScorePion;
+	[SerializeField] private TextMeshProUGUI textScoreTotal;
+
 
 	public void DisplayScore()
 	{
@@ -29,11 +31,12 @@ public class UIWinController : MonoBehaviour
 					textScoreCavalier.text = scoreController.GetScoreKillString(piece);
 					break;
 				case PieceType.Tour:
-					textScoreTour.text = scoreController.GetScoreKillString(piece);
+					textScoreTower.text = scoreController.GetScoreKillString(piece);
 					break;
 			}
 		}
 		textScoreNbTurns.text = scoreController.GetTextScoreNbCoups();
-		textScoretime.text = scoreController.GetTextScoreTime();
+		textScoretime.text = $"= {scoreController.GetTextScoreTime()}";
+		textScoreTotal.text = $"{scoreController.score}";
 	}
 }

@@ -158,24 +158,29 @@ public class ScoreController : MonoBehaviour
 
 	public string GetScoreKillString(PieceType piece)
     {
+		int n, s;
         switch (piece)
         {
             case PieceType.Pion:
-				return $"x {nbPionKilled} = {scoreKillPion}";
+				n = nbPionKilled;
+				s = scoreKillPion;
                 break;
             case PieceType.Fou:
-				return $"x {nbFouKilled} = {scoreKillFou}";
+				n = nbFouKilled;
+				s = scoreKillFou;
                 break;
             case PieceType.Cavalier:
-				return $"x {nbCavalierKilled} = {scoreKillCavalier}";
+				n = nbCavalierKilled;
+				s = scoreKillCavalier;
                 break;
             case PieceType.Tour:
-				return $"x {nbTourKilled} = {scoreKillTour}";
+				n = nbTourKilled;
+				s = scoreKillTour;
                 break;
             default:
 				return "";
-                break;
         }
+		return $"x {n} = {s}";
     }
 
 	private void OnDestroy()

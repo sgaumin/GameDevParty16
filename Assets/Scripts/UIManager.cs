@@ -34,13 +34,15 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI score;
 	[SerializeField] private GameObject gameOverUI;
 	[SerializeField] private GameObject winUI;
+	[SerializeField] private GameObject scoreUI;
 	[SerializeField] private string scoreTitle = "SCORE = {0} pts";
 	[SerializeField] private TextMeshProUGUI timerText;
-	[SerializeField] private UIWinController winController;
+	[SerializeField] private UIScoreController winController;
 
 	private PieceType previousType;
 	private int timerValue;
 	private Coroutine timer;
+	private Coroutine waitScore;
 
 	protected void Awake()
 	{
@@ -105,7 +107,7 @@ public class UIManager : MonoBehaviour
 	{
 		score.text = string.Format(scoreTitle, val.ToString());
 
-		winController.DisplayScore();
+		//winController.DisplayScore();
 
 		if (shake)
 		{
@@ -154,6 +156,7 @@ public class UIManager : MonoBehaviour
 	public void DisplayWin()
 	{
 		StartCoroutine(DisplayScreenCore(winUI));
+		waitScore = StartCoroutine(DisplayScoreScreen());
 		winController.DisplayScore();
 	}
 
@@ -169,7 +172,32 @@ public class UIManager : MonoBehaviour
 		prefab.FadIn(0.5f);
 	}
 
-	private void OnDestroy()
+	private IEnumerator DisplayScoreScreen()
+    {
+		yield return new WaitForSeconds(2f);
+		this.winUI.FadOut(0.1f);
+		this.winUI.gameObject.SetActive(false);
+		//yield return new WaitForSeconds(0.2f);
+		scoreUI.gameObject.SetActive(true);
+		scoreUI.FadIn(0.5f);
+	}
+
+    private void Update()
+    {
+        if(winUI.active)
+        {
+			if(Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
+            {
+				StopCoroutine(this.waitScore);
+				this.winUI.FadOut(0.1f);
+				this.winUI.gameObject.SetActive(false);
+				scoreUI.gameObject.SetActive(true);
+				scoreUI.FadIn(0.5f);
+			}
+        }
+    }
+
+    private void OnDestroy()
 	{
 		board.OnEndLevel -= StopTimer;
 	}
