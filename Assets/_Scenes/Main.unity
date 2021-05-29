@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.4478277, g: 0.4978143, b: 0.57544374, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -317,12 +317,12 @@ PrefabInstance:
         type: 3}
       propertyPath: levelBoard
       value: 
-      objectReference: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494,
+      objectReference: {fileID: 3622037727342620051, guid: bf39b73b8617e9140b037105c08d28e7,
         type: 3}
     - target: {fileID: 8616961112485578065, guid: 91f77c7f45a95cc40a928615b549a427,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -18.400024
+      value: -18.400146
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91f77c7f45a95cc40a928615b549a427, type: 3}
