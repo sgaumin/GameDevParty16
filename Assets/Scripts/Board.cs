@@ -6,14 +6,22 @@ using System.Linq;
 using Tools.Utils;
 using UnityEngine;
 
+[System.Serializable]
+public struct MarkType
+{
+	public MarkNames Name;
+	public Material Material;
+}
+
 public class Board : MonoBehaviour
 {
 	[Header("Rules")]
+	[SerializeField] private Cell spawnCell;
 	[SerializeField] private int timerCount = 10;
+	[SerializeField] private float timeBeforeRowDeletion = 1f;
 	[SerializeField] private int rowStartDisplayCount = 8;
 	[SerializeField, IntRangeSlider(0, 10)] private IntRange rowDeletionAmount = new IntRange(1, 3);
-	[SerializeField] private float timeBeforeRowDeletion = 1f;
-	[SerializeField] private Cell spawnCell;
+	[SerializeField] private List<MarkType> marks = new List<MarkType>();
 
 	[Header("Animations")]
 	[SerializeField] private float fadDestroyingCellDuration = 0.01f;
@@ -22,13 +30,10 @@ public class Board : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private Player piecePrefab;
 	[SerializeField] private Transform cellHolder;
-	[SerializeField] private Transform cameraTarget;
 
 	private List<Cell> cells = new List<Cell>();
 	private List<List<Cell>> rowCells = new List<List<Cell>>();
 	private List<Enemy> enemies = new List<Enemy>();
-	public Player player;
-	private GameObject o;
 	private bool hasFinishTurn;
 	private Coroutine rowDeletion;
 	private BoardStates boardState;
@@ -46,6 +51,7 @@ public class Board : MonoBehaviour
 	public Action OnEndLevel;
 	public Action OnRefreshBoard;
 
+	public Player Player { get; set; }
 	public List<Enemy> Enemies
 	{
 		get => enemies;
@@ -54,7 +60,7 @@ public class Board : MonoBehaviour
 			enemies = value;
 		}
 	}
-
+	public List<MarkType> Marks => marks;
 	public BoardStates BoardState
 	{
 		get => boardState;
@@ -102,7 +108,7 @@ public class Board : MonoBehaviour
 		cells.ForEach(x => x.Init());
 
 		SpawnPiece();
-		cells.ForEach(x => x.Piece = player);
+		cells.ForEach(x => x.Piece = Player);
 
 		enemies = FindObjectsOfType<Enemy>().ToList();
 		ActivateEnemiesChecks();
@@ -123,14 +129,6 @@ public class Board : MonoBehaviour
 		CanReceiveInput = false;
 	}
 
-	private void Update()
-	{
-		if (player != null)
-		{
-			cameraTarget.transform.position = player.transform.position;
-		}
-	}
-
 	private void ActivateEnemiesChecks()
 	{
 		enemies.ForEach(x => x.gameObject.SetActive(x.CurrentCell.gameObject.activeSelf));
@@ -144,7 +142,7 @@ public class Board : MonoBehaviour
 
 		for (int i = zMin; i <= zMax; i++)
 		{
-			o = new GameObject();
+			GameObject o = new GameObject();
 			o.name = $"Row {rowCount++}";
 			o.transform.SetParent(cellHolder);
 
@@ -213,7 +211,7 @@ public class Board : MonoBehaviour
 		int zMin = Mathf.FloorToInt(cells.Min(x => x.transform.position.z));
 		int zMax = Mathf.FloorToInt(cells.Max(x => x.transform.position.z));
 
-		positionPercentage = (player.transform.position.z - zMin) / (zMax - zMin);
+		positionPercentage = (Player.transform.position.z - zMin) / (zMax - zMin);
 		currentRowDeletionAmount = Mathf.FloorToInt((rowDeletionAmount.Max - rowDeletionAmount.Min) * positionPercentage + rowDeletionAmount.Min);
 	}
 
@@ -296,10 +294,10 @@ public class Board : MonoBehaviour
 
 	private void SpawnPiece()
 	{
-		player = Instantiate(piecePrefab, transform);
-		player.Init(spawnCell);
+		Player = Instantiate(piecePrefab, transform);
+		Player.Init(spawnCell);
 
-		Game.Instance.SetCameraTarget(player.transform);
+		Game.Instance.SetCameraTarget(Player.transform);
 		UIManager.Instance.Dialogues.Init();
 	}
 
@@ -310,7 +308,7 @@ public class Board : MonoBehaviour
 
 	private void SafeCheckOnPlayer()
 	{
-		if (player == null || player.CurrentCell == null)
+		if (Player == null || Player.CurrentCell == null)
 		{
 			EndLevel();
 		}
@@ -364,6 +362,12 @@ public class Board : MonoBehaviour
 	public void OnlySelectCell(Cell cell)
 	{
 		cells.Where(x => x != cell).ForEach(x => x.State = CellState.Unselected);
+	}
+
+	[ContextMenu("Reset Mark")]
+	public void ResetMarks()
+	{
+		GetComponentsInChildren<Cell>().ForEach(x => x.Mark = MarkNames.None);
 	}
 
 	private void OnDestroy()

@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Tools.Utils;
 using UnityEngine;
 
 public class Cell : MonoBehaviour
@@ -11,20 +10,22 @@ public class Cell : MonoBehaviour
 	private const float SPHERE_RADIUS = 0.45f;
 	private const float CHECK_DISTANCE = 1f;
 
+	[Header("Settings")]
 	[SerializeField] private bool isWin;
 	[SerializeField] private bool canFall;
-	[SerializeField] private GameObject winEffect;
+	[SerializeField] private MarkNames mark = MarkNames.None;
 
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
 	[SerializeField] private MeshRenderer model;
-	[SerializeField] private Material[] groundMaterials = new Material[2];
 	[SerializeField] private GameObject highlight;
 	[SerializeField] private Material highlightMaterial;
 	[SerializeField] private Material highlightSelectedMaterial;
 	[SerializeField] private Material highlightCliquedMaterial;
 	[SerializeField] private Transform characterPosition;
 	[SerializeField] private Transform effectPosition;
+	[SerializeField] private GameObject winEffect;
+	[SerializeField] private Material[] groundMaterials = new Material[2];
 
 	[Header("Animations")]
 	[SerializeField] private float timeBeforeRowDeletion = 1.4f;
@@ -32,7 +33,6 @@ public class Cell : MonoBehaviour
 	[SerializeField] private float offsetYDestroyingCell = -1.5f;
 
 	private GameObject effect;
-	private Board board;
 	private CellState state;
 	private PieceType typeGiven;
 	private Character characterGiven;
@@ -57,21 +57,27 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightLeftTop;
 	private Cell cellKnightLeftDown;
 	private Enemy enemyOnTop;
+	private Coroutine falling;
 
 	public MeshRenderer Model => model;
 	public GameObject Highlight => highlight;
 	public bool IsWin => isWin;
 	public Player Piece { get; set; }
-
+	public MarkNames Mark
+	{
+		get => mark;
+		set
+		{
+			mark = value;
+		}
+	}
 	public bool CanFall => canFall;
-	private Coroutine falling;
-
 	public CellState State
 	{
 		get => state;
 		set
 		{
-			if (board.CanReceiveInput)
+			if (Game.Instance.LevelBoard.CanReceiveInput)
 			{
 				state = value;
 				switch (state)
@@ -118,7 +124,7 @@ public class Cell : MonoBehaviour
 						{
 							enemyOnTop.IsHighlighted = false;
 						}
-						board.OnlySelectCell(this);
+						Game.Instance.LevelBoard.OnlySelectCell(this);
 						Piece.MoveToCell(this);
 						break;
 					case CellState.Inactive:
@@ -141,7 +147,6 @@ public class Cell : MonoBehaviour
 
 	public void Init()
 	{
-		board = GetComponentInParent<Board>();
 		DefineCellLinks();
 		State = CellState.Unselected;
 
@@ -151,6 +156,10 @@ public class Cell : MonoBehaviour
 			effect = Instantiate(winEffect);
 			effect.transform.position = EffectPosition;
 			effect.transform.SetParent(transform);
+		}
+		else if (mark != MarkNames.None)
+		{
+			model.material = Game.Instance.LevelBoard.Marks.Where(x => x.Name == mark).FirstOrDefault().Material;
 		}
 		else
 		{
@@ -528,12 +537,12 @@ public class Cell : MonoBehaviour
 	}
 
 	public void MakeCellFall()
-    {
+	{
 		this.falling = StartCoroutine(CellFalling());
-    }
+	}
 
 	private IEnumerator CellFalling()
-    {
+	{
 		yield return new WaitForSeconds(timeBeforeRowDeletion);
 		gameObject.SetActive(true);
 		Highlight.SetActive(false);
@@ -542,11 +551,11 @@ public class Cell : MonoBehaviour
 		yield return new WaitForSeconds(fadDestroyingCellDuration);
 	}
 
-    private void OnDestroy()
-    {
-        if (falling != null)
-        {
+	private void OnDestroy()
+	{
+		if (falling != null)
+		{
 			StopCoroutine(falling);
-        }
-    }
+		}
+	}
 }

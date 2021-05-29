@@ -298,5 +298,16 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.18721917
       objectReference: {fileID: 0}
+    - target: {fileID: 7246981277467468507, guid: 91f77c7f45a95cc40a928615b549a427,
+        type: 3}
+      propertyPath: levelBoard
+      value: 
+      objectReference: {fileID: 3622037727342620051, guid: 959d695fd63859847be5c74f6b6ea755,
+        type: 3}
+    - target: {fileID: 8616961112485578065, guid: 91f77c7f45a95cc40a928615b549a427,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18.399963
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91f77c7f45a95cc40a928615b549a427, type: 3}
