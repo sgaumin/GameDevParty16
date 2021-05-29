@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.1
+  m_fontSize: 28
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4505,7 +4505,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 125.85
+  m_fontSize: 135
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7226,7 +7226,6 @@ MonoBehaviour:
   shakeScoreDuration: 0.6
   shakeScoreStrenght: 15
   shakeScoreVibrato: 15
-  board: {fileID: 0}
   portrait: {fileID: 3790453629507950018}
   hud: {fileID: 6705377327383062798}
   piecesList:
@@ -7241,6 +7240,7 @@ MonoBehaviour:
   scoreTitle: SCORE = {0} pts
   timerText: {fileID: 1014823040803086449}
   winController: {fileID: 779425758751662308}
+  dialoguesController: {fileID: 8248661699243407027}
 --- !u!114 &8248661699243407027
 MonoBehaviour:
   m_ObjectHideFlags: 0

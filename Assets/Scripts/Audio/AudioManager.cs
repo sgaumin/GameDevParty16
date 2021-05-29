@@ -1,38 +1,41 @@
-﻿using UnityEngine.Audio;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    //our array of sounds
-    //public Sound[] sounds;
+	//our array of sounds
+	//public Sound[] sounds;
 
-    //public AudioClip musicClip;
-    //public AudioSource audioSource;
-    //SoundData music;
+	//public AudioClip musicClip;
+	//public AudioSource audioSource;
+	//SoundData music;
 
-    public static AudioManager Instance { get; private set; }
+	[Header("References")]
+	[SerializeField] private AudioSource audioSource;
 
-    protected void Awake()
-    {
-        if (Instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+	public AudioSource Source => audioSource;
 
-    //private void Start()
-    //{
-    //    //music.Play();
-    //}
+	public static AudioManager Instance { get; private set; }
 
-    //internal void ChangeMusic(AudioClip music)
-    //{
-    //    Instance.musicClip = music;
-    //}
+	protected void Awake()
+	{
+		if (Instance == null)
+		{
+			DontDestroyOnLoad(gameObject);
+			Instance = this;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
+	}
+
+	//private void Start()
+	//{
+	//    //music.Play();
+	//}
+
+	//internal void ChangeMusic(AudioClip music)
+	//{
+	//    Instance.musicClip = music;
+	//}
 }

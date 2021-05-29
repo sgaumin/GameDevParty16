@@ -15,7 +15,6 @@ public class DialoguesController : MonoBehaviour
 	[SerializeField] protected Sprite tourSprite;
 
 	[Header("References")]
-	[SerializeField] private Board board;
 	[SerializeField] private TextMeshProUGUI nameText;
 	[SerializeField] private TextMeshProUGUI dialogueText;
 	[SerializeField] private Animator notificationAnim;
@@ -36,18 +35,18 @@ public class DialoguesController : MonoBehaviour
 
 	public void Init()
 	{
-		board.player.OnKillEnemy += SetNotifications;
-		board.OnStartPlayerTurn += MoveDialogue;
+		Game.Instance.LevelBoard.player.OnKillEnemy += SetNotifications;
+		Game.Instance.LevelBoard.OnStartPlayerTurn += MoveDialogue;
 	}
 
 	public void MoveDialogue()
 	{
 		if (nbMoves % nbMovesBeforeDialogue == 0)
 		{
-			SetDialogue(board.player.currentType, DialogueType.Normal);
+			SetDialogue(Game.Instance.LevelBoard.player.currentType, DialogueType.Normal);
 		}
 
-		board.player.hasKilled = false;
+		Game.Instance.LevelBoard.player.hasKilled = false;
 		nbMoves++;
 	}
 
@@ -230,8 +229,8 @@ public class DialoguesController : MonoBehaviour
 
 	protected virtual void OnDestroy()
 	{
-		board.player.OnKillEnemy -= SetNotifications;
-		board.OnStartPlayerTurn -= MoveDialogue;
+		Game.Instance.LevelBoard.player.OnKillEnemy -= SetNotifications;
+		Game.Instance.LevelBoard.OnStartPlayerTurn -= MoveDialogue;
 
 		if (dialogueCoroutine != null)
 		{

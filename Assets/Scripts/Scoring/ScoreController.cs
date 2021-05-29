@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
+	public static ScoreController Instance { get; private set; }
+
 	[Header("References")]
-	[SerializeField] protected Board board;
 	[SerializeField] protected UIManager ui;
 	[SerializeField] private TextMeshProUGUI winScore;
 	public SoundData mouveSounds;
@@ -51,9 +52,11 @@ public class ScoreController : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		board.OnStartPlayerTurn += PlayerTurnStart;
-		board.OnPlayerSelectedCell += PlayerTurnEnd;
-		board.OnEndLevel += EndLevelReached;
+		Instance = this;
+
+		Game.Instance.LevelBoard.OnStartPlayerTurn += PlayerTurnStart;
+		Game.Instance.LevelBoard.OnPlayerSelectedCell += PlayerTurnEnd;
+		Game.Instance.LevelBoard.OnEndLevel += EndLevelReached;
 
 		score = 0;
 		ui.DisplayScore(score, false);
@@ -67,7 +70,7 @@ public class ScoreController : MonoBehaviour
 	private void PlayerTurnEnd()
 	{
 		nbTurns++;
-		if (!board.player.IsAlive)
+		if (!Game.Instance.LevelBoard.player.IsAlive)
 			return;
 		System.DateTime endTime = System.DateTime.Now;
 		System.TimeSpan delta = (endTime - startTime);
@@ -85,7 +88,7 @@ public class ScoreController : MonoBehaviour
 
 	private void EndLevelReached()
 	{
-		if (!board.player.IsAlive)
+		if (!Game.Instance.LevelBoard.player.IsAlive)
 			return;
 		int val = GetScoreCoups(nbTurns);
 		scoreEndLevel += val;
@@ -103,9 +106,9 @@ public class ScoreController : MonoBehaviour
 	}
 
 	public string GetTextScoreTime()
-    {
+	{
 		return $"{scoreMove}";
-    }
+	}
 
 	public int GetScoreCoups(int nbCoups)
 	{
@@ -113,9 +116,9 @@ public class ScoreController : MonoBehaviour
 	}
 
 	public string GetTextScoreNbCoups()
-    {
+	{
 		return $"{nbTurns} tours = {scoreEndLevel}";
-    }
+	}
 
 	// Tour: 900
 	// Fou: 600
@@ -157,36 +160,36 @@ public class ScoreController : MonoBehaviour
 	}
 
 	public string GetScoreKillString(PieceType piece)
-    {
+	{
 		int n, s;
-        switch (piece)
-        {
-            case PieceType.Pion:
+		switch (piece)
+		{
+			case PieceType.Pion:
 				n = nbPionKilled;
 				s = scoreKillPion;
-                break;
-            case PieceType.Fou:
+				break;
+			case PieceType.Fou:
 				n = nbFouKilled;
 				s = scoreKillFou;
-                break;
-            case PieceType.Cavalier:
+				break;
+			case PieceType.Cavalier:
 				n = nbCavalierKilled;
 				s = scoreKillCavalier;
-                break;
-            case PieceType.Tour:
+				break;
+			case PieceType.Tour:
 				n = nbTourKilled;
 				s = scoreKillTour;
-                break;
-            default:
+				break;
+			default:
 				return "";
-        }
+		}
 		return $"x {n} = {s}";
-    }
+	}
 
 	private void OnDestroy()
 	{
-		board.OnStartPlayerTurn -= PlayerTurnStart;
-		board.OnPlayerSelectedCell -= PlayerTurnEnd;
-		board.OnEndLevel -= EndLevelReached;
+		Game.Instance.LevelBoard.OnStartPlayerTurn -= PlayerTurnStart;
+		Game.Instance.LevelBoard.OnPlayerSelectedCell -= PlayerTurnEnd;
+		Game.Instance.LevelBoard.OnEndLevel -= EndLevelReached;
 	}
 }

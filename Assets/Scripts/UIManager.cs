@@ -27,7 +27,6 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private int shakeScoreVibrato = 15;
 
 	[Header("References")]
-	[SerializeField] private Board board;
 	[SerializeField] private Image portrait;
 	[SerializeField] private GameObject hud;
 	[SerializeField] private Image[] piecesList = new Image[4];
@@ -38,16 +37,19 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private string scoreTitle = "SCORE = {0} pts";
 	[SerializeField] private TextMeshProUGUI timerText;
 	[SerializeField] private UIScoreController winController;
+	[SerializeField] private DialoguesController dialoguesController;
 
 	private PieceType previousType;
 	private int timerValue;
 	private Coroutine timer;
 	private Coroutine waitScore;
 
+	public DialoguesController Dialogues => dialoguesController;
+
 	protected void Awake()
 	{
 		Instance = this;
-		board.OnEndLevel += StopTimer;
+		Game.Instance.LevelBoard.OnEndLevel += StopTimer;
 	}
 
 	public void DisplayPieces(List<PieceType> types)
@@ -142,7 +144,7 @@ public class UIManager : MonoBehaviour
 
 			if (timerValue < 0)
 			{
-				board.EndLevel();
+				Game.Instance.LevelBoard.EndLevel();
 				break;
 			}
 		}
@@ -173,7 +175,7 @@ public class UIManager : MonoBehaviour
 	}
 
 	private IEnumerator DisplayScoreScreen()
-    {
+	{
 		yield return new WaitForSeconds(2f);
 		this.winUI.FadOut(0.1f);
 		this.winUI.gameObject.SetActive(false);
@@ -182,23 +184,23 @@ public class UIManager : MonoBehaviour
 		scoreUI.FadIn(0.5f);
 	}
 
-    private void Update()
-    {
-        if(winUI.active)
-        {
-			if(Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
-            {
+	private void Update()
+	{
+		if (winUI.active)
+		{
+			if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
+			{
 				StopCoroutine(this.waitScore);
 				this.winUI.FadOut(0.1f);
 				this.winUI.gameObject.SetActive(false);
 				scoreUI.gameObject.SetActive(true);
 				scoreUI.FadIn(0.5f);
 			}
-        }
-    }
+		}
+	}
 
-    private void OnDestroy()
+	private void OnDestroy()
 	{
-		board.OnEndLevel -= StopTimer;
+		Game.Instance.LevelBoard.OnEndLevel -= StopTimer;
 	}
 }

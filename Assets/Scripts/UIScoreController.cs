@@ -5,7 +5,6 @@ using UnityEngine;
 public class UIScoreController : MonoBehaviour
 {
 	[Header("references")]
-	[SerializeField] private ScoreController scoreController;
 	[SerializeField] private TextMeshProUGUI textScoreNbTurns;
 	[SerializeField] private TextMeshProUGUI textScoretime;
 	[SerializeField] private TextMeshProUGUI textScoreFou;
@@ -22,21 +21,21 @@ public class UIScoreController : MonoBehaviour
 			switch (piece)
 			{
 				case PieceType.Pion:
-					textScorePion.text = scoreController.GetScoreKillString(piece);
+					textScorePion.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
 				case PieceType.Fou:
-					textScoreFou.text = scoreController.GetScoreKillString(piece);
+					textScoreFou.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
 				case PieceType.Cavalier:
-					textScoreCavalier.text = scoreController.GetScoreKillString(piece);
+					textScoreCavalier.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
 				case PieceType.Tour:
-					textScoreTower.text = scoreController.GetScoreKillString(piece);
+					textScoreTower.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
 			}
 		}
-		textScoreNbTurns.text = scoreController.GetTextScoreNbCoups();
-		textScoretime.text = $"= {scoreController.GetTextScoreTime()}";
-		textScoreTotal.text = $"{scoreController.score}";
+		textScoreNbTurns.text = ScoreController.Instance.GetTextScoreNbCoups();
+		textScoretime.text = $"= {ScoreController.Instance.GetTextScoreTime()}";
+		textScoreTotal.text = $"{ScoreController.Instance.score}";
 	}
 }

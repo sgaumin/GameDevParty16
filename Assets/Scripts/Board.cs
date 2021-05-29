@@ -20,8 +20,6 @@ public class Board : MonoBehaviour
 	[SerializeField] private float offsetYDestroyingCell = -2f;
 
 	[Header("References")]
-	[SerializeField] private DialoguesController dialoguesController;
-	[SerializeField] private ScoreController scoreController;
 	[SerializeField] private Player piecePrefab;
 	[SerializeField] private Transform cellHolder;
 	[SerializeField] private Transform cameraTarget;
@@ -87,7 +85,7 @@ public class Board : MonoBehaviour
 	{
 		killSound.instrument.Play();
 		killSound.voice.Play();
-		scoreController.SetScoreKill(type);
+		ScoreController.Instance.SetScoreKill(type);
 	}
 
 	protected void Awake()
@@ -300,7 +298,9 @@ public class Board : MonoBehaviour
 	{
 		player = Instantiate(piecePrefab, transform);
 		player.Init(spawnCell);
-		dialoguesController.Init();
+
+		Game.Instance.SetCameraTarget(player.transform);
+		UIManager.Instance.Dialogues.Init();
 	}
 
 	public void PlayerSelectedCell()

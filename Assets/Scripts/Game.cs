@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using Tools;
@@ -6,6 +7,8 @@ using UnityEngine.Audio;
 
 public class Game : GameSystem
 {
+	public static Game Instance { get; private set; }
+
 	private const string MENU_SCENE = "Menu";
 
 	public delegate void GameEventHandler();
@@ -13,10 +16,15 @@ public class Game : GameSystem
 	public event GameEventHandler OnGameOver;
 	public event GameEventHandler OnPause;
 
+	[SerializeField] private Board levelBoard;
+
+	[Header("Animation")]
 	[SerializeField] private float fadDuration = 0.5f;
 
 	[Header("References")]
 	[SerializeField] private FadScreen fader;
+	[SerializeField] private Transform levelHolder;
+	[SerializeField] private CinemachineVirtualCamera cinemachine;
 
 	private GameStates gameState;
 	private Coroutine loadingLevel;
@@ -24,6 +32,7 @@ public class Game : GameSystem
 	public AudioClip music;
 	public AudioMixerGroup mixer;
 
+	public Board LevelBoard { get; private set; }
 	public GameStates GameState
 	{
 		get => gameState;
@@ -51,11 +60,17 @@ public class Game : GameSystem
 	protected override void Awake()
 	{
 		base.Awake();
+
+		Instance = this;
+		if (levelBoard != null)
+		{
+			LevelBoard = Instantiate(levelBoard, levelHolder);
+		}
 	}
 
 	protected void Start()
 	{
-		if (music.name != AudioManager.Instance.GetComponent<AudioSource>().clip.name)
+		if (AudioManager.Instance.Source.clip == null || music.name != AudioManager.Instance.Source.clip.name)
 		{
 			AudioManager.Instance.GetComponent<AudioSource>().clip = music;
 			AudioManager.Instance.GetComponent<AudioSource>().outputAudioMixerGroup = mixer;
@@ -69,6 +84,12 @@ public class Game : GameSystem
 	protected override void Update()
 	{
 		base.Update();
+	}
+
+	public void SetCameraTarget(Transform target)
+	{
+		cinemachine.Follow = target;
+		cinemachine.LookAt = target;
 	}
 
 	public void ReloadLevel()
