@@ -460,7 +460,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1656059746762820470, guid: e485b65197b696d458eae78032b860ef,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656059746762820470, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1656059746762820470, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1656059746762820470, guid: e485b65197b696d458eae78032b860ef,
@@ -470,13 +480,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2113225208829542696, guid: e485b65197b696d458eae78032b860ef,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113225208829542696, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
       propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113225208829542696, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3005511464643730562, guid: e485b65197b696d458eae78032b860ef,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018680321707828863, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 6.299988
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018680321707828863, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -116.70001
       objectReference: {fileID: 0}
     - target: {fileID: 3237467202424586466, guid: e485b65197b696d458eae78032b860ef,
         type: 3}

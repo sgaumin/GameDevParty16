@@ -40,7 +40,7 @@ public static class GameData
 	{
 		get
 		{
-			return PlayerPrefs.HasKey(LANGUAGE) ? PlayerPrefs.GetString(LANGUAGE) : "";
+			return PlayerPrefs.HasKey(LANGUAGE) ? PlayerPrefs.GetString(LANGUAGE) : "FR";
 		}
 		set
 		{
