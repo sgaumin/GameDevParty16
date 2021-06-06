@@ -5,7 +5,7 @@ public class Enemy : Character
 {
 	[SerializeField] public PieceType type;
 
-	private Character target;
+	private Player playerTarget;
 
 	public static bool attackPlayer = false;
 
@@ -32,8 +32,8 @@ public class Enemy : Character
 			if (!targets.IsEmpty())
 			{
 				board.StopAutoDeletionRows();
-				target = targets[0];
-				MoveToCell(target.CurrentCell);
+				playerTarget = targets[0];
+				MoveToCell(playerTarget.CurrentCell);
 			}
 			else
 			{
@@ -49,10 +49,10 @@ public class Enemy : Character
 	}
 
 	protected override void DoActionBeforeMoving(Cell cell)
-    {
+	{
 		base.DoActionBeforeMoving(cell);
-		if(attackPlayer == false)
-        {
+		if (attackPlayer == false)
+		{
 			attackPlayer = true;
 			playerKilledSound.instrument.Play();
 			playerKilledSound.voice.Play();
@@ -62,9 +62,18 @@ public class Enemy : Character
 	protected override void DoActionAfterMoving(Cell cell)
 	{
 		base.DoActionAfterMoving(cell);
-		target.Kill();
-		attackPlayer = false;
-		board.EndLevel();
+
+		if (playerTarget.HasShield)
+		{
+			playerTarget.HasShield = false;
+			Kill();
+		}
+		else
+		{
+			playerTarget.Kill();
+			attackPlayer = false;
+			board.EndLevel();
+		}
 
 		End();
 	}

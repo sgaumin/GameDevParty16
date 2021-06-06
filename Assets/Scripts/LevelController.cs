@@ -27,13 +27,11 @@ public class LevelController : GameSystem
 	[SerializeField] private FadScreen fader;
 	[SerializeField] private Transform levelHolder;
 	[SerializeField] private CinemachineVirtualCamera cinemachine;
-	[SerializeField] private List<Board> levelPrefabs = new List<Board>();
+	[SerializeField] private List<LevelData> levelDatas = new List<LevelData>();
 
+	private LevelData currentLevelData;
 	private GameStates gameState;
 	private Coroutine loadingLevel;
-
-	public AudioClip music;
-	public AudioMixerGroup mixer;
 
 	public Board LevelBoard { get; private set; }
 	public GameStates GameState
@@ -65,20 +63,22 @@ public class LevelController : GameSystem
 		base.Awake();
 
 		Instance = this;
+		currentLevelData = levelDatas.Where(x => x.Name == GameData.LevelNameSelected).FirstOrDefault();
+
 		if (levelBoard != null)
 		{
 			LevelBoard = Instantiate(levelBoard, levelHolder);
 		}
 		else if (!string.IsNullOrEmpty(GameData.LevelNameSelected))
 		{
-			LevelBoard = Instantiate(levelPrefabs.Where(x => x.name == GameData.LevelNameSelected).FirstOrDefault(), levelHolder);
+			LevelBoard = Instantiate(currentLevelData.Prefab, levelHolder);
 		}
 	}
 
 	protected void Start()
 	{
 		GameState = GameStates.Play;
-		AudioManager.Instance.UpdateMusic(music, mixer);
+		AudioManager.Instance.UpdateMusic(currentLevelData.clip, currentLevelData.mixer);
 		fader.FadIn();
 	}
 

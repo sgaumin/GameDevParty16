@@ -586,13 +586,11 @@ MonoBehaviour:
   fader: {fileID: 1857699063805068419}
   levelHolder: {fileID: 6637106348129906977}
   cinemachine: {fileID: 6623270590083085715}
-  levelPrefabs:
-  - {fileID: 3622037727342620051, guid: 959d695fd63859847be5c74f6b6ea755, type: 3}
-  - {fileID: 3622037727342620051, guid: bf39b73b8617e9140b037105c08d28e7, type: 3}
-  - {fileID: 3622037727342620051, guid: 0b457605a0a7a6d49abcf11efb94981f, type: 3}
-  - {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494, type: 3}
-  music: {fileID: 8300000, guid: 632629cff1a121042bbf5817b01fa34e, type: 3}
-  mixer: {fileID: 7990551975244809061, guid: dbd143edd4df0224d92ac4ff39f0844e, type: 2}
+  levelDatas:
+  - {fileID: 11400000, guid: c7ac794ad1acdb244a2c3a4b6232ac0a, type: 2}
+  - {fileID: 11400000, guid: 495596c79f52f4f419680a2c928da37f, type: 2}
+  - {fileID: 11400000, guid: 8041269133b92d0429d071fee2a72b9e, type: 2}
+  - {fileID: 11400000, guid: f8e9606bdeec698418d01ea74ff6fae3, type: 2}
 --- !u!114 &1261624071804609154
 MonoBehaviour:
   m_ObjectHideFlags: 0

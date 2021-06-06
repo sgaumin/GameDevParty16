@@ -10,9 +10,11 @@ public class Player : Character
 
 	[Header("Config")]
 	[SerializeField] private int piecesToShowInAdvance = 3;
+	[SerializeField] private bool hasShieldAtStart;
 
 	private List<PieceType> types = new List<PieceType>();
 
+	public bool HasShield { get; set; }
 	public PieceType CurrentType { get; private set; }
 	public bool HasKilled { get; set; } = false;
 	public PiecePoolType PiecePoolType { get; set; }
@@ -25,6 +27,8 @@ public class Player : Character
 
 		board.OnStartPlayerTurn += AssignRandomType;
 		board.OnRefreshBoard += RefreshMovements;
+
+		HasShield = hasShieldAtStart;
 	}
 
 	private void AssignRandomType()
