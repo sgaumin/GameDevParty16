@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-	//our array of sounds
-	//public Sound[] sounds;
-
-	//public AudioClip musicClip;
-	//public AudioSource audioSource;
-	//SoundData music;
-
 	[Header("References")]
 	[SerializeField] private AudioSource audioSource;
 
@@ -29,13 +23,17 @@ public class AudioManager : MonoBehaviour
 		}
 	}
 
-	//private void Start()
-	//{
-	//    //music.Play();
-	//}
+	public void UpdateMusic(AudioClip clip, AudioMixerGroup mixer)
+	{
+		if (Source.clip != null && clip.name == Source.clip.name)
+			return;
 
-	//internal void ChangeMusic(AudioClip music)
-	//{
-	//    Instance.musicClip = music;
-	//}
+		Source.clip = clip;
+		Source.outputAudioMixerGroup = mixer;
+
+		if (!Source.isPlaying)
+		{
+			Instance.Source.Play();
+		}
+	}
 }

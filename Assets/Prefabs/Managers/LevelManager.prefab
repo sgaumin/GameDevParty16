@@ -581,12 +581,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04dc52d7a03854747abbc90cc4458624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelBoard: {fileID: 3622037727342620051, guid: 959d695fd63859847be5c74f6b6ea755,
-    type: 3}
+  levelBoard: {fileID: 0}
   fadDuration: 0.55
   fader: {fileID: 1857699063805068419}
   levelHolder: {fileID: 6637106348129906977}
   cinemachine: {fileID: 6623270590083085715}
+  levelPrefabs:
+  - {fileID: 3622037727342620051, guid: 959d695fd63859847be5c74f6b6ea755, type: 3}
+  - {fileID: 3622037727342620051, guid: bf39b73b8617e9140b037105c08d28e7, type: 3}
+  - {fileID: 3622037727342620051, guid: 0b457605a0a7a6d49abcf11efb94981f, type: 3}
+  - {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494, type: 3}
   music: {fileID: 8300000, guid: 632629cff1a121042bbf5817b01fa34e, type: 3}
   mixer: {fileID: 7990551975244809061, guid: dbd143edd4df0224d92ac4ff39f0844e, type: 2}
 --- !u!114 &1261624071804609154

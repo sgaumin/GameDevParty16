@@ -1,5 +1,5 @@
 ﻿public enum MainMenuState
 {
-	Main,
-	Level
+	StartScreen,
+	SelectionLevel
 }

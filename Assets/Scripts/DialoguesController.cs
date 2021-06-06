@@ -35,18 +35,18 @@ public class DialoguesController : MonoBehaviour
 
 	public void Init()
 	{
-		Game.Instance.LevelBoard.Player.OnKillEnemy += SetNotifications;
-		Game.Instance.LevelBoard.OnStartPlayerTurn += MoveDialogue;
+		LevelController.Instance.LevelBoard.Player.OnKillEnemy += SetNotifications;
+		LevelController.Instance.LevelBoard.OnStartPlayerTurn += MoveDialogue;
 	}
 
 	public void MoveDialogue()
 	{
 		if (nbMoves % nbMovesBeforeDialogue == 0)
 		{
-			SetDialogue(Game.Instance.LevelBoard.Player.currentType, DialogueType.Normal);
+			SetDialogue(LevelController.Instance.LevelBoard.Player.currentType, DialogueType.Normal);
 		}
 
-		Game.Instance.LevelBoard.Player.hasKilled = false;
+		LevelController.Instance.LevelBoard.Player.hasKilled = false;
 		nbMoves++;
 	}
 
@@ -229,8 +229,8 @@ public class DialoguesController : MonoBehaviour
 
 	protected virtual void OnDestroy()
 	{
-		Game.Instance.LevelBoard.Player.OnKillEnemy -= SetNotifications;
-		Game.Instance.LevelBoard.OnStartPlayerTurn -= MoveDialogue;
+		LevelController.Instance.LevelBoard.Player.OnKillEnemy -= SetNotifications;
+		LevelController.Instance.LevelBoard.OnStartPlayerTurn -= MoveDialogue;
 
 		if (dialogueCoroutine != null)
 		{

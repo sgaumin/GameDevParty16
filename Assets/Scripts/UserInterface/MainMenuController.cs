@@ -2,32 +2,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Tools;
+using UnityEngine.Audio;
 
-public class MainMenuController : MonoBehaviour
+public class MainMenuController : GameSystem
 {
-    [Header("References")]
-    private GameObject activeGameObject;
-    [SerializeField] private GameObject main;
-    [SerializeField] private GameObject level;
-    private Dictionary<MainMenuState, GameObject> statesObjects;
+	[SerializeField] private MainMenuState state = MainMenuState.StartScreen;
 
-    [Header("Parameters")]
-    [SerializeField] private MainMenuState state = MainMenuState.Main;
+	[Header("Animation")]
+	[SerializeField] private float fadDuration = 0.5f;
 
-    private void Awake()
-    {
-        statesObjects = new Dictionary<MainMenuState, GameObject>();
-        statesObjects.Add(MainMenuState.Main, main);
-        statesObjects.Add(MainMenuState.Level, level);
-        activeGameObject = statesObjects[state];
-        SwitchState((int)state);
-    }
+	[Header("Audio")]
+	[SerializeField] private AudioClip music;
+	[SerializeField] private AudioMixerGroup mixer;
 
-    public void SwitchState(int stateId)
-    {
-        state = (MainMenuState)stateId;
-        activeGameObject.SetActive(false);
-        activeGameObject = statesObjects[state];
-        activeGameObject.SetActive(true);
-    }
+	[Header("References")]
+	[SerializeField] private GameObject main;
+	[SerializeField] private GameObject level;
+	[SerializeField] private FadScreen fader;
+
+	private Dictionary<MainMenuState, GameObject> statesObjects;
+	private GameObject activeGameObject;
+	private Coroutine loadingLevel;
+
+	protected override void Awake()
+	{
+		base.Awake();
+
+		statesObjects = new Dictionary<MainMenuState, GameObject>();
+		statesObjects.Add(MainMenuState.StartScreen, main);
+		statesObjects.Add(MainMenuState.SelectionLevel, level);
+		activeGameObject = statesObjects[state];
+		SwitchState((int)state);
+	}
+
+	protected void Start()
+	{
+		fader.FadIn();
+		AudioManager.Instance.UpdateMusic(music, mixer);
+	}
+
+	public void SwitchState(int stateId)
+	{
+		state = (MainMenuState)stateId;
+		activeGameObject.SetActive(false);
+		activeGameObject = statesObjects[state];
+		activeGameObject.SetActive(true);
+	}
+
+	public void SelectLevel(string levelPrefab)
+	{
+		if (loadingLevel == null)
+		{
+			loadingLevel = StartCoroutine(LoadLevelCore(
+
+			content: () =>
+			{
+				GameData.LevelNameSelected = levelPrefab;
+				LevelLoader.LoadNextLevel();
+			}));
+		}
+	}
+
+	private IEnumerator LoadLevelCore(Action content = null)
+	{
+		Time.timeScale = 1f;
+		yield return fader.FadOutCore(fadDuration: fadDuration);
+		content?.Invoke();
+	}
 }

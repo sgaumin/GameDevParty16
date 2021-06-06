@@ -54,9 +54,9 @@ public class ScoreController : MonoBehaviour
 	{
 		Instance = this;
 
-		Game.Instance.LevelBoard.OnStartPlayerTurn += PlayerTurnStart;
-		Game.Instance.LevelBoard.OnPlayerSelectedCell += PlayerTurnEnd;
-		Game.Instance.LevelBoard.OnEndLevel += EndLevelReached;
+		LevelController.Instance.LevelBoard.OnStartPlayerTurn += PlayerTurnStart;
+		LevelController.Instance.LevelBoard.OnPlayerSelectedCell += PlayerTurnEnd;
+		LevelController.Instance.LevelBoard.OnEndLevel += EndLevelReached;
 
 		score = 0;
 		ui.DisplayScore(score, false);
@@ -70,7 +70,7 @@ public class ScoreController : MonoBehaviour
 	private void PlayerTurnEnd()
 	{
 		nbTurns++;
-		if (!Game.Instance.LevelBoard.Player.IsAlive)
+		if (!LevelController.Instance.LevelBoard.Player.IsAlive)
 			return;
 		System.DateTime endTime = System.DateTime.Now;
 		System.TimeSpan delta = (endTime - startTime);
@@ -88,7 +88,7 @@ public class ScoreController : MonoBehaviour
 
 	private void EndLevelReached()
 	{
-		if (!Game.Instance.LevelBoard.Player.IsAlive)
+		if (!LevelController.Instance.LevelBoard.Player.IsAlive)
 			return;
 		int val = GetScoreCoups(nbTurns);
 		scoreEndLevel += val;
@@ -188,8 +188,8 @@ public class ScoreController : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		Game.Instance.LevelBoard.OnStartPlayerTurn -= PlayerTurnStart;
-		Game.Instance.LevelBoard.OnPlayerSelectedCell -= PlayerTurnEnd;
-		Game.Instance.LevelBoard.OnEndLevel -= EndLevelReached;
+		LevelController.Instance.LevelBoard.OnStartPlayerTurn -= PlayerTurnStart;
+		LevelController.Instance.LevelBoard.OnPlayerSelectedCell -= PlayerTurnEnd;
+		LevelController.Instance.LevelBoard.OnEndLevel -= EndLevelReached;
 	}
 }

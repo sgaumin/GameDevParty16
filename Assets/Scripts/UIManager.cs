@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
 	protected void Awake()
 	{
 		Instance = this;
-		Game.Instance.LevelBoard.OnEndLevel += StopTimer;
+		LevelController.Instance.LevelBoard.OnEndLevel += StopTimer;
 	}
 
 	public void DisplayPieces(List<PieceType> types)
@@ -144,7 +144,7 @@ public class UIManager : MonoBehaviour
 
 			if (timerValue < 0)
 			{
-				Game.Instance.LevelBoard.EndLevel();
+				LevelController.Instance.LevelBoard.EndLevel();
 				break;
 			}
 		}
@@ -201,6 +201,6 @@ public class UIManager : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		Game.Instance.LevelBoard.OnEndLevel -= StopTimer;
+		LevelController.Instance.LevelBoard.OnEndLevel -= StopTimer;
 	}
 }

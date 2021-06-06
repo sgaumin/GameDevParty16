@@ -1264,7 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af14c7ee0929504da591ad6e1beec0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnCell: {fileID: 0}
+  spawnCell: {fileID: 991994389059675277}
   timerCount: 60
   timeBeforeRowDeletion: 1.4
   rowStartDisplayCount: 11
@@ -61494,6 +61494,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6211237451688886138}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &991994389059675277 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+    type: 3}
+  m_PrefabInstance: {fileID: 6211237451688886138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e8772c14532dd418864007d2cb341a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6217049307597201495
 PrefabInstance:
   m_ObjectHideFlags: 0

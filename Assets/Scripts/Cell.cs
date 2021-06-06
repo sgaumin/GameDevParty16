@@ -77,7 +77,7 @@ public class Cell : MonoBehaviour
 		get => state;
 		set
 		{
-			if (Game.Instance.LevelBoard.CanReceiveInput)
+			if (LevelController.Instance.LevelBoard.CanReceiveInput)
 			{
 				state = value;
 				switch (state)
@@ -124,7 +124,7 @@ public class Cell : MonoBehaviour
 						{
 							enemyOnTop.IsHighlighted = false;
 						}
-						Game.Instance.LevelBoard.OnlySelectCell(this);
+						LevelController.Instance.LevelBoard.OnlySelectCell(this);
 						Piece.MoveToCell(this);
 						break;
 					case CellState.Inactive:
@@ -157,9 +157,9 @@ public class Cell : MonoBehaviour
 			effect.transform.position = EffectPosition;
 			effect.transform.SetParent(transform);
 		}
-		else if (mark != MarkNames.None)
+		else if (mark != MarkNames.None && LevelController.Instance.LevelBoard.ShowMarkers)
 		{
-			model.material = Game.Instance.LevelBoard.Marks.Where(x => x.Name == mark).FirstOrDefault().Material;
+			model.material = LevelController.Instance.LevelBoard.Marks.Where(x => x.Name == mark).FirstOrDefault().Material;
 		}
 		else
 		{

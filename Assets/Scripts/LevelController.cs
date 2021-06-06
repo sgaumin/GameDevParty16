@@ -1,13 +1,15 @@
 using Cinemachine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Tools;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class Game : GameSystem
+public class LevelController : GameSystem
 {
-	public static Game Instance { get; private set; }
+	public static LevelController Instance { get; private set; }
 
 	private const string MENU_SCENE = "Menu";
 
@@ -25,6 +27,7 @@ public class Game : GameSystem
 	[SerializeField] private FadScreen fader;
 	[SerializeField] private Transform levelHolder;
 	[SerializeField] private CinemachineVirtualCamera cinemachine;
+	[SerializeField] private List<Board> levelPrefabs = new List<Board>();
 
 	private GameStates gameState;
 	private Coroutine loadingLevel;
@@ -66,18 +69,16 @@ public class Game : GameSystem
 		{
 			LevelBoard = Instantiate(levelBoard, levelHolder);
 		}
+		else if (!string.IsNullOrEmpty(GameData.LevelNameSelected))
+		{
+			LevelBoard = Instantiate(levelPrefabs.Where(x => x.name == GameData.LevelNameSelected).FirstOrDefault(), levelHolder);
+		}
 	}
 
 	protected void Start()
 	{
-		if (AudioManager.Instance.Source.clip == null || music.name != AudioManager.Instance.Source.clip.name)
-		{
-			AudioManager.Instance.GetComponent<AudioSource>().clip = music;
-			AudioManager.Instance.GetComponent<AudioSource>().outputAudioMixerGroup = mixer;
-			AudioManager.Instance.GetComponent<AudioSource>().Play();
-		}
-
 		GameState = GameStates.Play;
+		AudioManager.Instance.UpdateMusic(music, mixer);
 		fader.FadIn();
 	}
 
@@ -101,6 +102,20 @@ public class Game : GameSystem
 			content: () =>
 			{
 				LevelLoader.ReloadLevel();
+			}));
+		}
+	}
+
+	public void SelectLevel(string levelPrefab)
+	{
+		if (loadingLevel == null)
+		{
+			loadingLevel = StartCoroutine(LoadLevelCore(
+
+			content: () =>
+			{
+				GameData.LevelNameSelected = levelPrefab;
+				LevelLoader.LoadNextLevel();
 			}));
 		}
 	}

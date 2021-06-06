@@ -21,6 +21,7 @@ public class Board : MonoBehaviour
 	[SerializeField] private float timeBeforeRowDeletion = 1f;
 	[SerializeField] private int rowStartDisplayCount = 8;
 	[SerializeField, IntRangeSlider(0, 10)] private IntRange rowDeletionAmount = new IntRange(1, 3);
+	[SerializeField] private bool showMarkers;
 	[SerializeField] private List<MarkType> marks = new List<MarkType>();
 
 	[Header("Animations")]
@@ -60,6 +61,7 @@ public class Board : MonoBehaviour
 			enemies = value;
 		}
 	}
+	public bool ShowMarkers => showMarkers;
 	public List<MarkType> Marks => marks;
 	public BoardStates BoardState
 	{
@@ -281,7 +283,7 @@ public class Board : MonoBehaviour
 		if (index < rowCells.Count())
 		{
 			List<Cell> lastRow = rowCells[index];
-			if (lastRow.First().gameObject.activeSelf)
+			if (lastRow.IsEmpty() || lastRow.First().gameObject.activeSelf)
 			{
 				ShowNewRow(index + 1);
 			}
@@ -297,7 +299,7 @@ public class Board : MonoBehaviour
 		Player = Instantiate(piecePrefab, transform);
 		Player.Init(spawnCell);
 
-		Game.Instance.SetCameraTarget(Player.transform);
+		LevelController.Instance.SetCameraTarget(Player.transform);
 		UIManager.Instance.Dialogues.Init();
 	}
 
@@ -319,11 +321,7 @@ public class Board : MonoBehaviour
 		hasFinishTurn = false;
 		BoardState = BoardStates.EndPlayerTurn;
 		SafeCheckOnPlayer();
-
-		if (enemies.IsEmpty())
-		{
-			EndingTurn();
-		}
+		EndingTurn();
 	}
 
 	public void EndingTurn()
