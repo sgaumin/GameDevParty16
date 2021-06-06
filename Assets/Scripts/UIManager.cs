@@ -38,11 +38,16 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI timerText;
 	[SerializeField] private UIScoreController winController;
 	[SerializeField] private DialoguesController dialoguesController;
+	[SerializeField] private GameObject nextMoves;
 
 	private PieceType previousType;
 	private int timerValue;
 	private Coroutine timer;
 	private Coroutine waitScore;
+
+	public bool ShowPieceQueue { get; set; } = true;
+	public bool ShowScore { get; set; } = true;
+	public bool ShowTimer { get; set; } = true;
 
 	public DialoguesController Dialogues => dialoguesController;
 
@@ -54,6 +59,10 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayPieces(List<PieceType> types)
 	{
+		nextMoves.SetActive(ShowPieceQueue);
+		if (!ShowPieceQueue)
+			return;
+
 		int i = 0;
 		foreach (PieceType type in types)
 		{
@@ -67,13 +76,13 @@ public class UIManager : MonoBehaviour
 
 		switch (type)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				return pionSprite;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				return fouSprite;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				return cavalierSprite;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				return tourSprite;
 		}
 
@@ -87,16 +96,16 @@ public class UIManager : MonoBehaviour
 			previousType = currentType;
 			switch (currentType)
 			{
-				case PieceType.Pion:
+				case PieceType.Pawn:
 					portrait.sprite = pionPortraitSprite;
 					break;
-				case PieceType.Fou:
+				case PieceType.Bishop:
 					portrait.sprite = fouPortraitSprite;
 					break;
-				case PieceType.Cavalier:
+				case PieceType.Knight:
 					portrait.sprite = cavalierPortraitSprite;
 					break;
-				case PieceType.Tour:
+				case PieceType.Rook:
 					portrait.sprite = tourPortraitSprite;
 					break;
 			}
@@ -107,6 +116,10 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayScore(float val, bool shake = true)
 	{
+		score.gameObject.SetActive(ShowScore);
+		if (!ShowScore)
+			return;
+
 		score.text = string.Format(scoreTitle, val.ToString());
 
 		//winController.DisplayScore();
@@ -119,6 +132,10 @@ public class UIManager : MonoBehaviour
 
 	public void StartTimer(int value)
 	{
+		timerText.gameObject.SetActive(ShowTimer);
+		if (!ShowTimer)
+			return;
+
 		timerValue = value;
 		timer = StartCoroutine(Timer());
 	}

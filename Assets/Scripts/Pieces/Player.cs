@@ -6,15 +6,16 @@ using Random = UnityEngine.Random;
 
 public class Player : Character
 {
+	public Action<PieceType, DialogueType> OnKillEnemy;
+
 	[Header("Config")]
 	[SerializeField] private int piecesToShowInAdvance = 3;
 
 	private List<PieceType> types = new List<PieceType>();
-	public PieceType currentType;
 
-	public Action<PieceType, DialogueType> OnKillEnemy;
-
-	public bool hasKilled = false;
+	public PieceType CurrentType { get; private set; }
+	public bool HasKilled { get; set; } = false;
+	public PiecePoolType PiecePoolType { get; set; }
 
 	public void Init(Cell spawnCell)
 	{
@@ -32,16 +33,32 @@ public class Player : Character
 		{
 			while (types.Count <= piecesToShowInAdvance)
 			{
-				types.Add((PieceType)Random.Range(0, Enum.GetNames(typeof(PieceType)).Length));
+				switch (PiecePoolType)
+				{
+					case PiecePoolType.All:
+						types.Add((PieceType)Random.Range(0, Enum.GetNames(typeof(PieceType)).Length));
+						break;
+					case PiecePoolType.OnlyPawn:
+						types.Add(PieceType.Pawn);
+						break;
+					case PiecePoolType.OnlyKnight:
+						types.Add(PieceType.Knight);
+						break;
+				}
 			}
 
-			currentType = types.First();
-			CurrentCell.ShowMovements(currentType, this);
-			SetIcon(currentType);
+			CurrentType = types.First();
+			CurrentCell.ShowMovements(CurrentType, this);
+			SetIcon(CurrentType);
 			types.RemoveAt(0);
 			UIManager.Instance.DisplayPieces(types);
-			UIManager.Instance.DisplayPortrait(currentType);
+			UIManager.Instance.DisplayPortrait(CurrentType);
 		}
+	}
+
+	public void ClearPiecePool()
+	{
+		types.Clear();
 	}
 
 	private void RefreshMovements()
@@ -67,8 +84,8 @@ public class Player : Character
 		if (enemy != null)
 		{
 			board.EnemyKilled(enemy.type);
-			hasKilled = true;
-			OnKillEnemy?.Invoke(currentType, DialogueType.Attaque);
+			HasKilled = true;
+			OnKillEnemy?.Invoke(CurrentType, DialogueType.Attaque);
 			enemy.Kill();
 		}
 

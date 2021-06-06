@@ -1271,6 +1271,109 @@ MonoBehaviour:
   rowDeletionAmount:
     min: 1
     max: 7
+  events:
+  - RowIndex:
+      min: 0
+      max: 11
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3622037727342620051}
+          m_MethodName: ForcePawn
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - RowIndex:
+      min: 12
+      max: 13
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3622037727342620051}
+          m_MethodName: ForceKnight
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - RowIndex:
+      min: 0
+      max: 12
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3622037727342620051}
+          m_MethodName: HidePieceQueue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3622037727342620051}
+          m_MethodName: HideScore
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3622037727342620051}
+          m_MethodName: HideTimer
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - RowIndex:
+      min: 13
+      max: 20
+    Event:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3622037727342620051}
+          m_MethodName: ShowPieceQueue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 3622037727342620051}
+          m_MethodName: ForceAll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  showMarkers: 0
   marks:
   - Name: 0
     Material: {fileID: 2100000, guid: 20984fec92f987446a4be90d5ca55a40, type: 2}

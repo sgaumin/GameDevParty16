@@ -290,16 +290,16 @@ public class Cell : MonoBehaviour
 
 		switch (type)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				paths = GetPawnMovements(character);
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				paths = GetBishopMovements();
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				paths = GetKnightMovements();
 				break;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				paths = GetRookMovements();
 				break;
 		}
@@ -313,16 +313,16 @@ public class Cell : MonoBehaviour
 
 		switch (typeGiven)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				paths = GetPawnMovements(characterGiven);
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				paths = GetBishopMovements();
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				paths = GetKnightMovements();
 				break;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				paths = GetRookMovements();
 				break;
 		}
@@ -365,16 +365,16 @@ public class Cell : MonoBehaviour
 
 		switch (type)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				paths = GetPawnMovements(character);
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				paths = GetBishopMovements();
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				paths = GetKnightMovements();
 				break;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				paths = GetRookMovements();
 				break;
 		}

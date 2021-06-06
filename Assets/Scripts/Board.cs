@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tools.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public struct MarkType
@@ -13,14 +14,25 @@ public struct MarkType
 	public Material Material;
 }
 
+[System.Serializable]
+public struct BoardEvent
+{
+	[IntRangeSlider(0, 100)] public IntRange RowIndex;
+	public UnityEvent Event;
+}
+
 public class Board : MonoBehaviour
 {
 	[Header("Rules")]
 	[SerializeField] private Cell spawnCell;
+	[SerializeField] private bool rowAutoDeletionOnStart;
 	[SerializeField] private int timerCount = 10;
 	[SerializeField] private float timeBeforeRowDeletion = 1f;
 	[SerializeField] private int rowStartDisplayCount = 8;
 	[SerializeField, IntRangeSlider(0, 10)] private IntRange rowDeletionAmount = new IntRange(1, 3);
+	[Space]
+	[SerializeField] private List<BoardEvent> events = new List<BoardEvent>();
+	[Space]
 	[SerializeField] private bool showMarkers;
 	[SerializeField] private List<MarkType> marks = new List<MarkType>();
 
@@ -46,6 +58,7 @@ public class Board : MonoBehaviour
 	public SoundData playerKilledSound;
 	public SoundData winSound;
 
+	public Action OnTriggerEvents;
 	public Action OnStartPlayerTurn;
 	public Action OnPlayerSelectedCell;
 	public Action OnEndPlayerTurn;
@@ -72,6 +85,9 @@ public class Board : MonoBehaviour
 
 			switch (value)
 			{
+				case BoardStates.TriggerEvents:
+					OnTriggerEvents?.Invoke();
+					break;
 				case BoardStates.StartPlayerTurn:
 					OnStartPlayerTurn?.Invoke();
 					break;
@@ -98,9 +114,10 @@ public class Board : MonoBehaviour
 
 	protected void Awake()
 	{
-		OnEndLevel += StopAutoDeletionRows;
+		OnTriggerEvents += TriggerEvents;
 		OnStartPlayerTurn += AllowInput;
 		OnPlayerSelectedCell += DisableInput;
+		OnEndLevel += StopAutoDeletionRows;
 	}
 
 	void Start()
@@ -115,10 +132,68 @@ public class Board : MonoBehaviour
 		enemies = FindObjectsOfType<Enemy>().ToList();
 		ActivateEnemiesChecks();
 
-		UIManager.Instance.StartTimer(timerCount);
-		StartAutoDeletionRows();
+		BoardState = BoardStates.TriggerEvents;
 
+		StartAutoDeletionRows();
+		UIManager.Instance.StartTimer(timerCount);
+	}
+
+	private void TriggerEvents()
+	{
+		List<BoardEvent> eventsToTrigger = events.Where(x => x.RowIndex.Contains((int)Player.CurrentCell.transform.position.z)).ToList();
+		foreach (BoardEvent b in eventsToTrigger)
+		{
+			b.Event?.Invoke();
+		}
 		BoardState = BoardStates.StartPlayerTurn;
+	}
+
+	public void ForcePawn()
+	{
+		Player.ClearPiecePool();
+		Player.PiecePoolType = PiecePoolType.OnlyPawn;
+	}
+
+	public void ForceKnight()
+	{
+		Player.ClearPiecePool();
+		Player.PiecePoolType = PiecePoolType.OnlyKnight;
+	}
+
+	public void ForceAll()
+	{
+		Player.ClearPiecePool();
+		Player.PiecePoolType = PiecePoolType.All;
+	}
+
+	public void HidePieceQueue()
+	{
+		UIManager.Instance.ShowPieceQueue = false;
+	}
+
+	public void ShowPieceQueue()
+	{
+		UIManager.Instance.ShowPieceQueue = true;
+	}
+
+	public void HideScore()
+	{
+		UIManager.Instance.ShowScore = false;
+	}
+
+	public void ShowScore()
+	{
+		UIManager.Instance.ShowScore = true;
+	}
+
+	public void HideTimer()
+	{
+		UIManager.Instance.ShowTimer = false;
+	}
+
+	public void ShowTimer()
+	{
+		UIManager.Instance.ShowTimer = true;
 	}
 
 	private void AllowInput()
@@ -198,7 +273,10 @@ public class Board : MonoBehaviour
 	private void CheckRowDeletion()
 	{
 		CheckPlayerPositionPercentage();
-		DeleteFirstRow();
+		if (rowAutoDeletionOnStart)
+		{
+			DeleteFirstRow();
+		}
 
 		for (int i = 0; i < currentRowDeletionAmount; i++)
 		{
@@ -331,7 +409,7 @@ public class Board : MonoBehaviour
 			if (enemies.IsEmpty() || enemies.Where(x => x.gameObject.activeSelf).All(x => x.HasFinishTurn))
 			{
 				hasFinishTurn = true;
-				BoardState = BoardStates.StartPlayerTurn;
+				BoardState = BoardStates.TriggerEvents;
 			}
 		}
 	}
@@ -370,8 +448,9 @@ public class Board : MonoBehaviour
 
 	private void OnDestroy()
 	{
-		OnEndLevel -= StopAutoDeletionRows;
+		OnTriggerEvents -= TriggerEvents;
 		OnStartPlayerTurn -= AllowInput;
 		OnPlayerSelectedCell -= DisableInput;
+		OnEndLevel -= StopAutoDeletionRows;
 	}
 }

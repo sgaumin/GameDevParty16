@@ -57,7 +57,10 @@ public class ScoreController : MonoBehaviour
 		LevelController.Instance.LevelBoard.OnStartPlayerTurn += PlayerTurnStart;
 		LevelController.Instance.LevelBoard.OnPlayerSelectedCell += PlayerTurnEnd;
 		LevelController.Instance.LevelBoard.OnEndLevel += EndLevelReached;
+	}
 
+	private void Start()
+	{
 		score = 0;
 		ui.DisplayScore(score, false);
 	}
@@ -129,22 +132,22 @@ public class ScoreController : MonoBehaviour
 		int val = 0;
 		switch (type)
 		{
-			case PieceType.Tour:
+			case PieceType.Rook:
 				val = valKillTour;
 				nbTourKilled++;
 				scoreKillTour += val;
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				val = valKillFou;
 				nbFouKilled++;
 				scoreKillFou += val;
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				val = valKillCavalier;
 				nbCavalierKilled++;
 				scoreKillCavalier += val;
 				break;
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				val = valKillPion;
 				nbPionKilled++;
 				scoreKillPion += val;
@@ -164,19 +167,19 @@ public class ScoreController : MonoBehaviour
 		int n, s;
 		switch (piece)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				n = nbPionKilled;
 				s = scoreKillPion;
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				n = nbFouKilled;
 				s = scoreKillFou;
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				n = nbCavalierKilled;
 				s = scoreKillCavalier;
 				break;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				n = nbTourKilled;
 				s = scoreKillTour;
 				break;

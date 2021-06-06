@@ -43,10 +43,10 @@ public class DialoguesController : MonoBehaviour
 	{
 		if (nbMoves % nbMovesBeforeDialogue == 0)
 		{
-			SetDialogue(LevelController.Instance.LevelBoard.Player.currentType, DialogueType.Normal);
+			SetDialogue(LevelController.Instance.LevelBoard.Player.CurrentType, DialogueType.Normal);
 		}
 
-		LevelController.Instance.LevelBoard.Player.hasKilled = false;
+		LevelController.Instance.LevelBoard.Player.HasKilled = false;
 		nbMoves++;
 	}
 
@@ -55,7 +55,7 @@ public class DialoguesController : MonoBehaviour
 		string[] dialogueBase = { "NONE" };
 		switch (piece)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				notificationIcon.sprite = pionSprite;
 				switch (dialogueType)
 				{
@@ -67,7 +67,7 @@ public class DialoguesController : MonoBehaviour
 						break;
 				}
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				notificationIcon.sprite = fouSprite;
 				switch (dialogueType)
 				{
@@ -79,7 +79,7 @@ public class DialoguesController : MonoBehaviour
 						break;
 				}
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				notificationIcon.sprite = cavalierSprite;
 				switch (dialogueType)
 				{
@@ -91,7 +91,7 @@ public class DialoguesController : MonoBehaviour
 						break;
 				}
 				break;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				notificationIcon.sprite = tourSprite;
 				switch (dialogueType)
 				{
@@ -126,7 +126,7 @@ public class DialoguesController : MonoBehaviour
 		string name = "NONE";
 		switch (piece)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				name = pion.name;
 				switch (dialogueType)
 				{
@@ -138,7 +138,7 @@ public class DialoguesController : MonoBehaviour
 						break;
 				}
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				name = fou.name;
 				switch (dialogueType)
 				{
@@ -150,7 +150,7 @@ public class DialoguesController : MonoBehaviour
 						break;
 				}
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				name = cavalier.name;
 				switch (dialogueType)
 				{
@@ -162,7 +162,7 @@ public class DialoguesController : MonoBehaviour
 						break;
 				}
 				break;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				name = tour.name;
 				switch (dialogueType)
 				{

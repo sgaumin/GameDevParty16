@@ -153,22 +153,22 @@ public abstract class Character : MonoBehaviour
 	{
 		switch (type)
 		{
-			case PieceType.Pion:
+			case PieceType.Pawn:
 				icon.sprite = pionSprite;
 				character.sprite = pionCharacterSprite;
 				highlightSprite = pionCharacterhighlightSprite;
 				break;
-			case PieceType.Fou:
+			case PieceType.Bishop:
 				icon.sprite = fouSprite;
 				character.sprite = fouCharacterSprite;
 				highlightSprite = fouCharacterhighlightSprite;
 				break;
-			case PieceType.Cavalier:
+			case PieceType.Knight:
 				icon.sprite = cavalierSprite;
 				character.sprite = cavalierCharacterSprite;
 				highlightSprite = cavalierCharacterhighlightSprite;
 				break;
-			case PieceType.Tour:
+			case PieceType.Rook:
 				icon.sprite = tourSprite;
 				character.sprite = tourCharacterSprite;
 				highlightSprite = tourCharacterhighlightSprite;

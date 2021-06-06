@@ -1,7 +1,7 @@
 ﻿public enum PieceType
 {
-    Pion,
-    Fou,
-    Cavalier,
-    Tour
+	Pawn,
+	Bishop,
+	Knight,
+	Rook
 }

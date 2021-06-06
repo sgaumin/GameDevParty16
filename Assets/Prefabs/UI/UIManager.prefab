@@ -7236,6 +7236,7 @@ MonoBehaviour:
   timerText: {fileID: 1014823040803086449}
   winController: {fileID: 779425758751662308}
   dialoguesController: {fileID: 8248661699243407027}
+  nextMoves: {fileID: 7377298235522793627}
 --- !u!114 &8248661699243407027
 MonoBehaviour:
   m_ObjectHideFlags: 0

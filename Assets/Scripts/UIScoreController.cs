@@ -20,16 +20,16 @@ public class UIScoreController : MonoBehaviour
 		{
 			switch (piece)
 			{
-				case PieceType.Pion:
+				case PieceType.Pawn:
 					textScorePion.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
-				case PieceType.Fou:
+				case PieceType.Bishop:
 					textScoreFou.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
-				case PieceType.Cavalier:
+				case PieceType.Knight:
 					textScoreCavalier.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
-				case PieceType.Tour:
+				case PieceType.Rook:
 					textScoreTower.text = ScoreController.Instance.GetScoreKillString(piece);
 					break;
 			}

@@ -512,12 +512,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCell: {fileID: 7227624767949412090}
+  rowAutoDeletionOnStart: 1
   timerCount: 60
   timeBeforeRowDeletion: 1.4
   rowStartDisplayCount: 11
   rowDeletionAmount:
     min: 1
     max: 7
+  events: []
+  showMarkers: 0
   marks:
   - Name: 0
     Material: {fileID: 2100000, guid: 20984fec92f987446a4be90d5ca55a40, type: 2}
