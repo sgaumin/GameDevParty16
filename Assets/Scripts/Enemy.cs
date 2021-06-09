@@ -31,8 +31,11 @@ public class Enemy : Character
 			List<Player> targets = CurrentCell.GetTargetOnMovements<Player>(type, this);
 			if (!targets.IsEmpty())
 			{
-				board.StopAutoDeletionRows();
 				playerTarget = targets[0];
+                if (!playerTarget.HasShield)
+                {
+					board.StopAutoDeletionRows();
+                }
 				MoveToCell(playerTarget.CurrentCell);
 			}
 			else
