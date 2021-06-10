@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,8 +14,25 @@ public class Player : Character
 	[SerializeField] private bool hasShieldAtStart;
 
 	private List<PieceType> types = new List<PieceType>();
+	private bool hasShield;
 
-	public bool HasShield { get; set; }
+	public bool HasShield
+	{
+		get => hasShield;
+		set
+		{
+			hasShield = value;
+			if (shieldMask != null)
+			{
+				shieldMask.gameObject.SetActive(hasShield);
+			}
+			if (shieldVfx != null)
+			{
+				shieldVfx.transform?.DOKill();
+				shieldVfx.transform.DOLocalMoveY(shieldVfx.transform.position.y + shieldMovementY, shieldMovementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(shieldMovementEase);
+			}
+		}
+	}
 	public PieceType CurrentType { get; private set; }
 	public bool HasKilled { get; set; } = false;
 	public PiecePoolType PiecePoolType { get; set; }

@@ -23,6 +23,10 @@ public abstract class Character : MonoBehaviour
 
 	[Header("Animations")]
 	[SerializeField] private CharacterAnimationData animationData;
+	[Space]
+	[SerializeField] protected float shieldMovementY;
+	[SerializeField] protected float shieldMovementDuration;
+	[SerializeField] protected Ease shieldMovementEase;
 
 	[Header("Effects")]
 	[SerializeField] private Color effectColor;
@@ -34,6 +38,8 @@ public abstract class Character : MonoBehaviour
 	[SerializeField] protected LayerMask cellMask;
 	[SerializeField] protected Image icon;
 	[SerializeField] protected Image character;
+	[SerializeField] protected Image shieldVfx;
+	[SerializeField] protected Mask shieldMask;
 
 	protected Board board;
 	private Coroutine moving;
@@ -125,15 +131,15 @@ public abstract class Character : MonoBehaviour
 
 	protected virtual void DoActionBeforeMoving(Cell cell)
 	{
-        if (CurrentCell.CanFall)
-        {
+		if (CurrentCell.CanFall)
+		{
 			CurrentCell.MakeCellFall();
-        }
-    }
+		}
+	}
 	protected virtual void DoActionAfterMoving(Cell cell)
 	{
-        if (CurrentCell.CanFall)
-        {
+		if (CurrentCell.CanFall)
+		{
 			Destroy(CurrentCell.gameObject);
 			board.ResetBoard();
 		}
