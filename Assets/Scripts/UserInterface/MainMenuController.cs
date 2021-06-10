@@ -19,6 +19,7 @@ public class MainMenuController : GameSystem
 	[Header("References")]
 	[SerializeField] private GameObject main;
 	[SerializeField] private GameObject level;
+	[SerializeField] private GameObject OptionUi;
 	[SerializeField] private FadScreen fader;
 
 	private Dictionary<MainMenuState, GameObject> statesObjects;
@@ -70,4 +71,22 @@ public class MainMenuController : GameSystem
 		yield return fader.FadOutCore(fadDuration: fadDuration);
 		content?.Invoke();
 	}
+
+	public void QuitGame()
+	{
+		if (loadingLevel == null)
+		{
+			loadingLevel = StartCoroutine(LoadLevelCore(
+
+			content: () =>
+			{
+				LevelLoader.QuitGame();
+			}));
+		}
+	}
+
+	public void OpenOptions()
+    {
+		this.OptionUi.gameObject.SetActive(true);
+    }
 }

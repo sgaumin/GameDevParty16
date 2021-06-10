@@ -13,6 +13,8 @@ public class MenuOptionsController : MonoBehaviour
     [SerializeField] private Slider sliderVolumeMusic;
     [SerializeField] private Slider sliderVolumeSFX;
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Toggle toggleFr;
+    [SerializeField] private Toggle toggleEn;
 
     Resolution[] resolutions;
 
@@ -43,6 +45,34 @@ public class MenuOptionsController : MonoBehaviour
         // Volumes
         sliderVolumeSFX.value = GameData.VolumeSFX;
         sliderVolumeMusic.value = GameData.VolumeMusic;
+
+        // Language
+        Language lang = (Language)Enum.Parse(typeof(Language), GameData.Language);
+        Debug.Log($"{lang}");
+        switch (lang)
+        {
+            case Language.FR:
+                toggleFr.Select();
+                break;
+            case Language.EN:
+                toggleEn.Select();
+                break;
+        }
+    }
+
+    private void OnEnable()
+    {
+        // Language
+        Language lang = (Language)Enum.Parse(typeof(Language), GameData.Language);
+        switch (lang)
+        {
+            case Language.FR:
+                toggleFr.Select();
+                break;
+            case Language.EN:
+                toggleEn.Select();
+                break;
+        }
     }
 
     public void SetVolumeMusic(float volume)
@@ -61,7 +91,6 @@ public class MenuOptionsController : MonoBehaviour
     {
 
         Resolution resolution = resolutions[resolutionId];
-        Debug.Log($"Update resoluition {resolutionId}: {resolution}");
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
@@ -74,5 +103,12 @@ public class MenuOptionsController : MonoBehaviour
     {
         Language lang = (Language)Enum.Parse(typeof(Language), language);
         GameData.Language = Enum.GetName(typeof(Language), lang);
+        Debug.Log($"{GameData.Language}");
+        //GameData.Language = Enum.GetName(typeof(Language), lang);
+    }
+
+    public void Quit()
+    {
+        this.gameObject.SetActive(false);
     }
 }
