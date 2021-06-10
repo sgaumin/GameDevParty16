@@ -1265,6 +1265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCell: {fileID: 991994389059675277}
+  rowAutoDeletionOnStart: 0
   timerCount: 60
   timeBeforeRowDeletion: 1.4
   rowStartDisplayCount: 11
@@ -1373,7 +1374,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  showMarkers: 0
+  showMarkers: 1
   marks:
   - Name: 0
     Material: {fileID: 2100000, guid: 20984fec92f987446a4be90d5ca55a40, type: 2}
