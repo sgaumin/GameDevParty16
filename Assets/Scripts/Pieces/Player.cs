@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Player : Character
@@ -25,6 +26,7 @@ public class Player : Character
 			if (shieldMask != null)
 			{
 				shieldMask.gameObject.SetActive(hasShield);
+				shieldMask.GetComponent<Image>().sprite = character.sprite;
 			}
 			if (shieldVfx != null)
 			{

@@ -40,6 +40,7 @@ public abstract class Character : MonoBehaviour
 	[SerializeField] protected Image character;
 	[SerializeField] protected Image shieldVfx;
 	[SerializeField] protected Mask shieldMask;
+	[SerializeField] protected Image shieldImageMask;
 
 	protected Board board;
 	private Coroutine moving;
@@ -162,21 +163,25 @@ public abstract class Character : MonoBehaviour
 			case PieceType.Pawn:
 				icon.sprite = pionSprite;
 				character.sprite = pionCharacterSprite;
+				shieldImageMask.sprite = pionCharacterSprite;
 				highlightSprite = pionCharacterhighlightSprite;
 				break;
 			case PieceType.Bishop:
 				icon.sprite = fouSprite;
 				character.sprite = fouCharacterSprite;
+				shieldImageMask.sprite = fouCharacterSprite;
 				highlightSprite = fouCharacterhighlightSprite;
 				break;
 			case PieceType.Knight:
 				icon.sprite = cavalierSprite;
 				character.sprite = cavalierCharacterSprite;
+				shieldImageMask.sprite = cavalierCharacterSprite;
 				highlightSprite = cavalierCharacterhighlightSprite;
 				break;
 			case PieceType.Rook:
 				icon.sprite = tourSprite;
 				character.sprite = tourCharacterSprite;
+				shieldImageMask.sprite = tourCharacterSprite;
 				highlightSprite = tourCharacterhighlightSprite;
 				break;
 		}
