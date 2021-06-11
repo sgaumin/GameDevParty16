@@ -8,7 +8,9 @@ using System;
 
 public class MenuOptionsController : MonoBehaviour
 {
-    [Header("References")]
+    public static MenuOptionsController Instance { get; private set; }
+
+    [Header("UI Elements")]
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Slider sliderVolumeMusic;
     [SerializeField] private Slider sliderVolumeSFX;
@@ -20,6 +22,7 @@ public class MenuOptionsController : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
 #if UNITY_WEBGL
 #else
         // Résolutio
@@ -73,6 +76,16 @@ public class MenuOptionsController : MonoBehaviour
                 toggleEn.Select();
                 break;
         }
+        Board board = LevelController.Instance.LevelBoard;
+        if (board != null)
+        {
+            board.StopAutoDeletionRows();
+            board.DisableInput();
+        }
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.StopTimer();
+        }
     }
 
     public void SetVolumeMusic(float volume)
@@ -109,6 +122,16 @@ public class MenuOptionsController : MonoBehaviour
 
     public void Quit()
     {
+        if(LevelController.Instance != null)
+        {
+            Board board = LevelController.Instance.LevelBoard;
+            board.StartAutoDeletionRows();
+            board.AllowInput();
+        }
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ContinueTimer();
+        }
         this.gameObject.SetActive(false);
     }
 }

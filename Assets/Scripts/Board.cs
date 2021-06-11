@@ -196,12 +196,12 @@ public class Board : MonoBehaviour
 		UIManager.Instance.ShowTimer = true;
 	}
 
-	private void AllowInput()
+	public void AllowInput()
 	{
 		CanReceiveInput = true;
 	}
 
-	private void DisableInput()
+	public void DisableInput()
 	{
 		CanReceiveInput = false;
 	}

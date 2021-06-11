@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -39,6 +40,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private UIScoreController winController;
 	[SerializeField] private DialoguesController dialoguesController;
 	[SerializeField] private GameObject nextMoves;
+	[SerializeField] private GameObject optionMenu;
 
 	private PieceType previousType;
 	private int timerValue;
@@ -130,6 +132,11 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
+	public void ContinueTimer()
+    {
+		StartTimer(timerValue);
+    }
+
 	public void StartTimer(int value)
 	{
 		timerText.gameObject.SetActive(ShowTimer);
@@ -199,6 +206,11 @@ public class UIManager : MonoBehaviour
 		//yield return new WaitForSeconds(0.2f);
 		scoreUI.gameObject.SetActive(true);
 		scoreUI.FadIn(0.5f);
+	}
+
+	public void OpenOptions()
+    {
+		optionMenu.SetActive(true);
 	}
 
 	private void Update()
