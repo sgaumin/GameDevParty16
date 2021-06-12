@@ -23,13 +23,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935621065503844278}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8336070755623955435}
   - {fileID: 658252428484015046}
-  m_Father: {fileID: 7500705778818425100}
+  m_Father: {fileID: 7500705778020545772}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -672,6 +672,7 @@ RectTransform:
   - {fileID: 7500705779125649346}
   - {fileID: 8075181853938650961}
   - {fileID: 6838688849668921811}
+  - {fileID: 6139470721836999654}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1500,7 +1501,6 @@ RectTransform:
   - {fileID: 7500705778597255581}
   - {fileID: 7500705778073218774}
   - {fileID: 7500705779450340370}
-  - {fileID: 6139470721836999654}
   m_Father: {fileID: 7500705778020545772}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2721,15 +2721,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bce22768d27564f47a65588a6b539137, type: 3}
---- !u!1 &8075181853938650989 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6882164326461941119, guid: bce22768d27564f47a65588a6b539137,
-    type: 3}
-  m_PrefabInstance: {fileID: 3427965962351061522}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8075181853938650961 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6882164326461941059, guid: bce22768d27564f47a65588a6b539137,
+    type: 3}
+  m_PrefabInstance: {fileID: 3427965962351061522}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8075181853938650989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6882164326461941119, guid: bce22768d27564f47a65588a6b539137,
     type: 3}
   m_PrefabInstance: {fileID: 3427965962351061522}
   m_PrefabAsset: {fileID: 0}

@@ -76,13 +76,13 @@ public class MenuOptionsController : MonoBehaviour
                 toggleEn.Select();
                 break;
         }
-        Board board = LevelController.Instance.LevelBoard;
-        if (board != null)
+        if (LevelController.Instance != null)
         {
+            Board board = LevelController.Instance.LevelBoard;
             board.StopAutoDeletionRows();
             board.DisableInput();
         }
-        if (UIManager.Instance != null)
+        if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
         {
             UIManager.Instance.StopTimer();
         }
@@ -128,7 +128,7 @@ public class MenuOptionsController : MonoBehaviour
             board.StartAutoDeletionRows();
             board.AllowInput();
         }
-        if (UIManager.Instance != null)
+        if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
         {
             UIManager.Instance.ContinueTimer();
         }
