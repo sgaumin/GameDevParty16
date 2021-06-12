@@ -6,6 +6,7 @@ public class LevelData : ScriptableObject
 {
 	public string Name;
 	public Board Prefab;
+	public string NextLevelName;
 
 	[Header("Audio")]
 	public AudioClip clip;

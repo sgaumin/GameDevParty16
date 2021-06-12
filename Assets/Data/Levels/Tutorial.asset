@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Tutoriel
   Prefab: {fileID: 3622037727342620051, guid: fcfa46c1a82893449acc4bfebc0c8494, type: 3}
+  NextLevelName: Level 1
   clip: {fileID: 8300000, guid: 632629cff1a121042bbf5817b01fa34e, type: 3}
   mixer: {fileID: 7990551975244809061, guid: dbd143edd4df0224d92ac4ff39f0844e, type: 2}

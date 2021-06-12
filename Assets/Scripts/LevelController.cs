@@ -106,6 +106,32 @@ public class LevelController : GameSystem
 		}
 	}
 
+	public void SelectNextLevel()
+    {
+		Debug.Log($"select next level: {currentLevelData.NextLevelName}");
+		SelectLevelReload(currentLevelData.NextLevelName);
+	}
+
+	public String GetNextLevel()
+    {
+
+		return this.currentLevelData.NextLevelName;
+    }
+
+	public void SelectLevelReload(string levelPrefab)
+	{
+		if (loadingLevel == null)
+		{
+			loadingLevel = StartCoroutine(LoadLevelCore(
+
+			content: () =>
+			{
+				GameData.LevelNameSelected = levelPrefab;
+				LevelLoader.ReloadLevel();
+			}));
+		}
+	}
+
 	public void SelectLevel(string levelPrefab)
 	{
 		if (loadingLevel == null)

@@ -12,9 +12,23 @@ public class UIScoreController : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI textScoreCavalier;
 	[SerializeField] private TextMeshProUGUI textScorePion;
 	[SerializeField] private TextMeshProUGUI textScoreTotal;
+	[SerializeField] private GameObject nextLevelButton;
 
+    private void Awake()
+    {
+        if(LevelController.Instance != null)
+        {
+			if(LevelController.Instance.GetNextLevel() == "")
+            {
+				nextLevelButton.SetActive(false);
+			} else
+            {
+				nextLevelButton.SetActive(true);
+            }
+		}
+    }
 
-	public void DisplayScore()
+    public void DisplayScore()
 	{
 		foreach (PieceType piece in (PieceType[])Enum.GetValues(typeof(PieceType)))
 		{
