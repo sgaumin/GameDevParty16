@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class DialoguesController : MonoBehaviour
 {
@@ -21,6 +23,11 @@ public class DialoguesController : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI notificationText;
 	[SerializeField] private Image notificationIcon;
 
+	[Header("params")]
+	[SerializeField] private int nbAtack = 5;
+	[SerializeField] private int nbNormal = 10;
+	private Dictionary<DialogueType, int> nbDialogues;
+
 	Coroutine dialogueCoroutine;
 	Coroutine autoSwitchDialogue;
 
@@ -35,6 +42,10 @@ public class DialoguesController : MonoBehaviour
 
 	public void Init()
 	{
+		nbDialogues = new Dictionary<DialogueType, int>();
+		nbDialogues.Add(DialogueType.Normal, nbNormal);
+		nbDialogues.Add(DialogueType.Attaque, nbAtack);
+
 		LevelController.Instance.LevelBoard.Player.OnKillEnemy += SetNotifications;
 		LevelController.Instance.LevelBoard.OnStartPlayerTurn += MoveDialogue;
 	}
@@ -53,6 +64,7 @@ public class DialoguesController : MonoBehaviour
 	public void SetNotifications(PieceType piece, DialogueType dialogueType)
 	{
 		string[] dialogueBase = { "NONE" };
+		
 		switch (piece)
 		{
 			case PieceType.Pawn:
@@ -105,7 +117,12 @@ public class DialoguesController : MonoBehaviour
 				break;
 		}
 
-		string dialogue = dialogueBase[Random.Range(0, dialogueBase.Length)];
+
+		string dialogueId = $"{Enum.GetName(typeof(DialogueType), dialogueType)}" +
+			$"{Enum.GetName(typeof(PieceType), piece)}" +
+			$"{UnityEngine.Random.Range(1, nbDialogues[dialogueType] + 1)}";
+		string dialogue = I18n.Fields[dialogueId];
+		//string dialogue = dialogueBase[UnityEngine.Random.Range(0, dialogueBase.Length)];
 		notificationText.gameObject.FadIn(fadeDuration);
 		notificationText.text = "";
 		notificationAnim.SetTrigger("show");
@@ -115,7 +132,7 @@ public class DialoguesController : MonoBehaviour
 
 	public void SetDialogue(DialogueType dialogueType)
 	{
-		PieceType type = (PieceType)Random.Range(0, System.Enum.GetValues(typeof(PieceType)).Length);
+		PieceType type = (PieceType)UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(PieceType)).Length);
 		SetDialogue(type, dialogueType);
 	}
 
@@ -175,7 +192,13 @@ public class DialoguesController : MonoBehaviour
 				}
 				break;
 		}
-		string dialogue = dialogueBase[Random.Range(0, dialogueBase.Length)];
+		
+		//string dialogue = dialogueBase[UnityEngine.Random.Range(0, dialogueBase.Length)];
+		string dialogueId = $"{Enum.GetName(typeof(DialogueType), dialogueType)}" +
+			$"{Enum.GetName(typeof(PieceType), piece)}" +
+			$"{UnityEngine.Random.Range(1, nbDialogues[dialogueType] + 1)}";
+
+		string dialogue = I18n.Fields[dialogueId];
 		SetDialogueText(dialogue, name);
 	}
 

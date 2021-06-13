@@ -18,6 +18,9 @@ public class MenuOptionsController : MonoBehaviour
     [SerializeField] private Toggle toggleFr;
     [SerializeField] private Toggle toggleEn;
 
+
+    public Action onLanguageChanged;
+
     Resolution[] resolutions;
 
     private void Awake()
@@ -116,7 +119,18 @@ public class MenuOptionsController : MonoBehaviour
     {
         Language lang = (Language)Enum.Parse(typeof(Language), language);
         GameData.Language = Enum.GetName(typeof(Language), lang);
-        Debug.Log($"{GameData.Language}");
+        switch (lang)
+        {
+            case Language.FR:
+                break;
+            case Language.EN:
+                break;
+            default:
+                break;
+        }
+        Debug.Log($"ICI: {GameData.Language}");
+        I18n.LoadLanguageFromGameData();
+        onLanguageChanged?.Invoke();
         //GameData.Language = Enum.GetName(typeof(Language), lang);
     }
 

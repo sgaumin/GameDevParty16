@@ -1,0 +1,97 @@
+NormalPawn1=Is it my turn already? I’m so bored … 
+NormalPawn2=No, don’t leave me alone!
+NormalPawn3=There’s so many bad guys!
+NormalPawn4=I must honour Super-Meh!
+NormalPawn5=Are you… Are you sure?
+NormalPawn6=I can do it too! Yeah?
+NormalPawn7=Brace yourselves, the Big Bad Guys!
+NormalPawn8=Come on… I can do it! I don’t want to disappoint Ufo 
+NormalPawn9=Laviraec is watching me?… I’ll give it all, then!
+NormalPawn10=Ruto gets my back… Let’s go!
+
+AttaquePawn1=Take this!
+AttaquePawn2=Oh ! Erm … Sorry, I guess?…
+AttaquePawn3=Super Giga punch!
+AttaquePawn4=Did you see? I got him!
+AttaquePawn5=I didn’t think I could make it… Phew
+
+NormalBishop1=Faster! We’re loosing points!!
+NormalBishop2=My moves are fast and precise!
+NormalBishop3=If we take this path, it’s an 82 % chance of winning
+NormalBishop4=Come on! I already know my next three moves…
+NormalBishop5=Come on, Poni! No slacking off! 
+NormalBishop6=Ruto, tell us what you see up there! 
+NormalBishop7=Attack him! He can’t stay in our way!
+NormalBishop8=Don’t push me, Laviraec ! You’ll break my glasses.
+NormalBishop9=Let me think… 87+ 156 …. times 13 … OK, this is doing well!
+NormalBishop10=Brains always win! Just like me!
+
+AttaqueBishop1=I don’t have time for you!
+AttaqueBishop2=Get out of my way, this is my 78th move.
+AttaqueBishop3=And you thought I couldn’t defend myself?
+AttaqueBishop4=Back to jail!
+AttaqueBishop5=I won’t let you hurt me
+
+NormalKnight1=I’m The Unpredictable!
+NormalKnight2=Stop doing maths, Ufo ! WE’RE GOING IN!
+NormalKnight3=I’m telling you, I’m way stronger than Super-Meh!
+NormalKnight4=Nobody can stop me!
+NormalKnight5=Hurry up, Ruto! We don’t have time for this! 
+NormalKnight6=Who let so much bad guys out?
+NormalKnight7=Let’s take a break… Nah, just kidding, LET’S GO! 
+NormalKnight8=He won’t be laughing so much when he’ll face me!
+NormalKnight9=The fight is close! I can feel it! 
+NormalKnight10=Come to me already! I was born ready!
+
+AttaqueKnight1=Finally, some action!
+AttaqueKnight2=And… Right hook! You asked for it.
+AttaqueKnight3=Here I come, straight behind you! 
+AttaqueKnight4=Take a deep breath… and now we beat them up! 
+AttaqueKnight5=Wait a second… Why is he already down?
+
+NormalRook1=I have sights on them! Hurry! 
+NormalRook2=The other side is close, we can do it! 
+NormalRook3=Wait! I think someone got rolled on ...
+NormalRook4=Oh, no! We have to rescue that poor cat! 
+NormalRook5=Don’t throw sand into my wheels, come on!
+NormalRook6=If only it was straight-forward….
+NormalRook7=Poni be careful… You’re not Super-Meh, you know…
+NormalRook8=Ufo can you craft me boosters? That’d be neat!
+NormalRook9=Watch out Laviraec! Behind you!
+NormalRook10=I’m still not used to drifting...
+
+AttaqueRook1=Hyperescape!!
+AttaqueRook2=Wheelcome to my world.
+AttaqueRook3=It’s all on tracks!
+AttaqueRook4=I’m glad I knew where you were.
+AttaqueRook5=I just wanna protect people…
+
+tuto1_1=So, I’ve heard you want to be a Hero, too! I’m very proud of you, but you need to be prepared, for this path will be long and difficult.
+tuto1_2=First of all, you’ll need to learn how to… run! Go to the blue square over there by clicking the pink ones around you. I’ll wait you there!
+
+tuto2_1=Ha, we meet again! I knew you’ll manage! Unfortunately, the path is crowded here. We’ll need a new kind of move… Lucky of you! You have your friends to help you through this adventure! 
+tuto2_2=I’m sure one of them will know how to solve the situation. Go to the blue square and give her the next turn.
+
+tuto2_3=What a fierce girl! Nice to meet you! Can you help us? Jump over that hole by using your knight’s “L” move, and go to the next blue square.
+
+tuto2_4=Well done! You must have noticed that a line just appeared above your head. It tells which one of you will play the next turns. \nBe sure to read it in order to prepare your future moves ahead.
+tuto2_5=There are four of you, you can practice here in this safe Zone. Join me on the other side of the purple line when you feel ready.
+
+tuto3_1=I hope you had fun back there! Things are going to be way more serious. \nIn real conditions, the stage will fall down behind you : you HAVE TO keep moving in order to survive. 
+tuto3_2=But between those two special lines, time will freeze and you can cool down the fever here. My pro tip : take this time to prepare your next turns by using all the information you can have! \nNow, go to the blue square a little further.
+
+tuto4_1=Look over there! Big Bad Guys!! If you don’t pay attention, they will attack you! I wrote you down the positions you don’t want to be. 
+tuto4_2=Approach your enemies and jump on them when you find an opportunity! Meet me again at the next blue square.
+
+tuto5_1=Hahaha! I knew you had it in you! You will be great Heroes! But as you know, the outside world is full of danger and you need protection... 
+tuto5_2=Hey, look just here : a Shield! It’s a strong ally in combat. Take it and walk in front of that enemy : let the shield protect you from his attack, then hit him back! I’ll be waiting for you over there.
+tuto5_3=
+
+tuto6_1=Congratulations! You nailed it! You are now officially true Heroes! \nWait a second… Is the stage’s already falling?? quick, run fast before it catches you up!!
+tuto6_2=We’ll meet again, fellow Heroes! You can do it!
+
+fr=FRENCH
+en=ENGLISH
+whichLevel=WHICH \N LEVEL?
+level=level
+tuto=tutorial

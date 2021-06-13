@@ -149,7 +149,8 @@ public class UIManager : MonoBehaviour
 
 	public void StopTimer()
 	{
-		StopCoroutine(timer);
+		if(timer != null)
+			StopCoroutine(timer);
 	}
 
 	private IEnumerator Timer()

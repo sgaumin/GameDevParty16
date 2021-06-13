@@ -1,0 +1,97 @@
+NormalPawn1=C'est bientôt à moi ? Je m'ennuie … 
+NormalPawn2=Non, ne me laissez pas seul !
+NormalPawn3=Il y a plein de méchants !
+NormalPawn4=Je ferai honneur à Super-Meh !
+NormalPawn5=Vous … vous êtes sûrs ?
+NormalPawn6=Moi aussi je peux faire comme vous !
+NormalPawn7=Les méchants n’ont qu’à bien se tenir !
+NormalPawn8=Je ne veux pas décevoir Ufo… Un peu de courage 
+NormalPawn9=Laviraec me regarde… Il faut tout donner !
+NormalPawn10=Ruto me couvre… En avant !
+
+AttaquePawn1=Prends ça !
+AttaquePawn2=Ah ! Euhh … Pardon je suppose ?…
+AttaquePawn3=Super Giga poing !
+AttaquePawn4=Vous avez vu ? je l’ai eu !
+AttaquePawn5=J’aurais jamais pensé réussir …
+
+NormalBishop1=Plus vite ! on va rater des points !
+NormalBishop2=Mes déplacements sont précis et rapides !
+NormalBishop3=Si on prend ce chemin on a 82 % de chance de réussir
+NormalBishop4=On avance ! Je connais déjà mes 3 prochains coups…
+NormalBishop5=Aller Poni ne traîne pas ! 
+NormalBishop6=Ruto dit moi ce que tu voies ! 
+NormalBishop7=Attaque-le ! Je ne veux pas qu’il nous gêne !
+NormalBishop8=Ne me pousse pas Laviraec ! Tu vas casser mes lunettes.
+NormalBishop9=Attends … 87+ 156 …. fois 13 … Ok on est sur la bonne voie !
+NormalBishop10=L’intelligence gagne toujours ! Comme moi !
+
+AttaqueBishop1=Je n’ai pas de temps à perdre avec toi !
+AttaqueBishop2=Tu gênais mon 78ème mouvement
+AttaqueBishop3=Tu pensais que je savais pas me défendre ?
+AttaqueBishop4=Retourne en prison !
+AttaqueBishop5=Je ne vous laisserai plus faire de mal !
+
+NormalKnight1=Aussi imprévisible que le feu !
+NormalKnight2=Arrête de compter Ufo ! ON FONCE !
+NormalKnight3=Je te dis que je suis plus fort que Super-Meh !
+NormalKnight4=Personne ne m’arrête !
+NormalKnight5=Ruto, avance ! on a pas le temps ! 
+NormalKnight6=Mais qui a laissé autant de Super Méchants sortir ?
+NormalKnight7=On fait une pause ? non je rigole, ON AVANCE ! 
+NormalKnight8=Il rigolera moins quand je lui serai tombée dessus !
+NormalKnight9=Le Combat approche ! Je le sens ! 
+NormalKnight10=Mais attaque-le ! Je n'attends que ça !
+
+AttaqueKnight1=Enfin de la Bagarre !
+AttaqueKnight2=Crochet du droit ! Tu l’as bien cherché.
+AttaqueKnight3=Hop ! dans ton dos ! 
+AttaqueKnight4=On souffle à fond et on va leur casser la bouche ! 
+AttaqueKnight5=Une petite seconde… Mince, il est déjà à terre ?
+
+NormalRook1=Je les vois là- bas ! Vite ! 
+NormalRook2=La sortie n'est pas loin ! on va y arriver ! 
+NormalRook3=Attendez j’ai écrasé un truc je crois ...
+NormalRook4=Oh non ! Vite ! Ils s’en prennent à un chat ! 
+NormalRook5=Ne me mettez pas de bâton dans les roues !
+NormalRook6=Si seulement c'était tout droit ….
+NormalRook7=Poni fait attention… Tu n’es pas Super-Meh…
+NormalRook8=Ufo tu voudrais pas m’ajouter des propulseurs ?
+NormalRook9=Attention Laviraec ! Derrière toi !
+NormalRook10=J’ai encore du mal à déraper …
+
+AttaqueRook1=Hyper Vitesse !
+AttaqueRook2=Je prends ta place, tu prends un handicap.
+AttaqueRook3=Pour moi tout roule !
+AttaqueRook4=Heureusement que je savais que tu étais là.
+AttaqueRook5=Je veux juste protéger les gens, moi …
+
+tuto1_1=Alors toi aussi tu espères devenir un héros ! Je suis fièr.e que tu choisisses cette voie, mais que le chemin que tu t'apprêtes à prendre et parsemé d'embûches !
+tuto1_2=Dans un premier temps, il va falloir que tu saches courir ! Déplace-toi jusqu’à la case bleue en cliquant sur les cases roses autour de toi ! Je t'attends là- bas
+
+tuto2_1=Ah, te voilà ! Je savais que tu y arriverais ! Malheureusement le chemin devant nous est encombré. Il faudrait pouvoir se déplacer différemment. 
+tuto2_2=Heureusement j’ai vu que tes amis t'accompagnent ! Je suis sûr.e que l’une d’eux pourra nous aider. Déplace-toi jusqu'à la case bleue et voyons avec elle.
+
+tuto2_3=En voilà une qui n’a pas froid aux yeux ! Tu vas pouvoir nous sortir de là ! Saute par-dessus le trou grâce à ton déplacement en L jusqu'à la case bleue plus loin.
+
+tuto2_4=Bien joué ! Tu as dû le remarquer, mais une barre au-dessus de ta tête est apparue ! Elle désigne laequel d’entre vous sera lae prochain.e à jouer. \nN'hésite pas à la consulter pour prévoir tes prochains mouvements.
+tuto2_5=En tout, vous êtes 4. Déplace-toi dans la Zone pour te faire au mouvement de chacun.e de tes allié.e.s, puis, quand tu te sentiras prêt, rejoins-moi de l’autre côté de la ligne violette.
+
+tuto3_1=J’espère que tu t’es bien amusé avec tes amis, mais c’est ici que tout va commencer. \nEn temps normal, le terrain derrière toi va s'écrouler. Il est donc impératif de réussir à t'enfuir !
+tuto3_2=Heureusement, quand tu te trouves dans des zones entre ces 2 lignes tu ne crains rien, tu peux prendre le temps de souffler et réfléchir à ton plan d’attaque. \nAvance jusqu'à la case bleue en face de nous.
+
+tuto4_1=Regarde, là-bas ! Des Super Méchants !! Si tu n’es pas prudent, ils n'hésiteront pas à t'attaquer ! Pour t’aider je t'ai indiqué sur la carte les zones dangereuses.
+tuto4_2=Rapproche toi d’eux et si tu en as l’occasion, saute leurs dessus pour leur régler leurs comptes ! Je t’attends à la prochaine case bleue.
+
+tuto5_1=Ahahah ! Je savais qu’un grand héros sommeillait en toi ! Mais comme tu le sais, un grand pouvoir implique de grands dangers ! C’est pour cela qu’il faut aussi savoir se protéger ! 
+tuto5_2=Regarde ! Devant nous il y a une case bouclier ! Il sera un allié puissant pour survivre. Il repoussera le prochain ennemi a t’attaquer ! 
+tuto5_3=Essaye donc avec ce méchant : équipe le bouclier, mets toi à portée de l’ennemi, regarde le rater son attaque puis profite-en pour l’attaquer ensuite ! Je t’attends de l’autre côté 
+
+tuto6_1=Bravo ! Tu as parfaitement compris comment devenir un vrai Héros ! Mais attends une seconde … Oh non ! Le sol commence à se détruire derrière nous ! 
+tuto6_2=Vite ! Toi et tes amis, courez vers la sortie avant que le sol ne nous rattrape ! \nEt n’oubliez surtout pas : Vous êtes des Héros !“
+
+fr=FRANCAIS
+en=ANGLAIS
+whichLevel=QUEL \N NIVEAU?
+level=niveau
+tuto=tutoriel
