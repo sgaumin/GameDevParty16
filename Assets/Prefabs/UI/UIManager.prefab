@@ -1990,6 +1990,7 @@ GameObject:
   - component: {fileID: 7956269528205337592}
   - component: {fileID: 4346123027272373854}
   - component: {fileID: 7684867144710922556}
+  - component: {fileID: 6194230297206011473}
   m_Layer: 5
   m_Name: badGuys
   m_TagString: Untagged
@@ -2053,6 +2054,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &6194230297206011473
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531099618867485442}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fcce87289b282504b9e8b4458cff57da, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1749070598067104596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2414,7 +2434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &691567770610772584
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7760,6 +7780,8 @@ MonoBehaviour:
   notificationAnim: {fileID: 41448838865091416}
   notificationText: {fileID: 7464219711001822881}
   notificationIcon: {fileID: 7715271901529329768}
+  nbAtack: 5
+  nbNormal: 10
   timeBetweenDialogues: 0
   nbMovesBeforeDialogue: 1
   pion: {fileID: 11400000, guid: ab063588658353a4ab989278e0ce522d, type: 2}
