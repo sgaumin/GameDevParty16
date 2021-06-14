@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	private Sprite GetSpriteByType(PieceType type)
+	public Sprite GetSpriteByType(PieceType type)
 	{
 		Sprite selectedSprite = null;
 

@@ -14,6 +14,10 @@ public class Player : Character
 	[SerializeField] private int piecesToShowInAdvance = 3;
 	[SerializeField] private bool hasShieldAtStart;
 
+	[Header("References")]
+	[SerializeField] private Image[] piecesList = new Image[4];
+	[SerializeField] private GameObject nextMoves;
+
 	private List<PieceType> types = new List<PieceType>();
 	private bool hasShield;
 
@@ -75,7 +79,7 @@ public class Player : Character
 			CurrentCell.ShowMovements(CurrentType, this);
 			SetIcon(CurrentType);
 			types.RemoveAt(0);
-			UIManager.Instance.DisplayPieces(types);
+			DisplayPieces(types);
 			UIManager.Instance.DisplayPortrait(CurrentType);
 		}
 	}
@@ -131,5 +135,19 @@ public class Player : Character
 		base.OnDestroy();
 		board.OnStartPlayerTurn -= AssignRandomType;
 		board.OnRefreshBoard -= RefreshMovements;
+	}
+
+	public void DisplayPieces(List<PieceType> types)
+	{
+		bool ShowPieceQueue = UIManager.Instance.ShowPieceQueue;
+		nextMoves.SetActive(ShowPieceQueue);
+		if (!ShowPieceQueue)
+			return;
+
+		int i = 0;
+		foreach (PieceType type in types)
+		{
+			piecesList[i++].sprite = UIManager.Instance.GetSpriteByType(type);
+		}
 	}
 }

@@ -6734,7 +6734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6499339972836489079
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7728,10 +7728,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070c7aa21cd5983428868d5aed34244a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pionSprite: {fileID: 21300000, guid: 341aa642a2cf53c4bbebb878b0b2ab56, type: 3}
-  fouSprite: {fileID: 21300000, guid: 60a4ae049d6fac1448691a44d56458bb, type: 3}
-  cavalierSprite: {fileID: 21300000, guid: 3fc4a05e22a998c47a8df488ee56581a, type: 3}
-  tourSprite: {fileID: 21300000, guid: f5312baa27ba4244fb740e28bd1b2f4d, type: 3}
+  pionSprite: {fileID: 21300000, guid: 8d79c9bc008f92741868118ea081d413, type: 3}
+  fouSprite: {fileID: 21300000, guid: acf150cf576207043a00dc92746ded01, type: 3}
+  cavalierSprite: {fileID: 21300000, guid: b9427766a6de4174197d4b26d5e91d31, type: 3}
+  tourSprite: {fileID: 21300000, guid: c4a767e42ca9c8e4f92a709306a86573, type: 3}
   pionPortraitSprite: {fileID: 21300000, guid: 39d00f021435819448cf23d54e58d0d6, type: 3}
   fouPortraitSprite: {fileID: 21300000, guid: 1efda5fbaf23f9445869a63336ebe9f3, type: 3}
   cavalierPortraitSprite: {fileID: 21300000, guid: 2b027db12b41dbf4492fb6b21da34083,
