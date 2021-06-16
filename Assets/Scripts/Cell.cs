@@ -12,7 +12,8 @@ public class Cell : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField] private bool isWin;
-	[SerializeField] private bool canFall;
+  [SerializeField] private bool giveShield;
+  [SerializeField] private bool canFall;
 	[SerializeField] private MarkNames mark = MarkNames.None;
 
 	[Header("References")]
@@ -61,6 +62,7 @@ public class Cell : MonoBehaviour
 
 	public MeshRenderer Model => model;
 	public GameObject Highlight => highlight;
+	public bool GiveShield => giveShield;
 	public bool IsWin => isWin;
 	public Player Piece { get; set; }
 	public MarkNames Mark

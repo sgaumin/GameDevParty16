@@ -346,7 +346,7 @@ MonoBehaviour:
   shieldMask: {fileID: 6215353188812632227}
   shieldImageMask: {fileID: 1884264385307720763}
   piecesToShowInAdvance: 3
-  hasShieldAtStart: 1
+  hasShieldAtStart: 0
   piecesList:
   - {fileID: 6806227322571795729}
   - {fileID: 2823593143334615686}

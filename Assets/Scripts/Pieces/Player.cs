@@ -35,7 +35,7 @@ public class Player : Character
 			if (shieldVfx != null)
 			{
 				shieldVfx.transform?.DOKill();
-				shieldVfx.transform.DOLocalMoveY(shieldVfx.transform.position.y + shieldMovementY, shieldMovementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(shieldMovementEase);
+				shieldVfx.transform.DOLocalMoveY(shieldVfx.transform.localPosition.y + shieldMovementY, shieldMovementDuration).SetLoops(-1, LoopType.Yoyo).SetEase(shieldMovementEase);
 			}
 		}
 	}
@@ -119,7 +119,10 @@ public class Player : Character
 
 		CurrentCell = cell;
 		board.UnselectAllCells();
-
+    if (CurrentCell.GiveShield && !HasShield)
+    {
+			HasShield = true;
+    }
 		if (CurrentCell.IsWin)
 		{
 			board.EndLevel(true);
