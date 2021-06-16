@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Cell : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class Cell : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField] private bool isWin;
-  [SerializeField] private bool giveShield;
-  [SerializeField] private bool canFall;
+	[SerializeField] private bool giveShield;
+	[SerializeField] private bool canFall;
 	[SerializeField] private MarkNames mark = MarkNames.None;
+	[SerializeField] private bool eventExecutedOnlyOnce;
+	[SerializeField] private UnityEvent cellEvent;
 
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
@@ -60,6 +63,7 @@ public class Cell : MonoBehaviour
 	private Enemy enemyOnTop;
 	private Coroutine falling;
 
+	public UnityEvent CellEvent => cellEvent;
 	public MeshRenderer Model => model;
 	public GameObject Highlight => highlight;
 	public bool GiveShield => giveShield;
@@ -147,6 +151,14 @@ public class Cell : MonoBehaviour
 	public Vector3 CharacterPosition => characterPosition.transform.position;
 	public Vector3 EffectPosition => effectPosition.transform.position;
 
+	protected void Awake()
+	{
+		if (eventExecutedOnlyOnce)
+		{
+			cellEvent.AddListener(() => cellEvent = null);
+		}
+	}
+
 	public void Init()
 	{
 		DefineCellLinks();
@@ -165,7 +177,7 @@ public class Cell : MonoBehaviour
 		}
 		else
 		{
-			model.material = (transform.position.x + transform.position.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
+			model.material = (transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
 		}
 	}
 

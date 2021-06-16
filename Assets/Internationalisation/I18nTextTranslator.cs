@@ -1,35 +1,31 @@
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 public class I18nTextTranslator : MonoBehaviour
 {
-    public string TextId;
-    //private Text text;
-    private TextMeshProUGUI text;
+	public string TextId;
 
-    // Use this for initialization
-    private void Awake()
-    {
-        Debug.Log($"I18nTextTranslator awake: {MenuOptionsController.Instance}");
-        MenuOptionsController.Instance.onLanguageChanged += SetText;
-        text = GetComponent<TextMeshProUGUI>();
-        SetText();
-    }
+	private TextMeshProUGUI text;
 
-    private void SetText()
-    {
-        Debug.Log($"ici: {text == null}");
-        if (text != null)
-            if(TextId == "ISOCode")
-                text.text = I18n.GetLanguage();
-            else
-                text.text = I18n.Fields[TextId];
-    }
+	private void Awake()
+	{
+		MenuOptionsController.Instance.onLanguageChanged += SetText;
+	}
 
-    private void OnDisable()
-    {
-        MenuOptionsController.Instance.onLanguageChanged -= SetText;
-    }
+	protected void Start()
+	{
+		text = GetComponent<TextMeshProUGUI>();
+		SetText();
+	}
 
+	private void SetText()
+	{
+		if (text != null)
+			text.text = I18n.Fields[TextId];
+	}
+
+	private void OnDisable()
+	{
+		MenuOptionsController.Instance.onLanguageChanged -= SetText;
+	}
 }

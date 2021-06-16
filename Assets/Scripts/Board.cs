@@ -15,10 +15,20 @@ public struct MarkType
 }
 
 [System.Serializable]
-public struct BoardEvent
+public class BoardEvent
 {
 	[IntRangeSlider(0, 100)] public IntRange RowIndex;
 	public UnityEvent Event;
+	public int ExecutionTime;
+
+	public void Execute()
+	{
+		if (ExecutionTime == 0)
+			return;
+
+		Event?.Invoke();
+		ExecutionTime--;
+	}
 }
 
 public class Board : MonoBehaviour
@@ -141,10 +151,9 @@ public class Board : MonoBehaviour
 	private void TriggerEvents()
 	{
 		List<BoardEvent> eventsToTrigger = events.Where(x => x.RowIndex.Contains((int)Player.CurrentCell.transform.position.z)).ToList();
-		foreach (BoardEvent b in eventsToTrigger)
-		{
-			b.Event?.Invoke();
-		}
+		eventsToTrigger.ForEach(x => x.Execute());
+		Player.CurrentCell.CellEvent?.Invoke();
+
 		BoardState = BoardStates.StartPlayerTurn;
 	}
 
@@ -440,10 +449,25 @@ public class Board : MonoBehaviour
 		cells.Where(x => x != cell).ForEach(x => x.State = CellState.Unselected);
 	}
 
+	public void ShowInstructions(string translationKeys)
+	{
+		string[] keys = translationKeys.Split(',');
+		UIManager.Instance.DisplayTutorialInstruction(keys);
+	}
+
 	[ContextMenu("Reset Mark")]
 	public void ResetMarks()
 	{
 		GetComponentsInChildren<Cell>().ForEach(x => x.Mark = MarkNames.None);
+	}
+
+	[ContextMenu("Reorder Cell")]
+	public void ReorderCell()
+	{
+		List<Cell> cells = GetComponentsInChildren<Cell>().ToList();
+		cells.ForEach(x => x.name = $"({x.transform.localPosition.z},{x.transform.localPosition.x})");
+		cells = cells.OrderBy(x => x.transform.localPosition.z).ThenBy(x => x.transform.localPosition.x).ToList();
+		cells.ForEach(x => x.transform.SetAsLastSibling());
 	}
 
 	private void OnDestroy()

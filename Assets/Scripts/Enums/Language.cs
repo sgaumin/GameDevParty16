@@ -1,5 +1,6 @@
 ﻿public enum Language
 {
-    FR,
-    EN
+	FR,
+	EN,
+	NONE
 }

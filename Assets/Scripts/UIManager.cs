@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -41,6 +40,7 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private DialoguesController dialoguesController;
 	[SerializeField] private GameObject nextMoves;
 	[SerializeField] private GameObject optionMenu;
+	[SerializeField] private TutorialScreenPopup tutorialScreenPopup;
 
 	private PieceType previousType;
 	private int timerValue;
@@ -133,9 +133,9 @@ public class UIManager : MonoBehaviour
 	}
 
 	public void ContinueTimer()
-    {
+	{
 		StartTimer(timerValue);
-    }
+	}
 
 	public void StartTimer(int value)
 	{
@@ -149,7 +149,7 @@ public class UIManager : MonoBehaviour
 
 	public void StopTimer()
 	{
-		if(timer != null)
+		if (timer != null)
 			StopCoroutine(timer);
 	}
 
@@ -173,6 +173,13 @@ public class UIManager : MonoBehaviour
 				break;
 			}
 		}
+	}
+
+	public void DisplayTutorialInstruction(string[] keys)
+	{
+		tutorialScreenPopup.gameObject.SetActive(false);
+		tutorialScreenPopup.gameObject.FadIn(0.2f);
+		tutorialScreenPopup.SetDialogueText(keys);
 	}
 
 	public void DisplayGameOver()
@@ -210,7 +217,7 @@ public class UIManager : MonoBehaviour
 	}
 
 	public void OpenOptions()
-    {
+	{
 		optionMenu.SetActive(true);
 	}
 

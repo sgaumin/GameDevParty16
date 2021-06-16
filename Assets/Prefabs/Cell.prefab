@@ -264,15 +264,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWin: 0
-  winEffect: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+  giveShield: 0
+  canFall: 0
+  mark: 5
+  eventExecutedOnlyOnce: 1
+  cellEvent:
+    m_PersistentCalls:
+      m_Calls: []
   cellMask:
     serializedVersion: 2
     m_Bits: 256
   model: {fileID: 6626758957874410945}
-  groundMaterials:
-  - {fileID: 2100000, guid: 2aa149fd5031dc7469b38300d6167c32, type: 2}
-  - {fileID: 2100000, guid: 2b1a2da8816eac24885ebb5c52e80a1c, type: 2}
-  - {fileID: 2100000, guid: b62177bf2ae350844aa0b0178de13069, type: 2}
   highlight: {fileID: 397962746239420011}
   highlightMaterial: {fileID: 2100000, guid: 32e5dffd08acb4c4e997e6524c0e06f4, type: 2}
   highlightSelectedMaterial: {fileID: 2100000, guid: 2d16c599ba9fe0f4ca95a20c6754f659,
@@ -281,6 +283,14 @@ MonoBehaviour:
     type: 2}
   characterPosition: {fileID: 5984557096296291449}
   effectPosition: {fileID: 9181377872557047252}
+  winEffect: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}
+  groundMaterials:
+  - {fileID: 2100000, guid: 2aa149fd5031dc7469b38300d6167c32, type: 2}
+  - {fileID: 2100000, guid: 2b1a2da8816eac24885ebb5c52e80a1c, type: 2}
+  - {fileID: 2100000, guid: b62177bf2ae350844aa0b0178de13069, type: 2}
+  timeBeforeRowDeletion: 1.4
+  fadDestroyingCellDuration: 0.09
+  offsetYDestroyingCell: -1.5
 --- !u!1 &8909745489438822430
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,31 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 using TMPro;
+using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using System;
 
 public class MenuOptionsController : MonoBehaviour
 {
-    public static MenuOptionsController Instance { get; private set; }
+	public static MenuOptionsController Instance { get; private set; }
 
-    [Header("UI Elements")]
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [SerializeField] private Slider sliderVolumeMusic;
-    [SerializeField] private Slider sliderVolumeSFX;
-    [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Toggle toggleFr;
-    [SerializeField] private Toggle toggleEn;
+	[Header("UI Elements")]
+	[SerializeField] private TMP_Dropdown resolutionDropdown;
+	[SerializeField] private Slider sliderVolumeMusic;
+	[SerializeField] private Slider sliderVolumeSFX;
+	[SerializeField] private AudioMixer audioMixer;
+	[SerializeField] private Toggle toggleFr;
+	[SerializeField] private Toggle toggleEn;
 
 
-    public Action onLanguageChanged;
+	public Action onLanguageChanged;
 
-    Resolution[] resolutions;
+	Resolution[] resolutions;
 
-    private void Awake()
-    {
-        Instance = this;
+	private void Awake()
+	{
+		Instance = this;
 #if UNITY_WEBGL
 #else
         // Résolutio
@@ -48,104 +46,102 @@ public class MenuOptionsController : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
 #endif
 
-        // Volumes
-        sliderVolumeSFX.value = GameData.VolumeSFX;
-        sliderVolumeMusic.value = GameData.VolumeMusic;
+		// Volumes
+		sliderVolumeSFX.value = GameData.VolumeSFX;
+		sliderVolumeMusic.value = GameData.VolumeMusic;
 
-        // Language
-        Language lang = (Language)Enum.Parse(typeof(Language), GameData.Language);
-        Debug.Log($"{lang}");
-        switch (lang)
-        {
-            case Language.FR:
-                toggleFr.Select();
-                break;
-            case Language.EN:
-                toggleEn.Select();
-                break;
-        }
-    }
+		// Language
+		Language lang = (Language)Enum.Parse(typeof(Language), GameData.Language);
+		Debug.Log($"{lang}");
+		switch (lang)
+		{
+			case Language.FR:
+				toggleFr.Select();
+				break;
+			case Language.EN:
+				toggleEn.Select();
+				break;
+		}
+	}
 
-    private void OnEnable()
-    {
-        // Language
-        Language lang = (Language)Enum.Parse(typeof(Language), GameData.Language);
-        switch (lang)
-        {
-            case Language.FR:
-                toggleFr.Select();
-                break;
-            case Language.EN:
-                toggleEn.Select();
-                break;
-        }
-        if (LevelController.Instance != null)
-        {
-            Board board = LevelController.Instance.LevelBoard;
-            board.StopAutoDeletionRows();
-            board.DisableInput();
-        }
-        if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
-        {
-            UIManager.Instance.StopTimer();
-        }
-    }
+	private void OnEnable()
+	{
+		// Language
+		Language lang = (Language)Enum.Parse(typeof(Language), GameData.Language);
+		switch (lang)
+		{
+			case Language.FR:
+				toggleFr.Select();
+				break;
+			case Language.EN:
+				toggleEn.Select();
+				break;
+		}
+		if (LevelController.Instance != null)
+		{
+			Board board = LevelController.Instance.LevelBoard;
+			board.StopAutoDeletionRows();
+			board.DisableInput();
+		}
+		if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
+		{
+			UIManager.Instance.StopTimer();
+		}
+	}
 
-    public void SetVolumeMusic(float volume)
-    {
-        audioMixer.SetFloat("musicVolume", volume);
-        GameData.VolumeMusic = volume;
-    }
+	public void SetVolumeMusic(float volume)
+	{
+		audioMixer.SetFloat("musicVolume", volume);
+		GameData.VolumeMusic = volume;
+	}
 
-    public void SetVolumeSFX(float volume)
-    {
-        audioMixer.SetFloat("sfxVolume", volume);
-        GameData.VolumeSFX = volume;
-    }
+	public void SetVolumeSFX(float volume)
+	{
+		audioMixer.SetFloat("sfxVolume", volume);
+		GameData.VolumeSFX = volume;
+	}
 
-    public void SetResolution(int resolutionId)
-    {
+	public void SetResolution(int resolutionId)
+	{
 
-        Resolution resolution = resolutions[resolutionId];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
+		Resolution resolution = resolutions[resolutionId];
+		Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+	}
 
-    public void SetFullScreen(bool fullSceen)
-    {
-        Screen.fullScreen = fullSceen;
-    }
+	public void SetFullScreen(bool fullSceen)
+	{
+		Screen.fullScreen = fullSceen;
+	}
 
-    public void SetLanguage(string language)
-    {
-        Language lang = (Language)Enum.Parse(typeof(Language), language);
-        GameData.Language = Enum.GetName(typeof(Language), lang);
-        switch (lang)
-        {
-            case Language.FR:
-                break;
-            case Language.EN:
-                break;
-            default:
-                break;
-        }
-        Debug.Log($"ICI: {GameData.Language}");
-        I18n.LoadLanguageFromGameData();
-        onLanguageChanged?.Invoke();
-        //GameData.Language = Enum.GetName(typeof(Language), lang);
-    }
+	public void SetFrenchLanguage()
+	{
+		SetLanguage(Language.FR);
+	}
 
-    public void Quit()
-    {
-        if(LevelController.Instance != null)
-        {
-            Board board = LevelController.Instance.LevelBoard;
-            board.StartAutoDeletionRows();
-            board.AllowInput();
-        }
-        if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
-        {
-            UIManager.Instance.ContinueTimer();
-        }
-        this.gameObject.SetActive(false);
-    }
+	public void SetEnglishLanguage()
+	{
+		SetLanguage(Language.EN);
+	}
+
+	private void SetLanguage(Language language)
+	{
+		GameData.Language = language.ToString();
+		I18n.LoadLanguageFromGameData(language);
+		onLanguageChanged?.Invoke();
+	}
+
+	public void Quit()
+	{
+		if (LevelController.Instance != null)
+		{
+			Board board = LevelController.Instance.LevelBoard;
+			board.StartAutoDeletionRows();
+			board.AllowInput();
+		}
+		if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
+		{
+			UIManager.Instance.ContinueTimer();
+		}
+		this.gameObject.SetActive(false);
+	}
 }
