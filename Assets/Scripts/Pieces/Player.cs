@@ -119,10 +119,11 @@ public class Player : Character
 
 		CurrentCell = cell;
 		board.UnselectAllCells();
-    if (CurrentCell.GiveShield && !HasShield)
-    {
+		if (CurrentCell.GiveShield && !HasShield)
+		{
 			HasShield = true;
-    }
+			CurrentCell.GiveShield = false;
+		}
 		if (CurrentCell.IsWin)
 		{
 			board.EndLevel(true);

@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 using Tools;
+using UnityEngine;
 using UnityEngine.Audio;
 
 public class MainMenuController : GameSystem
@@ -84,9 +84,4 @@ public class MainMenuController : GameSystem
 			}));
 		}
 	}
-
-	public void OpenOptions()
-    {
-		this.OptionUi.gameObject.SetActive(true);
-    }
 }

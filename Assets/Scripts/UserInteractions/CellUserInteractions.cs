@@ -6,7 +6,7 @@ public class CellUserInteractions : MonoBehaviour
 
 	private void OnMouseOver()
 	{
-		if (cell.State == CellState.Highlighted)
+		if (cell.State == CellState.Highlighted && LevelController.Instance.GameState == GameStates.Play)
 		{
 			cell.State = CellState.Selected;
 		}
@@ -14,7 +14,7 @@ public class CellUserInteractions : MonoBehaviour
 
 	private void OnMouseExit()
 	{
-		if (cell.State == CellState.Selected)
+		if (cell.State == CellState.Selected && LevelController.Instance.GameState == GameStates.Play)
 		{
 			cell.State = CellState.Highlighted;
 		}
@@ -22,7 +22,7 @@ public class CellUserInteractions : MonoBehaviour
 
 	private void OnMouseUp()
 	{
-		if (cell.State != CellState.Unselected)
+		if (cell.State != CellState.Unselected && LevelController.Instance.GameState == GameStates.Play)
 		{
 			cell.State = CellState.Cliqued;
 		}

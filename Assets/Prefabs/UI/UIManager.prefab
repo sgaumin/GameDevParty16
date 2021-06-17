@@ -423,8 +423,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3030167775248291442}
-        m_MethodName: OpenOptions
+      - m_Target: {fileID: 2102271747308692109}
+        m_MethodName: Show
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7905,7 +7905,6 @@ MonoBehaviour:
   winController: {fileID: 779425758751662308}
   dialoguesController: {fileID: 8248661699243407027}
   nextMoves: {fileID: 7377298235522793627}
-  optionMenu: {fileID: 6830276202423073261}
   tutorialScreenPopup: {fileID: 5547940642419313918}
 --- !u!114 &8248661699243407027
 MonoBehaviour:
@@ -9096,7 +9095,7 @@ PrefabInstance:
     - target: {fileID: 6882164326461941119, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8598340721833809219, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
@@ -9105,15 +9104,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bce22768d27564f47a65588a6b539137, type: 3}
---- !u!1 &6830276202423073261 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6882164326461941119, guid: bce22768d27564f47a65588a6b539137,
-    type: 3}
-  m_PrefabInstance: {fileID: 92429316882308242}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6830276202423073233 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6882164326461941059, guid: bce22768d27564f47a65588a6b539137,
     type: 3}
   m_PrefabInstance: {fileID: 92429316882308242}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2102271747308692109 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2045930543630433823, guid: bce22768d27564f47a65588a6b539137,
+    type: 3}
+  m_PrefabInstance: {fileID: 92429316882308242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbb76fa14e5c8a48a73c0aef12c7892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

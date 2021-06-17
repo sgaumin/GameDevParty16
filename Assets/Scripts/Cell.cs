@@ -13,11 +13,16 @@ public class Cell : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField] private bool isWin;
-	[SerializeField] private bool giveShield;
+	[SerializeField] private bool giveShieldOnStart;
 	[SerializeField] private bool canFall;
 	[SerializeField] private MarkNames mark = MarkNames.None;
 	[SerializeField] private bool eventExecutedOnlyOnce;
 	[SerializeField] private UnityEvent cellEvent;
+
+	[Header("Animations")]
+	[SerializeField] private float timeBeforeRowDeletion = 1.4f;
+	[SerializeField] private float fadDestroyingCellDuration = 0.09f;
+	[SerializeField] private float offsetYDestroyingCell = -1.5f;
 
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
@@ -30,11 +35,7 @@ public class Cell : MonoBehaviour
 	[SerializeField] private Transform effectPosition;
 	[SerializeField] private GameObject winEffect;
 	[SerializeField] private Material[] groundMaterials = new Material[2];
-
-	[Header("Animations")]
-	[SerializeField] private float timeBeforeRowDeletion = 1.4f;
-	[SerializeField] private float fadDestroyingCellDuration = 0.09f;
-	[SerializeField] private float offsetYDestroyingCell = -1.5f;
+	[SerializeField] private Canvas shieldIcon;
 
 	private GameObject effect;
 	private CellState state;
@@ -62,11 +63,20 @@ public class Cell : MonoBehaviour
 	private Cell cellKnightLeftDown;
 	private Enemy enemyOnTop;
 	private Coroutine falling;
+	private bool giveShield;
 
 	public UnityEvent CellEvent => cellEvent;
 	public MeshRenderer Model => model;
 	public GameObject Highlight => highlight;
-	public bool GiveShield => giveShield;
+	public bool GiveShield
+	{
+		get => giveShield;
+		set
+		{
+			giveShield = value;
+			shieldIcon.gameObject.SetActive(giveShield);
+		}
+	}
 	public bool IsWin => isWin;
 	public Player Piece { get; set; }
 	public MarkNames Mark
@@ -161,8 +171,14 @@ public class Cell : MonoBehaviour
 
 	public void Init()
 	{
+		GiveShield = giveShieldOnStart;
 		DefineCellLinks();
 		State = CellState.Unselected;
+
+		if (effect != null)
+		{
+			Destroy(effect.gameObject);
+		}
 
 		if (isWin)
 		{
@@ -170,6 +186,10 @@ public class Cell : MonoBehaviour
 			effect = Instantiate(winEffect);
 			effect.transform.position = EffectPosition;
 			effect.transform.SetParent(transform);
+		}
+		if (GiveShield)
+		{
+			model.material = groundMaterials[3];
 		}
 		else if (mark != MarkNames.None && LevelController.Instance.LevelBoard.ShowMarkers)
 		{

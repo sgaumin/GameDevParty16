@@ -24,6 +24,7 @@ public class TutorialScreenPopup : MonoBehaviour
 
 	public void SetDialogueText(string[] keys)
 	{
+		LevelController.Instance.GameState = GameStates.Pause;
 		image.raycastTarget = true;
 		keysToTranslate = keys.ToList();
 		ShowNextPage();
@@ -78,6 +79,7 @@ public class TutorialScreenPopup : MonoBehaviour
 			OnClose?.Invoke();
 			gameObject.FadOut(fadeDuration);
 			image.raycastTarget = false;
+			LevelController.Instance.GameState = GameStates.Play;
 		}
 	}
 }

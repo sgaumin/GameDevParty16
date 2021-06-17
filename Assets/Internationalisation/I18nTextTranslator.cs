@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class I18nTextTranslator : MonoBehaviour
 {
 	public string TextId;
 
-	private TextMeshProUGUI text;
+	private TextMeshProUGUI tmpText;
+	private Text plainText;
 
 	private void Awake()
 	{
@@ -14,17 +16,20 @@ public class I18nTextTranslator : MonoBehaviour
 
 	protected void Start()
 	{
-		text = GetComponent<TextMeshProUGUI>();
+		tmpText = GetComponent<TextMeshProUGUI>();
+		plainText = GetComponent<Text>();
 		SetText();
 	}
 
 	private void SetText()
 	{
-		if (text != null)
-			text.text = I18n.Fields[TextId];
+		if (tmpText != null)
+			tmpText.text = I18n.Fields[TextId];
+		else if (plainText != null)
+			plainText.text = I18n.Fields[TextId];
 	}
 
-	private void OnDisable()
+	private void OnDestroy()
 	{
 		MenuOptionsController.Instance.onLanguageChanged -= SetText;
 	}

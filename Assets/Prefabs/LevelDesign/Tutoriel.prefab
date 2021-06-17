@@ -4903,6 +4903,11 @@ PrefabInstance:
       propertyPath: mark
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShieldOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
       propertyPath: m_RootOrder
@@ -12992,6 +12997,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mark
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
@@ -23163,6 +23173,11 @@ PrefabInstance:
       propertyPath: mark
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShieldOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
       propertyPath: m_RootOrder
@@ -28612,6 +28627,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mark
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
@@ -51373,6 +51393,11 @@ PrefabInstance:
       propertyPath: mark
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
       propertyPath: m_RootOrder
@@ -60588,6 +60613,11 @@ PrefabInstance:
       propertyPath: mark
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
       propertyPath: m_RootOrder
@@ -62874,6 +62904,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mark
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
@@ -70239,6 +70274,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mark
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
@@ -79050,6 +79090,11 @@ PrefabInstance:
       propertyPath: mark
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
       propertyPath: m_RootOrder
@@ -83940,6 +83985,11 @@ PrefabInstance:
       propertyPath: mark
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
       propertyPath: m_RootOrder
@@ -88099,6 +88149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mark
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: giveShield
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}

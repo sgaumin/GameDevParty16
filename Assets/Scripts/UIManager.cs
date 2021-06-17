@@ -39,7 +39,6 @@ public class UIManager : MonoBehaviour
 	[SerializeField] private UIScoreController winController;
 	[SerializeField] private DialoguesController dialoguesController;
 	[SerializeField] private GameObject nextMoves;
-	[SerializeField] private GameObject optionMenu;
 	[SerializeField] private TutorialScreenPopup tutorialScreenPopup;
 
 	private PieceType previousType;
@@ -214,11 +213,6 @@ public class UIManager : MonoBehaviour
 		//yield return new WaitForSeconds(0.2f);
 		scoreUI.gameObject.SetActive(true);
 		scoreUI.FadIn(0.5f);
-	}
-
-	public void OpenOptions()
-	{
-		optionMenu.SetActive(true);
 	}
 
 	private void Update()
