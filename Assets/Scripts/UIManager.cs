@@ -217,7 +217,7 @@ public class UIManager : MonoBehaviour
 
 	private void Update()
 	{
-		if (winUI.active)
+		if (winUI.activeSelf)
 		{
 			if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
 			{
