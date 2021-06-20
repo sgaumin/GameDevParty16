@@ -1,15 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Character
 {
 	[SerializeField] public PieceType type;
 
+	[SerializeField] private OnomatopeController onomatope;
+
 	private Player playerTarget;
 
 	public static bool attackPlayer = false;
 
 	public SoundData playerKilledSound;
+
+	public Coroutine killCoroutine;
 
 	protected override void Awake()
 	{
@@ -48,6 +53,16 @@ public class Enemy : Character
 
 	public override void Kill()
 	{
+		//onomatope.Display();
+		//      board.Enemies.Remove(this);
+		//      base.Kill();
+		killCoroutine = StartCoroutine(KillCoroutine());
+    }
+
+	private IEnumerator KillCoroutine()
+    {
+		onomatope.Display();
+		yield return new WaitForSeconds(onomatope.ScaleDuration);
 		board.Enemies.Remove(this);
 		base.Kill();
 	}
