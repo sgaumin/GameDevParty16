@@ -45,6 +45,8 @@ public class Board : MonoBehaviour
 	[Space]
 	[SerializeField] private bool showMarkers;
 	[SerializeField] private List<MarkType> marks = new List<MarkType>();
+	[Space]
+	[SerializeField] private float freezeDuration = 3.0f;
 
 	[Header("Animations")]
 	[SerializeField] private float fadDestroyingCellDuration = 0.01f;
@@ -64,6 +66,8 @@ public class Board : MonoBehaviour
 	private float positionPercentage;
 	private float currentRowDeletionAmount;
 
+	private Coroutine freeze;
+
 	public SoundData killSound;
 	public SoundData playerKilledSound;
 	public SoundData winSound;
@@ -74,6 +78,7 @@ public class Board : MonoBehaviour
 	public Action OnEndPlayerTurn;
 	public Action OnEndLevel;
 	public Action OnRefreshBoard;
+	public Action<FreezeState> OnFreeze;
 
 	public Player Player { get; set; }
 	public List<Enemy> Enemies
@@ -270,6 +275,46 @@ public class Board : MonoBehaviour
 			CheckRowDeletion();
 		}
 	}
+
+	public void StartFreeze()
+    {
+		//freeze = StartCoroutine(Freeze());
+    }
+
+	public void StopFreeze()
+    {
+   //     if (freeze != null)
+   //     {
+			//StopCoroutine(freeze);
+   //     }
+    }
+
+	public void Freeze()
+    {
+		this.StopAutoDeletionRows();
+		UIManager.Instance.StopTimer();
+	}
+
+	public void UnFreeze()
+    {
+		this.StartAutoDeletionRows();
+		UIManager.Instance.ContinueTimer();
+	}
+
+	//private IEnumerator Freeze()
+	//{
+	//    this.StopAutoDeletionRows();
+	//    UIManager.Instance.StopTimer();
+	//    OnFreeze?.Invoke(FreezeState.Start);
+	//    yield return new WaitForSeconds(freezeDuration / 3.0f);
+	//    OnFreeze?.Invoke(FreezeState.Middle);
+	//    yield return new WaitForSeconds(freezeDuration / 3.0f);
+	//    OnFreeze?.Invoke(FreezeState.Ending);
+	//    yield return new WaitForSeconds(freezeDuration / 3.0f);
+	//    OnFreeze?.Invoke(FreezeState.Off);
+	//    this.StartAutoDeletionRows();
+	//    UIManager.Instance.ContinueTimer();
+	//}
 
 	public void ResetBoard()
 	{

@@ -100,8 +100,11 @@ public class Player : Character
 	protected override void DoActionBeforeMoving(Cell cell)
 	{
 		base.DoActionBeforeMoving(cell);
-
 		board.PlayerSelectedCell();
+        if (CurrentCell.Freeze)
+        {
+			CurrentCell.StopFreeze();
+        }
 	}
 
 	protected override void DoActionAfterMoving(Cell cell)
@@ -124,6 +127,11 @@ public class Player : Character
 			HasShield = true;
 			CurrentCell.GiveShield = false;
 		}
+        if (CurrentCell.Freeze)
+        {
+			CurrentCell.BeginFreeze();
+			board.StartFreeze();
+        }
 		if (CurrentCell.IsWin)
 		{
 			board.EndLevel(true);

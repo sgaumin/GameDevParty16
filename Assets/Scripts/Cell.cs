@@ -14,10 +14,13 @@ public class Cell : MonoBehaviour
 	[Header("Settings")]
 	[SerializeField] private bool isWin;
 	[SerializeField] private bool giveShieldOnStart;
+	[SerializeField] private bool isFreeze;
 	[SerializeField] private bool canFall;
 	[SerializeField] private MarkNames mark = MarkNames.None;
 	[SerializeField] private bool eventExecutedOnlyOnce;
 	[SerializeField] private UnityEvent cellEvent;
+	[Space]
+	[SerializeField] private float freezeTotalDuration = 3.0f;
 
 	[Header("Animations")]
 	[SerializeField] private float timeBeforeRowDeletion = 1.4f;
@@ -36,6 +39,7 @@ public class Cell : MonoBehaviour
 	[SerializeField] private GameObject winEffect;
 	[SerializeField] private Material[] groundMaterials = new Material[2];
 	[SerializeField] private Canvas shieldIcon;
+	[SerializeField] private Canvas freezeIcon;
 
 	private GameObject effect;
 	private CellState state;
@@ -64,6 +68,12 @@ public class Cell : MonoBehaviour
 	private Enemy enemyOnTop;
 	private Coroutine falling;
 	private bool giveShield;
+	
+	private bool freeze;
+	private float freezeTimesRemaining;
+    private float freezeTimesStep = 0.5f;
+    private FreezeState currentFreezeState = FreezeState.Off;
+	private Coroutine freezeCoroutine;
 
 	public UnityEvent CellEvent => cellEvent;
 	public MeshRenderer Model => model;
@@ -75,6 +85,56 @@ public class Cell : MonoBehaviour
 		{
 			giveShield = value;
 			shieldIcon.gameObject.SetActive(giveShield);
+		}
+	}
+	public bool Freeze
+	{
+		get => freeze;
+		set
+		{
+			freezeIcon.gameObject.SetActive(value);
+            if (freeze && !value && !isWin && !giveShieldOnStart)
+            {
+				model.material = GetDefaultMaterial();
+				CurrentFreezeState = FreezeState.Off;
+			}
+			freeze = value;
+		}
+	}
+	public float FreezeTimesRemaining
+    {
+		get => freezeTimesRemaining;
+		set
+        {
+			freezeTimesRemaining = value;
+			float percentTimeRemaining = (freezeTimesRemaining * 100.0f) / freezeTotalDuration;
+			Debug.Log($"FreezeTime: {freezeTimesRemaining} - {freezeTotalDuration} -> {percentTimeRemaining}");
+            if (percentTimeRemaining > 66.0f)
+            {
+				CurrentFreezeState = FreezeState.Start;
+            }
+            else if (percentTimeRemaining > 33.0f)
+            {
+				CurrentFreezeState = FreezeState.Middle;
+            }
+			else if (percentTimeRemaining > 0.0f)
+			{
+				CurrentFreezeState = FreezeState.Ending;
+            }
+            else
+            {
+				CurrentFreezeState = FreezeState.Off;
+            }
+		}
+    }
+	public FreezeState CurrentFreezeState
+    {
+		get => currentFreezeState;
+		set
+        {
+			Debug.Log($"Freeze State: {currentFreezeState}");
+			currentFreezeState = value;
+			LevelController.Instance.LevelBoard.OnFreeze?.Invoke(currentFreezeState);
 		}
 	}
 	public bool IsWin => isWin;
@@ -172,6 +232,7 @@ public class Cell : MonoBehaviour
 	public void Init()
 	{
 		GiveShield = giveShieldOnStart;
+		Freeze = isFreeze;
 		DefineCellLinks();
 		State = CellState.Unselected;
 
@@ -191,14 +252,25 @@ public class Cell : MonoBehaviour
 		{
 			model.material = groundMaterials[3];
 		}
+		if (Freeze)
+        {
+			model.material = groundMaterials[4];
+        }
 		else if (mark != MarkNames.None && LevelController.Instance.LevelBoard.ShowMarkers)
 		{
 			model.material = LevelController.Instance.LevelBoard.Marks.Where(x => x.Name == mark).FirstOrDefault().Material;
 		}
 		else
 		{
-			model.material = (transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
+			model.material = GetDefaultMaterial();
+				//(transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
 		}
+	}
+
+	private Material GetDefaultMaterial()
+    {
+		return (transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
+
 	}
 
 	public void DefineCellLinks()
@@ -583,6 +655,52 @@ public class Cell : MonoBehaviour
 		Model.material.DOColor(Model.material.color.WithAlpha(0f), fadDestroyingCellDuration).SetEase(Ease.OutCubic);
 		transform.DOMoveY(-offsetYDestroyingCell, fadDestroyingCellDuration).SetRelative().SetEase(Ease.OutBack);
 		yield return new WaitForSeconds(fadDestroyingCellDuration);
+	}
+
+	public void ContinueFreeze()
+	{
+		if (!isFreeze)
+			return;
+		StartFreeze(freezeTimesRemaining);
+	}
+
+	public void BeginFreeze()
+    {
+		StartFreeze(freezeTotalDuration);
+    }
+
+	public void StartFreeze(float value)
+	{
+		if (!isFreeze)
+			return;
+		FreezeTimesRemaining = value;
+		freezeCoroutine = StartCoroutine(FreezeTimer());
+	}
+
+	public void StopFreeze()
+	{
+		Freeze = false;
+		LevelController.Instance.LevelBoard.UnFreeze();
+		if (freezeCoroutine != null)
+			StopCoroutine(freezeCoroutine);
+	}
+
+	public void PauseFreeze()
+    {
+		if (freezeCoroutine != null)
+			StopCoroutine(freezeCoroutine);
+	}
+
+	private IEnumerator FreezeTimer()
+	{
+		LevelController.Instance.LevelBoard.Freeze();
+		while (freezeTimesRemaining >= 0.0f)
+		{
+			yield return new WaitForSeconds(freezeTimesStep);
+			FreezeTimesRemaining -= freezeTimesStep;
+		}
+		LevelController.Instance.LevelBoard.UnFreeze();
+		Freeze = false;
 	}
 
 	private void OnDestroy()
