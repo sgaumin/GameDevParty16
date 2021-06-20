@@ -22,7 +22,7 @@ public class CellUserInteractions : MonoBehaviour
 
 	private void OnMouseUp()
 	{
-		if (cell.State != CellState.Unselected && LevelController.Instance.GameState == GameStates.Play)
+		if (cell.State != CellState.Unselected && cell.State != CellState.EnemyMovements && LevelController.Instance.GameState == GameStates.Play)
 		{
 			cell.State = CellState.Cliqued;
 		}

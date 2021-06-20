@@ -84,8 +84,8 @@ tuto4_1=Look over there! Big Bad Guys!! If you don’t pay attention, they will 
 tuto4_2=Approach your enemies and jump on them when you find an opportunity! Meet me again at the next blue square.
 
 tuto5_1=Hahaha! I knew you had it in you! You will be great Heroes! But as you know, the outside world is full of danger and you need protection... 
-tuto5_2=Hey, look just here : a Shield! It’s a strong ally in combat. Take it and walk in front of that enemy : let the shield protect you from his attack, then hit him back! I’ll be waiting for you over there.
-tuto5_3=
+tuto5_2=Hey, look just here : a Shield! It’s a strong ally in combat. Take it and walk in front of that enemy : let the shield protect you from his attack, then hit him back!
+tuto5_3=I’ll be waiting for you over there.
 
 tuto6_1=Congratulations! You nailed it! You are now officially true Heroes! \nWait a second… Is the stage’s already falling?? quick, run fast before it catches you up!!
 tuto6_2=We’ll meet again, fellow Heroes! You can do it!
