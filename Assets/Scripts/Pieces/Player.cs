@@ -116,6 +116,7 @@ public class Player : Character
 			board.EnemyKilled(enemy.type);
 			HasKilled = true;
 			OnKillEnemy?.Invoke(CurrentType, DialogueType.Attaque);
+			enemy.killedByPlayer = true;
 			enemy.Kill();
 		}
 

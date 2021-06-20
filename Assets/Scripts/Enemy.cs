@@ -16,6 +16,8 @@ public class Enemy : Character
 
 	public Coroutine killCoroutine;
 
+	public bool killedByPlayer = false;
+
 	protected override void Awake()
 	{
 		base.Awake();
@@ -53,16 +55,17 @@ public class Enemy : Character
 
 	public override void Kill()
 	{
-		//onomatope.Display();
-		//      board.Enemies.Remove(this);
-		//      base.Kill();
 		killCoroutine = StartCoroutine(KillCoroutine());
     }
 
 	private IEnumerator KillCoroutine()
     {
-		onomatope.Display();
-		yield return new WaitForSeconds(onomatope.ScaleDuration);
+		if (killedByPlayer)
+        {
+			onomatope.Display();
+			yield return new WaitForSeconds(onomatope.ScaleDuration);
+        }
+		yield return null;
 		board.Enemies.Remove(this);
 		base.Kill();
 	}
