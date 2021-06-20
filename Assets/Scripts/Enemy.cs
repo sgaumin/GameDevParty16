@@ -88,6 +88,7 @@ public class Enemy : Character
 		if (playerTarget.HasShield)
 		{
 			playerTarget.HasShield = false;
+			killedByPlayer = true;
 			Kill();
 		}
 		else
