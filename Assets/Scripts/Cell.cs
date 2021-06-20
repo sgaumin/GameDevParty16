@@ -666,6 +666,8 @@ public class Cell : MonoBehaviour
 
 	public void BeginFreeze()
     {
+		if (!isFreeze)
+			return;
 		StartFreeze(freezeTotalDuration);
     }
 

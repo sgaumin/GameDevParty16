@@ -13,15 +13,17 @@ public class ExplanationsPopup : MonoBehaviour
 		group.alpha = 0f;
 		group.DOFade(1f, 0.2f);
 
+		if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
+		{
+			UIManager.Instance.StopTimer();
+		}
 		if (LevelController.Instance != null)
 		{
 			Board board = LevelController.Instance.LevelBoard;
 			board.StopAutoDeletionRows();
 			board.DisableInput();
-		}
-		if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
-		{
-			UIManager.Instance.StopTimer();
+			if (board.Player.CurrentCell.Freeze)
+				board.Player.CurrentCell.PauseFreeze();
 		}
 	}
 
@@ -31,15 +33,17 @@ public class ExplanationsPopup : MonoBehaviour
 		group.interactable = false;
 		group.DOFade(0f, 0.2f);
 
+		if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
+		{
+			UIManager.Instance.ContinueTimer();
+		}
 		if (LevelController.Instance != null)
 		{
 			Board board = LevelController.Instance.LevelBoard;
 			board.StartAutoDeletionRows();
 			board.AllowInput();
-		}
-		if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
-		{
-			UIManager.Instance.ContinueTimer();
+			if (board.Player.CurrentCell.Freeze)
+				board.Player.CurrentCell.ContinueFreeze();
 		}
 	}
 }

@@ -130,7 +130,6 @@ public class Player : Character
         if (CurrentCell.Freeze)
         {
 			CurrentCell.BeginFreeze();
-			board.StartFreeze();
         }
 		if (CurrentCell.IsWin)
 		{

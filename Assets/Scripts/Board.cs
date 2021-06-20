@@ -278,15 +278,10 @@ public class Board : MonoBehaviour
 
 	public void StartFreeze()
     {
-		//freeze = StartCoroutine(Freeze());
     }
 
 	public void StopFreeze()
     {
-   //     if (freeze != null)
-   //     {
-			//StopCoroutine(freeze);
-   //     }
     }
 
 	public void Freeze()
