@@ -60,6 +60,7 @@ public abstract class Character : MonoBehaviour
 			character.sprite = isHighlighted ? highlightSprite : currentSprite;
 		}
 	}
+	public PieceType CurrentType { get; protected set; }
 
 	protected virtual void Awake()
 	{
@@ -77,6 +78,11 @@ public abstract class Character : MonoBehaviour
 	protected void ResetTurn()
 	{
 		HasFinishTurn = false;
+	}
+
+	public void ShowMovements()
+	{
+		CurrentCell.ShowMovements(CurrentType, this);
 	}
 
 	public virtual void Kill()

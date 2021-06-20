@@ -1,9 +1,9 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class DialoguesController : MonoBehaviour
 {
@@ -63,66 +63,10 @@ public class DialoguesController : MonoBehaviour
 
 	public void SetNotifications(PieceType piece, DialogueType dialogueType)
 	{
-		string[] dialogueBase = { "NONE" };
-		
-		switch (piece)
-		{
-			case PieceType.Pawn:
-				notificationIcon.sprite = pionSprite;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = pion.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = pion.dialogue;
-						break;
-				}
-				break;
-			case PieceType.Bishop:
-				notificationIcon.sprite = fouSprite;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = fou.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = fou.dialogue;
-						break;
-				}
-				break;
-			case PieceType.Knight:
-				notificationIcon.sprite = cavalierSprite;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = cavalier.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = cavalier.dialogue;
-						break;
-				}
-				break;
-			case PieceType.Rook:
-				notificationIcon.sprite = tourSprite;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = tour.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = tour.dialogue;
-						break;
-				}
-				break;
-		}
-
-
 		string dialogueId = $"{Enum.GetName(typeof(DialogueType), dialogueType)}" +
 			$"{Enum.GetName(typeof(PieceType), piece)}" +
 			$"{UnityEngine.Random.Range(1, nbDialogues[dialogueType] + 1)}";
 		string dialogue = I18n.Fields[dialogueId];
-		//string dialogue = dialogueBase[UnityEngine.Random.Range(0, dialogueBase.Length)];
 		notificationText.gameObject.FadIn(fadeDuration);
 		notificationText.text = "";
 		notificationAnim.SetTrigger("show");
@@ -139,61 +83,6 @@ public class DialoguesController : MonoBehaviour
 	// Dialogue choisi aléatoirement dans la base des dialogues de la pièce choisie
 	public void SetDialogue(PieceType piece, DialogueType dialogueType)
 	{
-		string[] dialogueBase = { "NONE" };
-		string name = "NONE";
-		switch (piece)
-		{
-			case PieceType.Pawn:
-				name = pion.name;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = pion.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = pion.dialogue;
-						break;
-				}
-				break;
-			case PieceType.Bishop:
-				name = fou.name;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = fou.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = fou.dialogue;
-						break;
-				}
-				break;
-			case PieceType.Knight:
-				name = cavalier.name;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = cavalier.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = cavalier.dialogue;
-						break;
-				}
-				break;
-			case PieceType.Rook:
-				name = tour.name;
-				switch (dialogueType)
-				{
-					case DialogueType.Attaque:
-						dialogueBase = tour.dialogueAttaque;
-						break;
-					case DialogueType.Normal:
-						dialogueBase = tour.dialogue;
-						break;
-				}
-				break;
-		}
-		
-		//string dialogue = dialogueBase[UnityEngine.Random.Range(0, dialogueBase.Length)];
 		string dialogueId = $"{Enum.GetName(typeof(DialogueType), dialogueType)}" +
 			$"{Enum.GetName(typeof(PieceType), piece)}" +
 			$"{UnityEngine.Random.Range(1, nbDialogues[dialogueType] + 1)}";

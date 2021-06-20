@@ -3,5 +3,6 @@
 	Pawn,
 	Bishop,
 	Knight,
-	Rook
+	Rook,
+	None
 }

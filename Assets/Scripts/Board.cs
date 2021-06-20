@@ -31,6 +31,13 @@ public class BoardEvent
 	}
 }
 
+[System.Serializable]
+public struct BoardSpawners
+{
+	public string spawnTag;
+	public Cell spawnCell;
+}
+
 public class Board : MonoBehaviour
 {
 	[Header("Rules")]
@@ -47,6 +54,8 @@ public class Board : MonoBehaviour
 	[SerializeField] private List<MarkType> marks = new List<MarkType>();
 	[Space]
 	[SerializeField] private float freezeDuration = 3.0f;
+	[Space]
+	[SerializeField] private List<BoardSpawners> spawners = new List<BoardSpawners>();
 
 	[Header("Animations")]
 	[SerializeField] private float fadDestroyingCellDuration = 0.01f;
@@ -65,8 +74,6 @@ public class Board : MonoBehaviour
 	private bool inverseAnimation;
 	private float positionPercentage;
 	private float currentRowDeletionAmount;
-
-	private Coroutine freeze;
 
 	public SoundData killSound;
 	public SoundData playerKilledSound;
@@ -119,6 +126,7 @@ public class Board : MonoBehaviour
 		}
 	}
 	public bool CanReceiveInput { get; set; }
+	public bool IsMovingRows { get; set; }
 
 	public void EnemyKilled(PieceType type)
 	{
@@ -148,6 +156,7 @@ public class Board : MonoBehaviour
 		ActivateEnemiesChecks();
 
 		BoardState = BoardStates.TriggerEvents;
+		IsMovingRows = rowAutoDeletionOnStart;
 
 		StartAutoDeletionRows();
 		UIManager.Instance.StartTimer(timerCount);
@@ -210,6 +219,11 @@ public class Board : MonoBehaviour
 		UIManager.Instance.ShowTimer = true;
 	}
 
+	public void ShowEnemiesMovements()
+	{
+		Enemies.ForEach(x => x.ShowMovements());
+	}
+
 	public void AllowInput()
 	{
 		CanReceiveInput = true;
@@ -256,7 +270,10 @@ public class Board : MonoBehaviour
 
 	public void StartAutoDeletionRows()
 	{
-		rowDeletion = StartCoroutine(AutoDeletionRowsCore());
+		if (IsMovingRows)
+		{
+			rowDeletion = StartCoroutine(AutoDeletionRowsCore());
+		}
 	}
 
 	public void StopAutoDeletionRows()
@@ -276,14 +293,6 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	public void StartFreeze()
-	{
-	}
-
-	public void StopFreeze()
-	{
-	}
-
 	public void Freeze()
 	{
 		this.StopAutoDeletionRows();
@@ -298,21 +307,6 @@ public class Board : MonoBehaviour
 		FreezeBackgroundEffect.Instance.Stop();
 	}
 
-	//private IEnumerator Freeze()
-	//{
-	//    this.StopAutoDeletionRows();
-	//    UIManager.Instance.StopTimer();
-	//    OnFreeze?.Invoke(FreezeState.Start);
-	//    yield return new WaitForSeconds(freezeDuration / 3.0f);
-	//    OnFreeze?.Invoke(FreezeState.Middle);
-	//    yield return new WaitForSeconds(freezeDuration / 3.0f);
-	//    OnFreeze?.Invoke(FreezeState.Ending);
-	//    yield return new WaitForSeconds(freezeDuration / 3.0f);
-	//    OnFreeze?.Invoke(FreezeState.Off);
-	//    this.StartAutoDeletionRows();
-	//    UIManager.Instance.ContinueTimer();
-	//}
-
 	public void ResetBoard()
 	{
 		cells.ForEach(x => x.DefineCellLinks());
@@ -324,10 +318,7 @@ public class Board : MonoBehaviour
 	private void CheckRowDeletion()
 	{
 		CheckPlayerPositionPercentage();
-		if (rowAutoDeletionOnStart)
-		{
-			DeleteFirstRow();
-		}
+		DeleteFirstRow();
 
 		for (int i = 0; i < currentRowDeletionAmount; i++)
 		{
@@ -353,7 +344,7 @@ public class Board : MonoBehaviour
 
 		foreach (Cell cell in firstRow)
 		{
-			cell.State = CellState.Inactive;
+			cell.State = CellState.Unselected;
 		}
 
 		firstRow.ForEach(x => cells.Remove(x));
@@ -426,10 +417,39 @@ public class Board : MonoBehaviour
 	private void SpawnPiece()
 	{
 		Player = Instantiate(piecePrefab, transform);
-		Player.Init(spawnCell);
+
+		Cell currentSpawner = spawnCell;
+		foreach (BoardSpawners spawner in spawners)
+		{
+			if (PlayerPrefs.HasKey(spawner.spawnTag))
+			{
+				currentSpawner = spawner.spawnCell;
+			}
+		}
+
+		Player.Init(currentSpawner);
 
 		LevelController.Instance.SetCameraTarget(Player.transform);
 		UIManager.Instance.Dialogues.Init();
+	}
+
+	public void ResetSpawnTag()
+	{
+		foreach (BoardSpawners spawner in spawners)
+		{
+			if (PlayerPrefs.HasKey(spawner.spawnTag))
+			{
+				PlayerPrefs.DeleteKey(spawner.spawnTag);
+			}
+		}
+	}
+
+	public void SetTag(string tag)
+	{
+		if (!string.IsNullOrEmpty(tag) && !PlayerPrefs.HasKey(tag))
+		{
+			PlayerPrefs.SetString(tag, "true");
+		}
 	}
 
 	public void PlayerSelectedCell()

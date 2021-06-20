@@ -28,24 +28,24 @@ public class MenuOptionsController : MonoBehaviour
 		Instance = this;
 #if UNITY_WEBGL
 #else
-        // Résolutio
-        int currentResolutionId = 0;
-        resolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        int index = 0;
-        foreach (Resolution resolution in resolutions)
-        {
-            options.Add($"{resolution.width} x {resolution.height}");
-            if(resolution.width == Screen.currentResolution.width && resolution.height == Screen.currentResolution.height)
-            {
-                currentResolutionId = index;
-            }
-            index++;
-        }
-        resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionId;
-        resolutionDropdown.RefreshShownValue();
+		// Résolutio
+		int currentResolutionId = 0;
+		resolutions = Screen.resolutions;
+		resolutionDropdown.ClearOptions();
+		List<string> options = new List<string>();
+		int index = 0;
+		foreach (Resolution resolution in resolutions)
+		{
+			options.Add($"{resolution.width} x {resolution.height}");
+			if (resolution.width == Screen.currentResolution.width && resolution.height == Screen.currentResolution.height)
+			{
+				currentResolutionId = index;
+			}
+			index++;
+		}
+		resolutionDropdown.AddOptions(options);
+		resolutionDropdown.value = currentResolutionId;
+		resolutionDropdown.RefreshShownValue();
 #endif
 
 		// Volumes
@@ -54,7 +54,6 @@ public class MenuOptionsController : MonoBehaviour
 
 		// Language
 		Language lang = (Language)Enum.Parse(typeof(Language), GameData.Language);
-		Debug.Log($"{lang}");
 		switch (lang)
 		{
 			case Language.FR:

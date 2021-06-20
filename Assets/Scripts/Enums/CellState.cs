@@ -1,8 +1,8 @@
 ﻿public enum CellState
 {
-	Unselected,
 	Highlighted,
+	EnemyMovements,
 	Selected,
 	Cliqued,
-	Inactive
+	Unselected
 }

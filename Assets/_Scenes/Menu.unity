@@ -713,6 +713,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7500705778020545773, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1300560980}
+    - target: {fileID: 7500705778020545773, guid: e485b65197b696d458eae78032b860ef,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7523654991322018916, guid: e485b65197b696d458eae78032b860ef,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -787,6 +797,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2177832480006244970, guid: 19da4f67621aea34dbd4e5bbbecb34ea,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1300560980}
+    - target: {fileID: 2177832480006244970, guid: 19da4f67621aea34dbd4e5bbbecb34ea,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2177832480006244971, guid: 19da4f67621aea34dbd4e5bbbecb34ea,
         type: 3}
       propertyPath: m_Pivot.x

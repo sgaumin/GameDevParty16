@@ -6,7 +6,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-[System.Runtime.InteropServices.Guid("DA531570-B2A2-419C-8F0F-DF967A39DA32")]
 public class Cell : MonoBehaviour
 {
 	private const float SPHERE_RADIUS = 0.45f;
@@ -28,13 +27,18 @@ public class Cell : MonoBehaviour
 	[SerializeField] private float fadDestroyingCellDuration = 0.09f;
 	[SerializeField] private float offsetYDestroyingCell = -1.5f;
 
+	[Header("Player Materials")]
+	[SerializeField] private Material highlightMaterial;
+	[SerializeField] private Material highlightSelectedMaterial;
+	[SerializeField] private Material highlightCliquedMaterial;
+
+	[Header("Enemy Materials")]
+	[SerializeField] private Material highlightEnemyMaterial;
+
 	[Header("References")]
 	[SerializeField] private LayerMask cellMask;
 	[SerializeField] private MeshRenderer model;
 	[SerializeField] private GameObject highlight;
-	[SerializeField] private Material highlightMaterial;
-	[SerializeField] private Material highlightSelectedMaterial;
-	[SerializeField] private Material highlightCliquedMaterial;
 	[SerializeField] private Transform characterPosition;
 	[SerializeField] private Transform effectPosition;
 	[SerializeField] private GameObject winEffect;
@@ -69,7 +73,6 @@ public class Cell : MonoBehaviour
 	private Enemy enemyOnTop;
 	private Coroutine falling;
 	private bool giveShield;
-
 	private bool freeze;
 	private float freezeTimesRemaining;
 	private float freezeTimesStep = 0.5f;
@@ -111,7 +114,6 @@ public class Cell : MonoBehaviour
 		{
 			freezeTimesRemaining = value;
 			float percentTimeRemaining = (freezeTimesRemaining * 100.0f) / freezeTotalDuration;
-			Debug.Log($"FreezeTime: {freezeTimesRemaining} - {freezeTotalDuration} -> {percentTimeRemaining}");
 			if (percentTimeRemaining > 66.0f)
 			{
 				CurrentFreezeState = FreezeState.Start;
@@ -135,7 +137,6 @@ public class Cell : MonoBehaviour
 		get => currentFreezeState;
 		set
 		{
-			Debug.Log($"Freeze State: {currentFreezeState}");
 			currentFreezeState = value;
 			LevelController.Instance.LevelBoard.OnFreeze?.Invoke(currentFreezeState);
 		}
@@ -156,71 +157,64 @@ public class Cell : MonoBehaviour
 		get => state;
 		set
 		{
-			if (LevelController.Instance.LevelBoard.CanReceiveInput)
+			state = value;
+			switch (state)
 			{
-				state = value;
-				switch (state)
-				{
-					case CellState.Unselected:
-						if (highlight != null)
-						{
-							highlight.gameObject.SetActive(false);
-						}
-						if (enemyOnTop != null)
-						{
-							enemyOnTop.IsHighlighted = false;
-						}
-						break;
-					case CellState.Highlighted:
-						if (highlight != null)
-						{
-							highlight.gameObject.SetActive(true);
-							highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
-						}
-						if (enemyOnTop != null)
-						{
-							enemyOnTop.IsHighlighted = true;
-						}
-						break;
-					case CellState.Selected:
-						if (highlight != null)
-						{
-							highlight.gameObject.SetActive(true);
-							highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
-						}
-						if (enemyOnTop != null)
-						{
-							enemyOnTop.IsHighlighted = false;
-						}
-						break;
-					case CellState.Cliqued:
-						if (highlight != null)
-						{
-							highlight.gameObject.SetActive(true);
-							highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
-						}
-						if (enemyOnTop != null)
-						{
-							enemyOnTop.IsHighlighted = false;
-						}
-						LevelController.Instance.LevelBoard.OnlySelectCell(this);
-						Piece.MoveToCell(this);
-						break;
-					case CellState.Inactive:
-						if (highlight != null)
-						{
-							highlight.gameObject.SetActive(false);
-						}
-						if (enemyOnTop != null)
-						{
-							enemyOnTop.IsHighlighted = false;
-						}
-						break;
-				}
+				case CellState.Highlighted:
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(true);
+						highlight.GetComponent<MeshRenderer>().material = highlightMaterial;
+					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = true;
+					}
+					break;
+				case CellState.EnemyMovements:
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(true);
+						highlight.GetComponent<MeshRenderer>().material = highlightEnemyMaterial;
+					}
+					break;
+				case CellState.Selected:
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(true);
+						highlight.GetComponent<MeshRenderer>().material = highlightSelectedMaterial;
+					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = false;
+					}
+					break;
+				case CellState.Cliqued:
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(true);
+						highlight.GetComponent<MeshRenderer>().material = highlightCliquedMaterial;
+					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = false;
+					}
+					LevelController.Instance.LevelBoard.OnlySelectCell(this);
+					Piece.MoveToCell(this);
+					break;
+				case CellState.Unselected:
+					if (highlight != null)
+					{
+						highlight.gameObject.SetActive(false);
+					}
+					if (enemyOnTop != null)
+					{
+						enemyOnTop.IsHighlighted = false;
+					}
+					break;
 			}
 		}
 	}
-
 	public Vector3 CharacterPosition => characterPosition.transform.position;
 	public Vector3 EffectPosition => effectPosition.transform.position;
 
@@ -272,7 +266,6 @@ public class Cell : MonoBehaviour
 	private Material GetDefaultMaterial()
 	{
 		return (transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
-
 	}
 
 	public void DefineCellLinks()
@@ -281,37 +274,21 @@ public class Cell : MonoBehaviour
 		knightCells.Clear();
 
 		cellTop = Physics.OverlapSphere(transform.position + new Vector3(0, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellTop != null && cellTop.state == CellState.Inactive) cellTop = null;
 		cellDown = Physics.OverlapSphere(transform.position + new Vector3(0, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellDown != null && cellDown.state == CellState.Inactive) cellDown = null;
 		cellLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 0) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellLeft != null && cellLeft.state == CellState.Inactive) cellLeft = null;
 		cellRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 0) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellRight != null && cellRight.state == CellState.Inactive) cellRight = null;
 		cellTopLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellTopLeft != null && cellTopLeft.state == CellState.Inactive) cellTopLeft = null;
 		cellTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellTopRight != null && cellTopRight.state == CellState.Inactive) cellTopRight = null;
 		cellDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellDownLeft != null && cellDownLeft.state == CellState.Inactive) cellDownLeft = null;
 		cellDownRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellDownRight != null && cellDownRight.state == CellState.Inactive) cellDownRight = null;
 		cellKnightTopLeft = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, 2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightTopLeft != null && cellKnightTopLeft.state == CellState.Inactive) cellKnightTopLeft = null;
 		cellKnightTopRight = Physics.OverlapSphere(transform.position + new Vector3(1, 0, 2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightTopRight != null && cellKnightTopRight.state == CellState.Inactive) cellKnightTopRight = null;
 		cellKnightRightTop = Physics.OverlapSphere(transform.position + new Vector3(2, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightRightTop != null && cellKnightRightTop.state == CellState.Inactive) cellKnightRightTop = null;
 		cellKnightRightDown = Physics.OverlapSphere(transform.position + new Vector3(2, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightRightDown != null && cellKnightRightDown.state == CellState.Inactive) cellKnightRightDown = null;
 		cellKnightDownLeft = Physics.OverlapSphere(transform.position + new Vector3(-2, 0, -1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightDownLeft != null && cellKnightDownLeft.state == CellState.Inactive) cellKnightDownLeft = null;
 		cellKnightDownRight = Physics.OverlapSphere(transform.position + new Vector3(-2, 0, 1) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightDownRight != null && cellKnightDownRight.state == CellState.Inactive) cellKnightDownRight = null;
 		cellKnightLeftTop = Physics.OverlapSphere(transform.position + new Vector3(1, 0, -2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightLeftTop != null && cellKnightLeftTop.state == CellState.Inactive) cellKnightLeftTop = null;
 		cellKnightLeftDown = Physics.OverlapSphere(transform.position + new Vector3(-1, 0, -2) * CHECK_DISTANCE, SPHERE_RADIUS, cellMask, QueryTriggerInteraction.Ignore).FirstOrDefault()?.GetComponentInParent<Cell>();
-		if (cellKnightLeftDown != null && cellKnightLeftDown.state == CellState.Inactive) cellKnightLeftDown = null;
 
 		if (cellTop != null)
 		{
@@ -392,7 +369,6 @@ public class Cell : MonoBehaviour
 	public void ShowMovements(PieceType type, Character character)
 	{
 		List<List<Cell>> paths = new List<List<Cell>>();
-
 		typeGiven = type;
 		characterGiven = character;
 
@@ -412,13 +388,43 @@ public class Cell : MonoBehaviour
 				break;
 		}
 
-		paths.Flatten().Distinct().WithoutNullValues().ForEach(x => x.State = CellState.Highlighted);
+		if (character is Enemy)
+		{
+			paths.Flatten().Distinct().WithoutNullValues().ForEach(x => x.State = CellState.EnemyMovements);
+		}
+		else if (character is Player)
+		{
+			paths.Flatten().Distinct().WithoutNullValues().ForEach(x => x.State = CellState.Highlighted);
+		}
+	}
+
+	public void HideMovements(PieceType type, Character character)
+	{
+		List<List<Cell>> paths = new List<List<Cell>>();
+		typeGiven = PieceType.None;
+		characterGiven = null;
+		switch (type)
+		{
+			case PieceType.Pawn:
+				paths = GetPawnMovements(character);
+				break;
+			case PieceType.Bishop:
+				paths = GetBishopMovements();
+				break;
+			case PieceType.Knight:
+				paths = GetKnightMovements();
+				break;
+			case PieceType.Rook:
+				paths = GetRookMovements();
+				break;
+		}
+
+		paths.Flatten().Distinct().WithoutNullValues().ForEach(x => x.State = CellState.Unselected);
 	}
 
 	public void RefreshMovements()
 	{
 		List<List<Cell>> paths = new List<List<Cell>>();
-
 		switch (typeGiven)
 		{
 			case PieceType.Pawn:

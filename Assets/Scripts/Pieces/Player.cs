@@ -39,7 +39,6 @@ public class Player : Character
 			}
 		}
 	}
-	public PieceType CurrentType { get; private set; }
 	public bool HasKilled { get; set; } = false;
 	public PiecePoolType PiecePoolType { get; set; }
 
@@ -64,7 +63,7 @@ public class Player : Character
 				switch (PiecePoolType)
 				{
 					case PiecePoolType.All:
-						types.Add((PieceType)Random.Range(0, Enum.GetNames(typeof(PieceType)).Length));
+						types.Add((PieceType)Random.Range(0, Enum.GetNames(typeof(PieceType)).Length - 1));
 						break;
 					case PiecePoolType.OnlyPawn:
 						types.Add(PieceType.Pawn);
@@ -101,10 +100,10 @@ public class Player : Character
 	{
 		base.DoActionBeforeMoving(cell);
 		board.PlayerSelectedCell();
-        if (CurrentCell.Freeze)
-        {
+		if (CurrentCell.Freeze)
+		{
 			CurrentCell.StopFreeze();
-        }
+		}
 	}
 
 	protected override void DoActionAfterMoving(Cell cell)
@@ -120,17 +119,17 @@ public class Player : Character
 			enemy.Kill();
 		}
 
+		CurrentCell.HideMovements(CurrentType, this);
 		CurrentCell = cell;
-		board.UnselectAllCells();
 		if (CurrentCell.GiveShield && !HasShield)
 		{
 			HasShield = true;
 			CurrentCell.GiveShield = false;
 		}
-        if (CurrentCell.Freeze)
-        {
+		if (CurrentCell.Freeze)
+		{
 			CurrentCell.BeginFreeze();
-        }
+		}
 		if (CurrentCell.IsWin)
 		{
 			board.EndLevel(true);

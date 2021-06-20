@@ -19,12 +19,14 @@ public class TutorialScreenPopup : MonoBehaviour
 
 	public Action OnClose = delegate { };
 
-	private Coroutine dialoqueAnimation;
 	private List<string> keysToTranslate = new List<string>();
 
 	public void SetDialogueText(string[] keys)
 	{
 		LevelController.Instance.GameState = GameStates.Pause;
+		if (LevelController.Instance.LevelBoard.Player.CurrentCell.Freeze)
+			LevelController.Instance.LevelBoard.Player.CurrentCell.PauseFreeze();
+
 		image.raycastTarget = true;
 		keysToTranslate = keys.ToList();
 		ShowNextPage();
@@ -40,11 +42,8 @@ public class TutorialScreenPopup : MonoBehaviour
 		{
 			gameObject.SetActive(true);
 		}
-		if (dialoqueAnimation != null)
-		{
-			StopCoroutine(dialoqueAnimation);
-		}
-		dialoqueAnimation = StartCoroutine(DialogueCoroutine(I18n.Fields[firstKey]));
+		StopAllCoroutines();
+		StartCoroutine(DialogueCoroutine(I18n.Fields[firstKey]));
 	}
 
 	private IEnumerator DialogueCoroutine(string text)
@@ -80,6 +79,8 @@ public class TutorialScreenPopup : MonoBehaviour
 			gameObject.FadOut(fadeDuration);
 			image.raycastTarget = false;
 			LevelController.Instance.GameState = GameStates.Play;
+			if (LevelController.Instance.LevelBoard.Player.CurrentCell.Freeze)
+				LevelController.Instance.LevelBoard.Player.CurrentCell.ContinueFreeze();
 		}
 	}
 }

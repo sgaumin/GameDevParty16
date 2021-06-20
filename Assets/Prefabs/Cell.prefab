@@ -278,16 +278,18 @@ MonoBehaviour:
   timeBeforeRowDeletion: 1.4
   fadDestroyingCellDuration: 0.09
   offsetYDestroyingCell: -1.5
-  cellMask:
-    serializedVersion: 2
-    m_Bits: 256
-  model: {fileID: 6626758957874410945}
-  highlight: {fileID: 397962746239420011}
   highlightMaterial: {fileID: 2100000, guid: 32e5dffd08acb4c4e997e6524c0e06f4, type: 2}
   highlightSelectedMaterial: {fileID: 2100000, guid: 2d16c599ba9fe0f4ca95a20c6754f659,
     type: 2}
   highlightCliquedMaterial: {fileID: 2100000, guid: 2d16c599ba9fe0f4ca95a20c6754f659,
     type: 2}
+  highlightEnemyMaterial: {fileID: 2100000, guid: 8364762db32867940a1b2e8cd2a59893,
+    type: 2}
+  cellMask:
+    serializedVersion: 2
+    m_Bits: 256
+  model: {fileID: 6626758957874410945}
+  highlight: {fileID: 397962746239420011}
   characterPosition: {fileID: 5984557096296291449}
   effectPosition: {fileID: 9181377872557047252}
   winEffect: {fileID: 100006, guid: 60bc526f4be1e044ab9e46340b82ffb3, type: 3}

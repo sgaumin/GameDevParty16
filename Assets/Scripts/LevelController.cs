@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Tools;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class LevelController : GameSystem
 {
@@ -107,16 +106,17 @@ public class LevelController : GameSystem
 	}
 
 	public void SelectNextLevel()
-    {
+	{
+		LevelBoard.ResetSpawnTag();
 		Debug.Log($"select next level: {currentLevelData.NextLevelName}");
 		SelectLevelReload(currentLevelData.NextLevelName);
 	}
 
 	public String GetNextLevel()
-    {
-
+	{
+		LevelBoard.ResetSpawnTag();
 		return this.currentLevelData.NextLevelName;
-    }
+	}
 
 	public void SelectLevelReload(string levelPrefab)
 	{
@@ -148,6 +148,7 @@ public class LevelController : GameSystem
 
 	public void LoadNextLevel()
 	{
+		LevelBoard.ResetSpawnTag();
 		if (loadingLevel == null)
 		{
 			loadingLevel = StartCoroutine(LoadLevelCore(
@@ -161,6 +162,7 @@ public class LevelController : GameSystem
 
 	public void LoadMenu()
 	{
+		LevelBoard.ResetSpawnTag();
 		if (loadingLevel == null)
 		{
 			loadingLevel = StartCoroutine(LoadLevelCore(
@@ -174,6 +176,7 @@ public class LevelController : GameSystem
 
 	public void LoadSceneByName(string sceneName)
 	{
+		LevelBoard.ResetSpawnTag();
 		if (loadingLevel == null)
 		{
 			loadingLevel = StartCoroutine(LoadLevelCore(
@@ -187,6 +190,7 @@ public class LevelController : GameSystem
 
 	public void QuitGame()
 	{
+		LevelBoard.ResetSpawnTag();
 		if (loadingLevel == null)
 		{
 			loadingLevel = StartCoroutine(LoadLevelCore(

@@ -22,6 +22,7 @@ public class Enemy : Character
 	{
 		CheckCurrentCell();
 		SetIcon(type);
+		CurrentType = type;
 	}
 
 	public void TryToAttackPlayer()
@@ -32,10 +33,10 @@ public class Enemy : Character
 			if (!targets.IsEmpty())
 			{
 				playerTarget = targets[0];
-                if (!playerTarget.HasShield)
-                {
+				if (!playerTarget.HasShield)
+				{
 					board.StopAutoDeletionRows();
-                }
+				}
 				MoveToCell(playerTarget.CurrentCell);
 			}
 			else
