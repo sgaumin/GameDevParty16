@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Runtime.InteropServices.Guid("DA531570-B2A2-419C-8F0F-DF967A39DA32")]
 public class Cell : MonoBehaviour
 {
 	private const float SPHERE_RADIUS = 0.45f;
@@ -85,6 +86,8 @@ public class Cell : MonoBehaviour
 		{
 			giveShield = value;
 			shieldIcon.gameObject.SetActive(giveShield);
+			if (!value && giveShieldOnStart)
+				model.material = GetDefaultMaterial();
 		}
 	}
 	public bool Freeze
@@ -248,11 +251,11 @@ public class Cell : MonoBehaviour
 			effect.transform.position = EffectPosition;
 			effect.transform.SetParent(transform);
 		}
-		if (GiveShield)
+		else if (GiveShield)
 		{
 			model.material = groundMaterials[3];
 		}
-		if (Freeze)
+		else if (Freeze)
 		{
 			model.material = groundMaterials[4];
 		}
@@ -263,7 +266,6 @@ public class Cell : MonoBehaviour
 		else
 		{
 			model.material = GetDefaultMaterial();
-			//(transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
 		}
 	}
 
@@ -696,15 +698,11 @@ public class Cell : MonoBehaviour
 	private IEnumerator FreezeTimer()
 	{
 		LevelController.Instance.LevelBoard.Freeze();
-		FreezeBackgroundEffect.Instance.Show();
-
 		while (freezeTimesRemaining >= 0.0f)
 		{
 			yield return new WaitForSeconds(freezeTimesStep);
 			FreezeTimesRemaining -= freezeTimesStep;
 		}
-
-		FreezeBackgroundEffect.Instance.Stop();
 		LevelController.Instance.LevelBoard.UnFreeze();
 		Freeze = false;
 	}
