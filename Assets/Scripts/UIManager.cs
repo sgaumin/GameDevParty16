@@ -188,8 +188,7 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayWin()
 	{
-		StartCoroutine(DisplayScreenCore(winUI));
-		waitScore = StartCoroutine(DisplayScoreScreen());
+        StartCoroutine(DisplayScreenCore(winUI));
 		winController.DisplayScore();
 	}
 
@@ -205,28 +204,15 @@ public class UIManager : MonoBehaviour
 		prefab.FadIn(0.5f);
 	}
 
-	private IEnumerator DisplayScoreScreen()
-	{
-		yield return new WaitForSeconds(2f);
-		this.winUI.FadOut(0.1f);
-		this.winUI.gameObject.SetActive(false);
-		//yield return new WaitForSeconds(0.2f);
-		scoreUI.gameObject.SetActive(true);
-		scoreUI.FadIn(0.5f);
-	}
-
 	private void Update()
 	{
 		if (winUI.activeSelf)
 		{
 			if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
 			{
-				StopCoroutine(this.waitScore);
-				this.winUI.FadOut(0.1f);
-				this.winUI.gameObject.SetActive(false);
 				scoreUI.gameObject.SetActive(true);
-				scoreUI.FadIn(0.5f);
-			}
+                this.winUI.FadOut(1f);
+            }
 		}
 	}
 

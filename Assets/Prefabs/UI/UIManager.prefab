@@ -1863,7 +1863,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.85
+  m_fontSize: 21.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2451,7 +2451,7 @@ RectTransform:
   - {fileID: 6966328837031928349}
   - {fileID: 9154201784360237582}
   m_Father: {fileID: 3511521872826282492}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3355,7 +3355,7 @@ RectTransform:
   - {fileID: 5898019230581000172}
   - {fileID: 1277466672249822818}
   m_Father: {fileID: 3511521872826282492}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5002,7 +5002,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 130.5
+  m_fontSize: 125.85
   m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7793,8 +7793,8 @@ RectTransform:
   - {fileID: 6150980058404480656}
   - {fileID: 9135475229620294425}
   - {fileID: 7269780462152660627}
-  - {fileID: 1487096386622003982}
   - {fileID: 691567770610772584}
+  - {fileID: 1487096386622003982}
   - {fileID: 6830276202423073233}
   - {fileID: 6270840181230652605}
   - {fileID: 331943670018753097}
