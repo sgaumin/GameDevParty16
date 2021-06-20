@@ -68,11 +68,11 @@ public class Cell : MonoBehaviour
 	private Enemy enemyOnTop;
 	private Coroutine falling;
 	private bool giveShield;
-	
+
 	private bool freeze;
 	private float freezeTimesRemaining;
-    private float freezeTimesStep = 0.5f;
-    private FreezeState currentFreezeState = FreezeState.Off;
+	private float freezeTimesStep = 0.5f;
+	private FreezeState currentFreezeState = FreezeState.Off;
 	private Coroutine freezeCoroutine;
 
 	public UnityEvent CellEvent => cellEvent;
@@ -93,8 +93,8 @@ public class Cell : MonoBehaviour
 		set
 		{
 			freezeIcon.gameObject.SetActive(value);
-            if (freeze && !value && !isWin && !giveShieldOnStart)
-            {
+			if (freeze && !value && !isWin && !giveShieldOnStart)
+			{
 				model.material = GetDefaultMaterial();
 				CurrentFreezeState = FreezeState.Off;
 			}
@@ -102,36 +102,36 @@ public class Cell : MonoBehaviour
 		}
 	}
 	public float FreezeTimesRemaining
-    {
+	{
 		get => freezeTimesRemaining;
 		set
-        {
+		{
 			freezeTimesRemaining = value;
 			float percentTimeRemaining = (freezeTimesRemaining * 100.0f) / freezeTotalDuration;
 			Debug.Log($"FreezeTime: {freezeTimesRemaining} - {freezeTotalDuration} -> {percentTimeRemaining}");
-            if (percentTimeRemaining > 66.0f)
-            {
+			if (percentTimeRemaining > 66.0f)
+			{
 				CurrentFreezeState = FreezeState.Start;
-            }
-            else if (percentTimeRemaining > 33.0f)
-            {
+			}
+			else if (percentTimeRemaining > 33.0f)
+			{
 				CurrentFreezeState = FreezeState.Middle;
-            }
+			}
 			else if (percentTimeRemaining > 0.0f)
 			{
 				CurrentFreezeState = FreezeState.Ending;
-            }
-            else
-            {
+			}
+			else
+			{
 				CurrentFreezeState = FreezeState.Off;
-            }
+			}
 		}
-    }
+	}
 	public FreezeState CurrentFreezeState
-    {
+	{
 		get => currentFreezeState;
 		set
-        {
+		{
 			Debug.Log($"Freeze State: {currentFreezeState}");
 			currentFreezeState = value;
 			LevelController.Instance.LevelBoard.OnFreeze?.Invoke(currentFreezeState);
@@ -253,9 +253,9 @@ public class Cell : MonoBehaviour
 			model.material = groundMaterials[3];
 		}
 		if (Freeze)
-        {
+		{
 			model.material = groundMaterials[4];
-        }
+		}
 		else if (mark != MarkNames.None && LevelController.Instance.LevelBoard.ShowMarkers)
 		{
 			model.material = LevelController.Instance.LevelBoard.Marks.Where(x => x.Name == mark).FirstOrDefault().Material;
@@ -263,12 +263,12 @@ public class Cell : MonoBehaviour
 		else
 		{
 			model.material = GetDefaultMaterial();
-				//(transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
+			//(transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
 		}
 	}
 
 	private Material GetDefaultMaterial()
-    {
+	{
 		return (transform.localPosition.x + transform.localPosition.z) % 2 == 0 ? groundMaterials[0] : groundMaterials[1];
 
 	}
@@ -665,11 +665,11 @@ public class Cell : MonoBehaviour
 	}
 
 	public void BeginFreeze()
-    {
+	{
 		if (!isFreeze)
 			return;
 		StartFreeze(freezeTotalDuration);
-    }
+	}
 
 	public void StartFreeze(float value)
 	{
@@ -688,7 +688,7 @@ public class Cell : MonoBehaviour
 	}
 
 	public void PauseFreeze()
-    {
+	{
 		if (freezeCoroutine != null)
 			StopCoroutine(freezeCoroutine);
 	}
@@ -696,11 +696,15 @@ public class Cell : MonoBehaviour
 	private IEnumerator FreezeTimer()
 	{
 		LevelController.Instance.LevelBoard.Freeze();
+		FreezeBackgroundEffect.Instance.Show();
+
 		while (freezeTimesRemaining >= 0.0f)
 		{
 			yield return new WaitForSeconds(freezeTimesStep);
 			FreezeTimesRemaining -= freezeTimesStep;
 		}
+
+		FreezeBackgroundEffect.Instance.Stop();
 		LevelController.Instance.LevelBoard.UnFreeze();
 		Freeze = false;
 	}

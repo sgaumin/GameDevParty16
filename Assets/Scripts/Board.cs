@@ -277,23 +277,25 @@ public class Board : MonoBehaviour
 	}
 
 	public void StartFreeze()
-    {
-    }
+	{
+	}
 
 	public void StopFreeze()
-    {
-    }
+	{
+	}
 
 	public void Freeze()
-    {
+	{
 		this.StopAutoDeletionRows();
 		UIManager.Instance.StopTimer();
+		FreezeBackgroundEffect.Instance.Show();
 	}
 
 	public void UnFreeze()
-    {
+	{
 		this.StartAutoDeletionRows();
 		UIManager.Instance.ContinueTimer();
+		FreezeBackgroundEffect.Instance.Stop();
 	}
 
 	//private IEnumerator Freeze()

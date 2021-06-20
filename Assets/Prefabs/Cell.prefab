@@ -274,10 +274,10 @@ MonoBehaviour:
   cellEvent:
     m_PersistentCalls:
       m_Calls: []
+  freezeTotalDuration: 3
   timeBeforeRowDeletion: 1.4
   fadDestroyingCellDuration: 0.09
   offsetYDestroyingCell: -1.5
-  freezeTotalDuration: 3
   cellMask:
     serializedVersion: 2
     m_Bits: 256
@@ -392,7 +392,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1510393732569748461
 RectTransform:
   m_ObjectHideFlags: 0
@@ -651,7 +651,7 @@ PrefabInstance:
     - target: {fileID: 8529292508562204754, guid: 2e498a15b80973241bb383fdbea142ab,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8787304824048068777, guid: 2e498a15b80973241bb383fdbea142ab,
         type: 3}

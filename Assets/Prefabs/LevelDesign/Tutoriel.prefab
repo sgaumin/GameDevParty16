@@ -1438,6 +1438,7 @@ MonoBehaviour:
     Material: {fileID: 2100000, guid: 20984fec92f987446a4be90d5ca55a40, type: 2}
   - Name: 2
     Material: {fileID: 2100000, guid: 0f44e5dda1c1d464c9eeb70e56f5dbed, type: 2}
+  freezeDuration: 3
   fadDestroyingCellDuration: 0.09
   offsetYDestroyingCell: 1.5
   piecePrefab: {fileID: 3127202912604834137, guid: 791dbd1f0e919f94089a21a35fd5648b,
@@ -17842,6 +17843,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mark
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: isFreeze
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
@@ -59952,6 +59958,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mark
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626758959356287991, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
+        type: 3}
+      propertyPath: isFreeze
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6626758959356287992, guid: 85b38f9ed0b33bd4d89689f47b9e4562,
         type: 3}
