@@ -2286,6 +2286,7 @@ GameObject:
   - component: {fileID: 9185931520008694603}
   - component: {fileID: 811860922267052715}
   - component: {fileID: 2880864455680098850}
+  - component: {fileID: 8224655126323002671}
   m_Layer: 5
   m_Name: background
   m_TagString: Untagged
@@ -2368,6 +2369,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8224655126323002671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9052895843602013830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b606ac7a5c645f4495441b16a53c387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 41a088e6d7a9a944694e944e020bf8ce, type: 3}
+    clips: []
+    mixerGroup: {fileID: -5772611144999393440, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 1
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1001 &3427965962351061522
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,5 +15,5 @@ MonoBehaviour:
   Name: Level 2
   Prefab: {fileID: 3622037727342620051, guid: bf39b73b8617e9140b037105c08d28e7, type: 3}
   NextLevelName: Level 3
-  clip: {fileID: 8300000, guid: 632629cff1a121042bbf5817b01fa34e, type: 3}
+  clip: {fileID: 8300000, guid: a301cfbeabd61f74db1c0e0396212124, type: 3}
   mixer: {fileID: -568684619260816553, guid: dbd143edd4df0224d92ac4ff39f0844e, type: 2}

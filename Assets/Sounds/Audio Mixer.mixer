@@ -61,6 +61,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &-5772611144999393440
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ThunderTitleScreen
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: f50b29d93fc32984d874a2f46d26504c
+  m_Children: []
+  m_Volume: 231f3e2f9c5fd7c49800a0e7084a922a
+  m_Pitch: 9ec300e3c6539c54c8cb422c883fd8de
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -1600930507423363103}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &-5672864320431138447
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -174,6 +193,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-1600930507423363103
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 08b8a78b341b1a049a8b71d27b33b0e7
+  m_EffectName: Attenuation
+  m_MixLevel: c361f0c21b85b8f4b8ea3c95605aac83
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-706990728485806028
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -261,6 +294,7 @@ AudioMixerController:
     - 85a86e96eb40e8f4dadcc2643dd91cc7
     - 8e70f1407e7e4f041bfeb7e2bea44da1
     - ad57fde7e8170eb439d4d2ed6214b5f3
+    - f50b29d93fc32984d874a2f46d26504c
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -317,6 +351,7 @@ AudioMixerSnapshotController:
     3771a80a20db5314cbf92688b3039f13: -8
     27ab7dea7849b11419e75b385f0130fd: -3.184112
     665400bd4a5eb75459c490c077234754: 4
+    231f3e2f9c5fd7c49800a0e7084a922a: -10.34521
   m_TransitionOverrides: {}
 --- !u!244 &458445194541006327
 AudioMixerEffectController:
@@ -435,6 +470,7 @@ AudioMixerGroupController:
   - {fileID: 1210247988137533499}
   - {fileID: 2282503454744926330}
   - {fileID: -2988044021073429056}
+  - {fileID: -5772611144999393440}
   m_Volume: 83ca9008926246b44bd6527fb0d6194f
   m_Pitch: fbf7af984b224e44f8c9ea582b8f4ffe
   m_Send: 00000000000000000000000000000000
