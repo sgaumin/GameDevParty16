@@ -95,3 +95,5 @@ en=ANGLAIS
 whichLevel=QUEL \N NIVEAU?
 level=niveau
 tuto=tutoriel
+
+gameOverTitle=OH LA HONTE !!!

@@ -95,3 +95,5 @@ en=ENGLISH
 whichLevel=WHICH \N LEVEL?
 level=level
 tuto=tutorial
+
+gameOverTitle=WHAT A SHAME!!!

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Tools.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,6 +22,10 @@ public class Cell : MonoBehaviour
 	[SerializeField] private UnityEvent cellEvent;
 	[Space]
 	[SerializeField] private float freezeTotalDuration = 3.0f;
+
+	[Header("Audio")]
+	[SerializeField] private AudioExpress freezeSound;
+	[SerializeField] private AudioExpress shieldSound;
 
 	[Header("Animations")]
 	[SerializeField] private float timeBeforeRowDeletion = 1.4f;
@@ -78,6 +83,7 @@ public class Cell : MonoBehaviour
 	private float freezeTimesStep = 0.5f;
 	private FreezeState currentFreezeState = FreezeState.Off;
 	private Coroutine freezeCoroutine;
+	private AudioUnit freezeSoundUnit;
 
 	public UnityEvent CellEvent => cellEvent;
 	public MeshRenderer Model => model;
@@ -90,7 +96,10 @@ public class Cell : MonoBehaviour
 			giveShield = value;
 			shieldIcon.gameObject.SetActive(giveShield);
 			if (!value && giveShieldOnStart)
+			{
+				shieldSound.Play();
 				model.material = GetDefaultMaterial();
+			}
 		}
 	}
 	public bool Freeze
@@ -683,6 +692,8 @@ public class Cell : MonoBehaviour
 	{
 		if (!isFreeze)
 			return;
+
+		freezeSoundUnit = freezeSound.Play();
 		FreezeTimesRemaining = value;
 		freezeCoroutine = StartCoroutine(FreezeTimer());
 	}
@@ -691,6 +702,7 @@ public class Cell : MonoBehaviour
 	{
 		Freeze = false;
 		LevelController.Instance.LevelBoard.UnFreeze();
+		freezeSoundUnit?.FadOut();
 		if (freezeCoroutine != null)
 			StopCoroutine(freezeCoroutine);
 	}

@@ -275,6 +275,38 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   freezeTotalDuration: 3
+  freezeSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 713f2344b52c302408c6009ce11a7da0, type: 3}
+    clips: []
+    mixerGroup: {fileID: 2918268738808022416, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
+  shieldSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 19f634ce7653da642bfba433a443b64c, type: 3}
+    clips: []
+    mixerGroup: {fileID: 3850013527156585844, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 1
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
   timeBeforeRowDeletion: 1.4
   fadDestroyingCellDuration: 0.09
   offsetYDestroyingCell: -1.5
