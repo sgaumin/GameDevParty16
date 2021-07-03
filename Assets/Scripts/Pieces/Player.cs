@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tools.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,6 +14,12 @@ public class Player : Character
 	[Header("Config")]
 	[SerializeField] private int piecesToShowInAdvance = 3;
 	[SerializeField] private bool hasShieldAtStart;
+
+	[Header("Audio")]
+	[SerializeField] private AudioExpress knightMovementSound;
+	[SerializeField] private AudioExpress bishopMovementSound;
+	[SerializeField] private AudioExpress pawnMovementSound;
+	[SerializeField] private AudioExpress rookMovementSound;
 
 	[Header("References")]
 	[SerializeField] private Image[] piecesList = new Image[4];
@@ -100,6 +107,7 @@ public class Player : Character
 	{
 		base.DoActionBeforeMoving(cell);
 		board.PlayerSelectedCell();
+
 		if (CurrentCell.Freeze)
 		{
 			CurrentCell.StopFreeze();
@@ -109,6 +117,8 @@ public class Player : Character
 	protected override void DoActionAfterMoving(Cell cell)
 	{
 		base.DoActionAfterMoving(cell);
+
+		PlayMovementSound();
 
 		Enemy enemy = cell.TargetPresentOnCell<Enemy>();
 		if (enemy != null)
@@ -138,6 +148,25 @@ public class Player : Character
 		else
 		{
 			board.EndTurnPlayer();
+		}
+	}
+
+	private void PlayMovementSound()
+	{
+		switch (CurrentType)
+		{
+			case PieceType.Pawn:
+				pawnMovementSound.Play();
+				break;
+			case PieceType.Bishop:
+				bishopMovementSound.Play();
+				break;
+			case PieceType.Knight:
+				knightMovementSound.Play();
+				break;
+			case PieceType.Rook:
+				rookMovementSound.Play();
+				break;
 		}
 	}
 

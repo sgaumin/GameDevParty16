@@ -6054,6 +6054,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 0.2
   delayCharacterDisplay: 0.01
+  showSound:
+    isUsingClips: 1
+    clip: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 0ae00efb118130543a72a4c54ae2ec42, type: 3}
+    - {fileID: 8300000, guid: c8e99969a6e653d44be6dc120cd4829f, type: 3}
+    - {fileID: 8300000, guid: 650c5f61b5eaa774884d4256d32955a5, type: 3}
+    - {fileID: 8300000, guid: d477b2534f20bdb47828864e4f6fbcf5, type: 3}
+    - {fileID: 8300000, guid: 351ecea8ac7d55245a6a3eaa8f693d11, type: 3}
+    - {fileID: 8300000, guid: e994f61828ac1e44ca59147e4dd7536d, type: 3}
+    - {fileID: 8300000, guid: e1ca3e8fdf3bd084f8bd1d0835d87363, type: 3}
+    - {fileID: 8300000, guid: 273ba9dbbea2f2f479681cbdaacbd12f, type: 3}
+    - {fileID: 8300000, guid: a5cbd053e8b69e147a3b7e224d7dd9cf, type: 3}
+    - {fileID: 8300000, guid: 2d12e2af6bfb3f141a8f637d6d4e0975, type: 3}
+    - {fileID: 8300000, guid: f443a9ed919031742962a068df00691d, type: 3}
+    - {fileID: 8300000, guid: 630a4b77fd6512541b3e675fe8bf0cc9, type: 3}
+    mixerGroup: {fileID: 3532360209623887613, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
   description: {fileID: 5836415267861411229}
   image: {fileID: 3926702655314761166}
   button: {fileID: 739114450847024297}

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Tools.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ public class TutorialScreenPopup : MonoBehaviour
 	[Header("Animations")]
 	[SerializeField] private float fadeDuration = 0.2f;
 	[SerializeField] private float delayCharacterDisplay = 0.01f;
+
+	[Header("Audio")]
+	[SerializeField] private AudioExpress showSound;
 
 	[Header("References")]
 	[SerializeField] private TextMeshProUGUI description;
@@ -44,6 +48,8 @@ public class TutorialScreenPopup : MonoBehaviour
 		}
 		StopAllCoroutines();
 		StartCoroutine(DialogueCoroutine(I18n.Fields[firstKey]));
+
+		showSound.Play();
 	}
 
 	private IEnumerator DialogueCoroutine(string text)

@@ -347,6 +347,70 @@ MonoBehaviour:
   shieldImageMask: {fileID: 1884264385307720763}
   piecesToShowInAdvance: 3
   hasShieldAtStart: 0
+  knightMovementSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: e9022c5146607824caaa3a64b7e6747b, type: 3}
+    clips: []
+    mixerGroup: {fileID: -4629270628022533547, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
+  bishopMovementSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 62401c8a745785448ab7ab0668fe17c2, type: 3}
+    clips: []
+    mixerGroup: {fileID: -4629270628022533547, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
+  pawnMovementSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: b5d3806d5a8098540a97494a47e95837, type: 3}
+    clips: []
+    mixerGroup: {fileID: -4629270628022533547, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
+  rookMovementSound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 98c235aa3e7a3e84193bdc8cec187f2e, type: 3}
+    clips: []
+    mixerGroup: {fileID: -4629270628022533547, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
   piecesList:
   - {fileID: 6806227322571795729}
   - {fileID: 2823593143334615686}

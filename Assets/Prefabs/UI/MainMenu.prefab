@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 170517149808521314}
   - component: {fileID: 2586536102700196504}
   - component: {fileID: 5510519907355280549}
+  - component: {fileID: 3311088236275632136}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -301,6 +302,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3311088236275632136}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3311088236275632136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283382192059451239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: e38443224192e54488a34a1de05d94a7, type: 3}
+    clips: []
+    mixerGroup: {fileID: -3951147854898018671, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 1
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &4347004777262530739
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +449,7 @@ GameObject:
   - component: {fileID: 7500705777402182747}
   - component: {fileID: 7500705777402182744}
   - component: {fileID: 7275967317487529545}
+  - component: {fileID: 4753371336950093641}
   m_Layer: 5
   m_Name: level2
   m_TagString: Untagged
@@ -555,6 +596,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 4753371336950093641}
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -591,6 +643,34 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 4ff00de1b55bdeb4eaee5fc510e87585, type: 3}
     buttonActiveSprite: {fileID: 21300000, guid: 0f4e15da1f039164981b16741fac700a,
       type: 3}
+--- !u!114 &4753371336950093641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500705777402182749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: f6bb46f4a2d000c4ea525e10583ac62c, type: 3}
+    clips: []
+    mixerGroup: {fileID: 4351031701503315906, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &7500705778020545681
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +724,7 @@ Canvas:
   m_GameObject: {fileID: 7500705778020545681}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -728,6 +808,7 @@ GameObject:
   - component: {fileID: 7500705778073218772}
   - component: {fileID: 7500705778073218773}
   - component: {fileID: 4115479009046044963}
+  - component: {fileID: 4779452118046578965}
   m_Layer: 5
   m_Name: play
   m_TagString: Untagged
@@ -845,6 +926,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4779452118046578965}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4115479009046044963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -864,6 +956,34 @@ MonoBehaviour:
   - language: 1
     sprite: {fileID: 21300000, guid: 955d68ad8f7fb6c429847f624bf1927c, type: 3}
     buttonActiveSprite: {fileID: 0}
+--- !u!114 &4779452118046578965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500705778073218775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: e38443224192e54488a34a1de05d94a7, type: 3}
+    clips: []
+    mixerGroup: {fileID: -3951147854898018671, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &7500705778350605888
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,6 +998,7 @@ GameObject:
   - component: {fileID: 7500705778350605918}
   - component: {fileID: 7500705778350605915}
   - component: {fileID: 6127117120593908899}
+  - component: {fileID: 8624650001470001164}
   m_Layer: 5
   m_Name: tuto
   m_TagString: Untagged
@@ -1023,6 +1144,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 8624650001470001164}
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -1057,6 +1189,34 @@ MonoBehaviour:
   - language: 1
     sprite: {fileID: 21300000, guid: de219112ccc50bb4d9ed46ee11fc4322, type: 3}
     buttonActiveSprite: {fileID: 0}
+--- !u!114 &8624650001470001164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500705778350605888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 881cb368355a6824dbe2f30e9ec4d4f5, type: 3}
+    clips: []
+    mixerGroup: {fileID: 4351031701503315906, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &7500705778552811116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1364,7 @@ GameObject:
   - component: {fileID: 7500705778940934802}
   - component: {fileID: 7500705778940934895}
   - component: {fileID: 6895602096707521397}
+  - component: {fileID: 1885595314283119230}
   m_Layer: 5
   m_Name: level1
   m_TagString: Untagged
@@ -1350,6 +1511,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1885595314283119230}
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -1386,6 +1558,34 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 48a2cf951d078f041a3e19b55bd90fed, type: 3}
     buttonActiveSprite: {fileID: 21300000, guid: 66c0a71cf78561049ab484bd72449ebd,
       type: 3}
+--- !u!114 &1885595314283119230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500705778940934804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: b456647eaeec1c24795ceb2db537c3d0, type: 3}
+    clips: []
+    mixerGroup: {fileID: 4351031701503315906, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &7500705779125649347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,6 +1637,7 @@ GameObject:
   - component: {fileID: 7500705779199479362}
   - component: {fileID: 7500705779199479391}
   - component: {fileID: 8323723948309104818}
+  - component: {fileID: 2693044672303268987}
   m_Layer: 5
   m_Name: level3
   m_TagString: Untagged
@@ -1583,6 +1784,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 2693044672303268987}
+          m_MethodName: Play
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -1619,6 +1831,34 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 8e049792ea21b914bb8e8dab01f73958, type: 3}
     buttonActiveSprite: {fileID: 21300000, guid: 801ba3a8c9004aa4baa85a14dd8edcff,
       type: 3}
+--- !u!114 &2693044672303268987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500705779199479364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: 92757a5027be1174fa00ab501cf1d03c, type: 3}
+    clips: []
+    mixerGroup: {fileID: 4351031701503315906, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 0
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &7500705779370208079
 GameObject:
   m_ObjectHideFlags: 0
@@ -1893,6 +2133,7 @@ GameObject:
   - component: {fileID: 7912982522957943358}
   - component: {fileID: 290563112214452549}
   - component: {fileID: 1809186047016988064}
+  - component: {fileID: 945912467991526747}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -2011,6 +2252,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 945912467991526747}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &945912467991526747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850429521634494341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: e38443224192e54488a34a1de05d94a7, type: 3}
+    clips: []
+    mixerGroup: {fileID: -3951147854898018671, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 1
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &8001008404024760923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,6 +2436,7 @@ GameObject:
   - component: {fileID: 886416417463171298}
   - component: {fileID: 6856846532821283043}
   - component: {fileID: 5331759520503850685}
+  - component: {fileID: 4499799993578311875}
   m_Layer: 5
   m_Name: Tutorial
   m_TagString: Untagged
@@ -2274,6 +2555,45 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4499799993578311875}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4499799993578311875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8906648917846510871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51dd524be375b94d99651abe83518e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound:
+    isUsingClips: 0
+    clip: {fileID: 8300000, guid: e38443224192e54488a34a1de05d94a7, type: 3}
+    clips: []
+    mixerGroup: {fileID: -3951147854898018671, guid: dbd143edd4df0224d92ac4ff39f0844e,
+      type: 2}
+    loopType: 0
+    timeBetweenLoop:
+      min: 1
+      max: 3
+    isPitchModified: 1
+    pitchMaxVariation:
+      min: -0.2
+      max: 0.2
+    autoDestroy: 0
+    multiplier: 5
 --- !u!1 &9052895843602013830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,37 +2727,47 @@ PrefabInstance:
     - target: {fileID: 3657270072495254330, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3657270072495254330, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3657270072495254330, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4136861310821310820, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4136861310821310820, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4136861310821310820, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4136861310821310820, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000012397766
+      objectReference: {fileID: 0}
+    - target: {fileID: 4812090695171634003, guid: bce22768d27564f47a65588a6b539137,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 19.100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 6815823217672722855, guid: bce22768d27564f47a65588a6b539137,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6882164326461941059, guid: bce22768d27564f47a65588a6b539137,
         type: 3}
