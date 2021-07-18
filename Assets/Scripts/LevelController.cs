@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tools;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class LevelController : GameSystem
 {
@@ -109,6 +110,14 @@ public class LevelController : GameSystem
 	{
 		LevelBoard.ResetSpawnTag();
 		Debug.Log($"select next level: {currentLevelData.NextLevelName}");
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+		string customEventName = "PlayNextLevel";
+		AnalyticsResult ar = Analytics.CustomEvent(customEventName, new Dictionary<string, object>
+			{
+				{ "NextLevel", currentLevelData.NextLevelName}
+			});
+		Debug.Log($"Analytics {customEventName}: {ar}");
+#endif
 		SelectLevelReload(currentLevelData.NextLevelName);
 	}
 
@@ -208,5 +217,4 @@ public class LevelController : GameSystem
 		yield return fader.FadOutCore(fadDuration: fadDuration);
 		content?.Invoke();
 	}
-
 }

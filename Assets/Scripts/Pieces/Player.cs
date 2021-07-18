@@ -1,9 +1,11 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Tools.Utils;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -16,6 +18,7 @@ public class Player : Character
 	[SerializeField] private bool hasShieldAtStart;
 
 	[Header("Audio")]
+	[SerializeField] private float delayMovementSound = 0.4f;
 	[SerializeField] private AudioExpress knightMovementSound;
 	[SerializeField] private AudioExpress bishopMovementSound;
 	[SerializeField] private AudioExpress pawnMovementSound;
@@ -72,9 +75,11 @@ public class Player : Character
 					case PiecePoolType.All:
 						types.Add((PieceType)Random.Range(0, Enum.GetNames(typeof(PieceType)).Length - 1));
 						break;
+
 					case PiecePoolType.OnlyPawn:
 						types.Add(PieceType.Pawn);
 						break;
+
 					case PiecePoolType.OnlyKnight:
 						types.Add(PieceType.Knight);
 						break;
@@ -108,6 +113,8 @@ public class Player : Character
 		base.DoActionBeforeMoving(cell);
 		board.PlayerSelectedCell();
 
+		StartCoroutine(PlayMovementSoundCore());
+
 		if (CurrentCell.Freeze)
 		{
 			CurrentCell.StopFreeze();
@@ -117,9 +124,6 @@ public class Player : Character
 	protected override void DoActionAfterMoving(Cell cell)
 	{
 		base.DoActionAfterMoving(cell);
-
-		PlayMovementSound();
-
 		Enemy enemy = cell.TargetPresentOnCell<Enemy>();
 		if (enemy != null)
 		{
@@ -136,19 +140,53 @@ public class Player : Character
 		{
 			HasShield = true;
 			CurrentCell.GiveShield = false;
+
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+			string customEventName = "PlayerShield";
+			AnalyticsResult ar = Analytics.CustomEvent(customEventName, new Dictionary<string, object>
+			{
+				{ "Level", board.name},
+				{ "Cell", CurrentCell.transform.position}
+			});
+			Debug.Log($"Analytics {customEventName}: {ar}");
+#endif
 		}
 		if (CurrentCell.Freeze)
 		{
 			CurrentCell.BeginFreeze();
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+			string customEventName = "PlayerFreeze";
+			AnalyticsResult ar = Analytics.CustomEvent(customEventName, new Dictionary<string, object>
+			{
+				{ "Level", board.name},
+				{ "Cell", CurrentCell.transform.position}
+			});
+			Debug.Log($"Analytics {customEventName}: {ar}");
+#endif
 		}
 		if (CurrentCell.IsWin)
 		{
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+			string customEventName = "WinLevel";
+			AnalyticsResult ar = Analytics.CustomEvent(customEventName, new Dictionary<string, object>
+			{
+				{ "Level", board.name}
+			});
+			Debug.Log($"Analytics {customEventName}: {ar}");
+#endif
+
 			board.EndLevel(true);
 		}
 		else
 		{
 			board.EndTurnPlayer();
 		}
+	}
+
+	private IEnumerator PlayMovementSoundCore()
+	{
+		yield return new WaitForSeconds(delayMovementSound);
+		PlayMovementSound();
 	}
 
 	private void PlayMovementSound()
@@ -158,12 +196,15 @@ public class Player : Character
 			case PieceType.Pawn:
 				pawnMovementSound.Play();
 				break;
+
 			case PieceType.Bishop:
 				bishopMovementSound.Play();
 				break;
+
 			case PieceType.Knight:
 				knightMovementSound.Play();
 				break;
+
 			case PieceType.Rook:
 				rookMovementSound.Play();
 				break;

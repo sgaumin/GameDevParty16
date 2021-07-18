@@ -1,6 +1,8 @@
 ﻿using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.UI;
 
 public abstract class Character : MonoBehaviour
@@ -94,6 +96,18 @@ public abstract class Character : MonoBehaviour
 
 		Camera.main.DOShakePosition(animationData.cameraShakeDuration.RandomValue, animationData.cameraShakeStrenght.RandomValue, animationData.cameraShakeVibrato.RandomValue);
 
+		if (this is Player)
+		{
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+			string customEventName = "PlayerKilled";
+			AnalyticsResult ar = Analytics.CustomEvent(customEventName, new Dictionary<string, object>
+			{
+				{ "Level", board.name}
+			});
+			Debug.Log($"Analytics {customEventName}: {ar}");
+#endif
+		}
+
 		Destroy(gameObject);
 	}
 
@@ -143,6 +157,7 @@ public abstract class Character : MonoBehaviour
 			CurrentCell.MakeCellFall();
 		}
 	}
+
 	protected virtual void DoActionAfterMoving(Cell cell)
 	{
 		if (CurrentCell.CanFall)
@@ -172,18 +187,21 @@ public abstract class Character : MonoBehaviour
 				shieldImageMask.sprite = pionCharacterSprite;
 				highlightSprite = pionCharacterhighlightSprite;
 				break;
+
 			case PieceType.Bishop:
 				icon.sprite = fouSprite;
 				character.sprite = fouCharacterSprite;
 				shieldImageMask.sprite = fouCharacterSprite;
 				highlightSprite = fouCharacterhighlightSprite;
 				break;
+
 			case PieceType.Knight:
 				icon.sprite = cavalierSprite;
 				character.sprite = cavalierCharacterSprite;
 				shieldImageMask.sprite = cavalierCharacterSprite;
 				highlightSprite = cavalierCharacterhighlightSprite;
 				break;
+
 			case PieceType.Rook:
 				icon.sprite = tourSprite;
 				character.sprite = tourCharacterSprite;
