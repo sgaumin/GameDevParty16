@@ -341,6 +341,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &4347004777262530739
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +434,9 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 73528be405c1f494dbb8cea193c1e9ca, type: 3}
     buttonActiveSprite: {fileID: 0}
   - language: 1
+    sprite: {fileID: 21300000, guid: 94790ab3ba62f1b4a8306467e1aba413, type: 3}
+    buttonActiveSprite: {fileID: 0}
+  - language: 2
     sprite: {fileID: 21300000, guid: 94790ab3ba62f1b4a8306467e1aba413, type: 3}
     buttonActiveSprite: {fileID: 0}
 --- !u!1 &7500705777402182749
@@ -643,6 +647,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 4ff00de1b55bdeb4eaee5fc510e87585, type: 3}
     buttonActiveSprite: {fileID: 21300000, guid: 0f4e15da1f039164981b16741fac700a,
       type: 3}
+  - language: 2
+    sprite: {fileID: 21300000, guid: 4ff00de1b55bdeb4eaee5fc510e87585, type: 3}
+    buttonActiveSprite: {fileID: 21300000, guid: 0f4e15da1f039164981b16741fac700a,
+      type: 3}
 --- !u!114 &4753371336950093641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +679,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &7500705778020545681
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +965,9 @@ MonoBehaviour:
   - language: 1
     sprite: {fileID: 21300000, guid: 955d68ad8f7fb6c429847f624bf1927c, type: 3}
     buttonActiveSprite: {fileID: 0}
+  - language: 2
+    sprite: {fileID: 21300000, guid: 955d68ad8f7fb6c429847f624bf1927c, type: 3}
+    buttonActiveSprite: {fileID: 0}
 --- !u!114 &4779452118046578965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,6 +996,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &7500705778350605888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1202,9 @@ MonoBehaviour:
   - language: 1
     sprite: {fileID: 21300000, guid: de219112ccc50bb4d9ed46ee11fc4322, type: 3}
     buttonActiveSprite: {fileID: 0}
+  - language: 2
+    sprite: {fileID: 21300000, guid: de219112ccc50bb4d9ed46ee11fc4322, type: 3}
+    buttonActiveSprite: {fileID: 0}
 --- !u!114 &8624650001470001164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,6 +1233,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &7500705778552811116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,6 +1326,9 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 303bdb3459eb40a48a1b6d53ca5f0d8b, type: 3}
     buttonActiveSprite: {fileID: 0}
   - language: 1
+    sprite: {fileID: 21300000, guid: 34b2fcc5a697dc247883e06ce6ee5834, type: 3}
+    buttonActiveSprite: {fileID: 0}
+  - language: 2
     sprite: {fileID: 21300000, guid: 34b2fcc5a697dc247883e06ce6ee5834, type: 3}
     buttonActiveSprite: {fileID: 0}
 --- !u!1 &7500705778818425101
@@ -1558,6 +1578,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 48a2cf951d078f041a3e19b55bd90fed, type: 3}
     buttonActiveSprite: {fileID: 21300000, guid: 66c0a71cf78561049ab484bd72449ebd,
       type: 3}
+  - language: 2
+    sprite: {fileID: 21300000, guid: 48a2cf951d078f041a3e19b55bd90fed, type: 3}
+    buttonActiveSprite: {fileID: 21300000, guid: 66c0a71cf78561049ab484bd72449ebd,
+      type: 3}
 --- !u!114 &1885595314283119230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,6 +1610,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &7500705779125649347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,6 +1856,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 8e049792ea21b914bb8e8dab01f73958, type: 3}
     buttonActiveSprite: {fileID: 21300000, guid: 801ba3a8c9004aa4baa85a14dd8edcff,
       type: 3}
+  - language: 2
+    sprite: {fileID: 21300000, guid: 8e049792ea21b914bb8e8dab01f73958, type: 3}
+    buttonActiveSprite: {fileID: 21300000, guid: 801ba3a8c9004aa4baa85a14dd8edcff,
+      type: 3}
 --- !u!114 &2693044672303268987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,6 +1888,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &7500705779370208079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,6 +2321,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &8001008404024760923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,6 +2625,7 @@ MonoBehaviour:
       max: 0.2
     autoDestroy: 0
     multiplier: 5
+  autoAssignButton: 0
 --- !u!1 &9052895843602013830
 GameObject:
   m_ObjectHideFlags: 0

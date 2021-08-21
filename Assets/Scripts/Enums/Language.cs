@@ -2,5 +2,6 @@
 {
 	FR,
 	EN,
+	JP,
 	NONE
 }

@@ -16,6 +16,7 @@ public class MenuOptionsController : MonoBehaviour
 	[SerializeField] private AudioMixer audioMixer;
 	[SerializeField] private Toggle toggleFr;
 	[SerializeField] private Toggle toggleEn;
+	[SerializeField] private Toggle toggleJp;
 	[SerializeField] private GameObject holder;
 
 
@@ -62,6 +63,11 @@ public class MenuOptionsController : MonoBehaviour
 			case Language.EN:
 				toggleEn.Select();
 				break;
+			case Language.JP:
+				toggleJp.Select();
+				break;
+			case Language.NONE:
+				break;
 		}
 	}
 
@@ -78,6 +84,11 @@ public class MenuOptionsController : MonoBehaviour
 				break;
 			case Language.EN:
 				toggleEn.isOn = true;
+				break;
+			case Language.JP:
+				toggleJp.isOn = true;
+				break;
+			case Language.NONE:
 				break;
 		}
 		if (UIManager.Instance != null && UIManager.Instance.ShowTimer)
@@ -126,6 +137,11 @@ public class MenuOptionsController : MonoBehaviour
 	public void SetEnglishLanguage()
 	{
 		SetLanguage(Language.EN);
+	}
+
+	public void SetJapaneseLanguage()
+	{
+		SetLanguage(Language.JP);
 	}
 
 	private void SetLanguage(Language language)
